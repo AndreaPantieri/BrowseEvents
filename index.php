@@ -1,13 +1,16 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Browse Events</title>
+<?php
+	include 'queryDB.php';
 
+	connectDB();
 
-  </head>
+	session_start();
 
-  <body>
-
-    
-  </body>
-</html>
+	$cookie_name = "logged";
+	
+	if(!isset($_COOKIE[$cookie_name])){
+		include 'login.php';
+	}
+	else{
+		include 'base.php';
+	}
+?>
