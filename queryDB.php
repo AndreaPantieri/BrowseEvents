@@ -38,7 +38,7 @@
 	function connectDB(){
 		setDBConfigs();
 
-		global $server, $db_name, $db_user, $db_pass;
+		global $server, $db_name, $db_user, $db_pass, $conn;
 		echo $server;
 		echo $db_name;
 		echo $db_user;
@@ -52,5 +52,19 @@
 		else{
 			echo "OK";
 		}
+	}
+
+	function closeConnectionDB(){
+		global $conn;
+		mysqli_close($conn);
+	}
+
+	function queryDB($querySQL){
+		global $conn;
+
+		connectDB();
+		$result = mysqli_query($conn, $querySQL);
+		closeConnectionDB();
+		return $result;
 	}
 ?>
