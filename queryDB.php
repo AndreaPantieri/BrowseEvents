@@ -64,7 +64,22 @@
 
 		connectDB();
 		$result = mysqli_query($conn, $querySQL);
+		return $result;
+	}
+
+	function select($querySQL){
+		$result = queryDB($querySQL);
+		$setResult = mysqli_fetch_all($result, MYSQLI_ASSOC);
+		mysqli_free_result($result);
 		closeConnectionDB();
+		return $setResult;
+		
+	}
+
+	function genericQuery($querySQL){
+		$result = queryDB($querySQL);
+		closeConnectionDB();
+
 		return $result;
 	}
 ?>
