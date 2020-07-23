@@ -39,10 +39,6 @@
 		setDBConfigs();
 
 		global $server, $db_name, $db_user, $db_pass, $conn;
-		echo $server;
-		echo $db_name;
-		echo $db_user;
-		echo $db_pass;
 
 		$conn = mysqli_connect($server, $db_user, $db_pass, $db_name);
 
