@@ -1,3 +1,7 @@
 #slidemenu ol, #subslidemenu ol{
 	list-style-type: none;
 }
+
+.clickable{
+	cursor: pointer;
+}
