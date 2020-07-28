@@ -24,8 +24,12 @@
             </ol>
         </li>
         <li id="my_account" class="clickable" onclick="clickMyAccount()">My account</li>
-        <li id="new_event" class="clickable" onclick="clickNewEvent()">Create new event</li>
-        <li id="manage_events" class="clickable" onclick="clickManageEvents()">Manage events</li>
+        <?php
+            if($type_account == 1 || $type_account == 2){
+                echo '<li id="new_event" class="clickable" onclick="clickNewEvent()">Create new event</li>
+                <li id="manage_events" class="clickable" onclick="clickManageEvents()">Manage events</li>';
+            }
+        ?>
         <li id="my_orders" class="clickable" onclick="clickMyOrders()">My orders</li>
         <li id="notifications" class="clickable" onclick="clickNotifications()">Notifications</li>
     </ol>

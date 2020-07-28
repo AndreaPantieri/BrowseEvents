@@ -1,3 +1,10 @@
+<?php
+    $included_files = get_included_files();
+    
+    if(!array_search("C:\\xampp\\htdocs\\BrowseEvents\\queryDB.php", $included_files)){
+        include 'queryDB.php';
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +12,6 @@
     <title>BrowseEvents</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Page title //THIS WILL BE THE DINAMICALLY LOADED PAGE TITLE-->
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
@@ -21,6 +27,7 @@
         function isMobile () {
           return is_numeric(strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "mobile"));
         }
+
         if(isMobile()){
             echo "<link rel=\"stylesheet\" href=\"css/style-mobile.css\">";
         } else {
@@ -38,7 +45,15 @@
             include 'login.php';
         }
         else{
-            include 'baseLogged.php';
+            $cookie_name_type_account ="type_account";
+            if(!isset($_COOKIE[$cookie_name_type_account])){
+                die('Error, type of account missing!');
+            }
+            else{
+                $type_account = $_COOKIE[$cookie_name_type_account];
+                include 'baseLogged.php';
+            }
+            
         }
     ?>
 </body>
