@@ -1,5 +1,7 @@
 <?php
 	include 'DBHandler.php';
 	$DBHandler = new DBHandler();
-	$DBHandler->hello();
+	$result = $DBHandler->select("SELECT * FROM usertype;");
+	$title = $result[2]["Type"];
+	echo $title;
 ?>

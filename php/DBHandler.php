@@ -58,14 +58,14 @@
 		}
 
 		private function queryDB($querySQL){
-			$conn = connectDB();
+			$conn = $this->connectDB();
 			$result = mysqli_query($conn, $querySQL);
-			closeConnectionDB($conn);
+			$this->closeConnectionDB($conn);
 			return $result;
 		}
 
 		function select($querySQL){
-			$result = queryDB($querySQL);
+			$result = $this->queryDB($querySQL);
 			$setResult = mysqli_fetch_all($result, MYSQLI_ASSOC);
 			mysqli_free_result($result);
 			
@@ -74,7 +74,7 @@
 		}
 
 		function genericQuery($querySQL){
-			$result = queryDB($querySQL);
+			$result = $this->queryDB($querySQL);
 			return $result;
 		}
 	}
