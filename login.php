@@ -1,107 +1,114 @@
+<?php include('./php/addUser.php'); ?>
+
 <!-- login -->
 <div>
     <form>
-        <fieldset>
-            <legend>Login</legend>
-            <!-- username -->
-            <label for="user">Username:</label>
-            <input type="text" id="user" name="user" placeholder="Username" />
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div h1>Login</h1>
+                        <hr class="mb-3">
+                        
+                        <!-- username -->
+                        <label for="user"><b>Username:</b></label>
+                        <input type="text" class="form-control" id="user" name="user" placeholder="Username" required />
 
-            <!-- password -->
-            <label for="password">Password:</label>
-            <input type="password" id="pwd" name="pwd" placeholder="Password" />
+                        <!-- password -->
+                        <label for="password"><b>Password:</b></label>
+                        <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password" required />
 
-            <!-- reminder check-->
-            <input type="checkbox" id="reminder" name="reminder" value="remind">
-            <label for="reminder">Keep me signed in</label>
+                        <!-- reminder check-->
+                        <input type="checkbox" class="form-control" id="reminder" name="reminder">
+                        <label for="reminder">Keep me signed in</label>
 
-            <button type="submit" id="login">Login</button>
-        </fieldset>
+                        <hr class="mb-3">
+                        <button type="submit" class="btn btn-primary" id="login">Login</button>
+                    </div>
+                </div>
+            </div>
     </form>
 </div>
+
+<p><br>Don't have an account yet?</br></p>
 
 <!-- registration -->
-<p>Don't have an account yet?</p>
 <div>
-    <form id="signupForm" action="php/addUser.php" method="POST" enctype="multipart/form-data">
-        <fieldset>
-            <legend>Sign in</legend>
-            <!-- first name -->
-            <label>First name:</label>
-            <input type="text" id="firstname" name="firstname" placeholder="First name" />
+    <form id="signupForm" action="base.php" method="POST" enctype="multipart/form-data">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div h1>Create an account</h1>
+                        <hr class="mb-3">
+                        
+                        <!-- first name -->
+                        <label><b>First name:</b></label>
+                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name" value="<?php if (isset($_POST['data'])) echo $firstname; ?>" required />
 
-            <!-- last name -->
-            <label>Last name:</label>
-            <input type="text" id="lastname" name="lastname" placeholder="Last name" />
+                        <!-- last name -->
+                        <label><b>Last name:</b></label>
+                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name" value="<?php if (isset($_POST['data'])) echo $lastname; ?>" required />
 
-            <!-- username -->
-            <label>Username:</label>
-            <input type="text" id="username" name="username" placeholder="Username" />
+                        <!-- username -->
+                        <div <?php if (isset($name_error)) : ?> class="form_error" <?php endif ?>>
+                            <label><b>Username:</b></label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?php if (isset($_POST['data'])) echo $username; ?>" required />
+                            <?php if (isset($name_error)) : ?>
+                                <span><?php echo $name_error; ?></span>
+                            <?php endif ?>
+                        </div>
 
-            <!-- email -->
-            <label>Email address:</label>
-            <input type="email" id="email" name="email" placeholder="Email address" />
+                        <!-- email -->
+                        <label><b>Email address:</b></label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email address" value="<?php if (isset($_POST['data'])) echo $email; ?>" required />
 
-            <!-- password -->
-            <label>Password:</label>
-            <input type="password" id="password" name="password" placeholder="Password" />
+                        <!-- password -->
+                        <label><b>Password:</b></label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required />
 
-            <!-- password confirmation -->
-            <label>Repeat your password:</label>
-            <input type="password" id="passwordrepeat" name="passwordrepeat" placeholder="Password" />
+                        <!-- password confirmation -->
+                        <label><b>Repeat your password:</b></label>
+                        <input type="password" class="form-control" id="passwordrepeat" name="passwordrepeat" placeholder="Password" required />
 
-            <!-- organizer check -->
-            <input type="checkbox" id="organizer" name="organizer" value="1">
-            <label for="organizer">I'm an organizer</label>
+                        <!-- organizer check -->
+                        <input type="checkbox" class="form-control" id="organizer" name="organizer">
+                        <label for="organizer">I'm an organizer</label>
 
-            <button type="submit" id="register" onclick="checkRegistration();">Register</button>
-        </fieldset>
+                        <hr class="mb-3">
+                        <button type="submit" class="btn btn-primary" id="register" onclick="checkRegistration();">Register</button>
+                    </div>
+                </div>
+            </div>
     </form>
 </div>
+</div>
 
-<!-- errors definition -->
+<!-- warnings definition -->
 <div id="missingFields" class="hidden text-danger">
-    <p>Not every field has been compiled correctly, username must be at least 5 characters, password must be at least 8
-        characters</p>
-</div>
-<div id="userAlreadyExist" class="hidden text-danger">
-    <p>Username already exist</p>
-</div>
-<div id="emailAlreadyExist" class="hidden text-danger">
-    <p>Email address is already in use</p>
+    <p>Username must be at least 5 characters long, password must be at least 8 characters long. Check also if passwords correspond!</p>
 </div>
 
 <!-- login/registration scripts -->
 <script>
-
     function checkRegistration() {
+
         const USERMINLENGTH = 5;
         const PASSMINLENGTH = 8;
 
-        var ok = true;
-        var email = true;
-        var user = true;
-
-        if ($("#username").val().length < USERMINLENGTH) {
-            ok = false;
-        }
-        if ($("#password").val().length < PASSMINLENGTH) {
-            ok = false;
-        }
-        if (!ok) {
+        if ($("#username").val().length < USERMINLENGTH || $("#password").val().length < PASSMINLENGTH || $("#password").val() == $("#passwordrepeat").val()) {
             $("#missingFields").removeClass("hidden");
+            die();
         } else {
-            $("#error").addClass("hidden");
-
-            //TODO: CONTROLLA SE USER e EMAIL esistono già nel DB e se organizer è checkato, se non ci sono problemi invia il form per creare un nuovo utente
-
-            if (user && email) {
-                $("#signupForm").submit();
-            }
+            $("#missingFields").addClass("hidden");
+            $.ajax({
+                type: 'POST',
+                url: './php/addUser.php',
+                data: 'data=true'
+            });
+            $("#signupForm").submit();
         }
+    }
 
-        function checkLogin() {
-            //TODO
-        }
+    function checkLogin() {
+        //TODO
     }
 </script>
