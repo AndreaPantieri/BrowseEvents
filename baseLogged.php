@@ -1,3 +1,6 @@
+<?php
+    require_once './php/DBHandler.php';
+?>
 <!-- Topbar -->
 <div id="topbar"></div>
 

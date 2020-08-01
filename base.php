@@ -1,9 +1,5 @@
 <?php
-    $included_files = get_included_files();
-    
-    if(!array_search("C:\\xampp\\htdocs\\BrowseEvents\\queryDB.php", $included_files)){
-        include 'queryDB.php';
-    }
+    require_once './php/DBHandler.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

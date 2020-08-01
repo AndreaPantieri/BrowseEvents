@@ -1,7 +1,7 @@
 <?php
-	include 'queryDB.php';
+	require_once './php/DBHandler.php';
 
 	session_start();
 
-	include 'base.php';
+	require_once './base.php';
 ?>
