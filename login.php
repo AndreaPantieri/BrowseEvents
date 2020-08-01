@@ -2,13 +2,13 @@
 
 <!-- login -->
 <div>
-    <form>
+    <form id="loginForm" action="php/checkLogin.php" method="POST" enctype="multipart/form-data">
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
                     <div h1>Login</h1>
                         <hr class="mb-3">
-                        
+
                         <!-- username -->
                         <label for="user"><b>Username:</b></label>
                         <input type="text" class="form-control" id="user" name="user" placeholder="Username" required />
@@ -22,7 +22,7 @@
                         <label for="reminder">Keep me signed in</label>
 
                         <hr class="mb-3">
-                        <button type="submit" class="btn btn-primary" id="login">Login</button>
+                        <button type="submit" class="btn btn-primary" id="login" onclick="checkLogin();">Login</button>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                 <div class="col-sm-3">
                     <div h1>Create an account</h1>
                         <hr class="mb-3">
-                        
+
                         <!-- first name -->
                         <label><b>First name:</b></label>
                         <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name" value="<?php if (isset($_POST['data'])) echo $firstname; ?>" required />
@@ -108,7 +108,11 @@
         }
     }
 
-    function checkLogin() {
-        //TODO
+    function checkLogin() { //DA MIGLIORARE
+        $.ajax({
+            type: 'POST',
+            url: './php/checkLogin.php',
+            data: 'loginData=true'
+        });
     }
 </script>
