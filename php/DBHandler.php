@@ -8,7 +8,7 @@
 
 		public function __construct() { 
 
-			$file_name = "../db/configDB.ini";
+			$file_name = "./db/configDB.ini";
 			$file = fopen($file_name, "r");
 
 			while (! feof($file)) {
