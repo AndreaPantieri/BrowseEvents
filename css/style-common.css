@@ -25,6 +25,12 @@
 	color:white;
 }
 
+#searchbar{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
 #slidemenu{
 	height: 100%;
 	width: 20%;
@@ -32,3 +38,4 @@
 	opacity: 0.7;
 	color:black;	
 }
+
