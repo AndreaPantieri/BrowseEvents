@@ -1,5 +1,8 @@
 #slidemenu ol, #subslidemenu ol{
 	list-style-type: none;
+	width: inherit;
+	height: inherit;
+	background-color: inherit;
 }
 
 .clickable{
@@ -15,4 +18,12 @@
 	justify-content: space-between;
 	background-color: black;
 	color:white;
+}
+
+#slidemenu{
+	height: 100%;
+	width: 20%;
+	background-color: red;
+	opacity: 0.5;
+	color:black;
 }
