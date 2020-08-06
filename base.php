@@ -1,5 +1,8 @@
 <?php
     require_once './php/DBHandler.php';
+    function isMobile () {
+          return is_numeric(strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "mobile"));
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,9 +23,6 @@
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="css/style-common.css">
     <?php
-        function isMobile () {
-          return is_numeric(strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "mobile"));
-        }
 
         if(isMobile()){
             echo "<link rel=\"stylesheet\" href=\"css/style-mobile.css\">";
@@ -37,16 +37,16 @@
     <?php
         $cookie_name = "logged";
         
-        if(!isset($_COOKIE[$cookie_name])){
+        if(isset($_COOKIE[$cookie_name])){
             include 'login.php';
         }
         else{
             $cookie_name_type_account ="type_account";
-            if(!isset($_COOKIE[$cookie_name_type_account])){
+            if(isset($_COOKIE[$cookie_name_type_account])){
                 die('Error, type of account missing!');
             }
             else{
-                $type_account = $_COOKIE[$cookie_name_type_account];
+                $type_account = 1/*$_COOKIE[$cookie_name_type_account]*/;
                 include 'baseLogged.php';
             }
             

@@ -1,5 +1,5 @@
 <?php
-    require_once('./DBHandler.php');
+    require_once 'DBHandler.php';
 
     if (isset($_POST['data'])) {
         $DBHandler = new DBHandler();
