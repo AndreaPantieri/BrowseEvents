@@ -27,7 +27,7 @@
     </div>
     <?php
         if(isMobile()){
-            //echo "<link rel=\"stylesheet\" href=\"css/style-mobile.css\">";
+            echo "<h3>CIAO</h3>";
         } else {
             //echo "<link rel=\"stylesheet\" href=\"css/style-dekstop.css\">";
         }
