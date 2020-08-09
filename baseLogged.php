@@ -109,7 +109,7 @@
     function openSlideMenu(){
         var displayValue = "none";
         if(document.getElementById("slidemenu").style.display === displayValue){
-            document.getElementById("slidemenu").style.display = "inline";
+            document.getElementById("slidemenu").style.display = "inline-block";
         }
         else{
             document.getElementById("slidemenu").style.display = displayValue;
