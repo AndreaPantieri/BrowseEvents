@@ -10,6 +10,10 @@ body{
 	background-color: orange;
 }
 
+#title{
+	font-size: 2vw;
+}
+
 #slidemenu ol, #subslidemenu ol{
 	list-style-type: none;
 	width: inherit;
