@@ -24,16 +24,54 @@ function isMobile()
 
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="css/style-common.css">
+    <link rel="stylesheet" href="css/style-mobile.css">
+    <link rel="stylesheet" href="css/style-dekstop.css">
     <?php
 
-    if (isMobile()) {
-        echo "<link rel=\"stylesheet\" href=\"css/style-mobile.css\">";
-    } else {
-        echo "<link rel=\"stylesheet\" href=\"css/style-dekstop.css\">";
-    }
+        //if (isMobile()) {
+         //   echo "<link rel=\"stylesheet\" href=\"css/style-mobile.css\">";
+        //} else {
+          //  echo "<link rel=\"stylesheet\" href=\"css/style-dekstop.css\">";
+        //}
 
     ?>
 
+    <script type="text/javascript">
+        var linkMobileSheet = 'LINK[href="css/style-mobile.css"]';
+        var linkDekstopSheet = 'LINK[href="css/style-dekstop.css"]';
+        function changeCSSStyleSheet(){
+            var w = window.innerWidth;
+            var h = window.innerHeight;
+
+            var sW = window.screen.width;
+            var sH = window.screen.height;
+
+
+            if(w < sW / 2.0 || h < sH / 2.0 || w <= 320){
+                $(linkDekstopSheet).prop('disabled', true);
+                $(linkMobileSheet).prop('disabled', false);
+                
+            }
+            else{
+                $(linkMobileSheet).prop('disabled', true);
+                $(linkDekstopSheet).prop('disabled', false);
+                    
+            }
+        }
+
+        <?php
+
+            if (isMobile()) {
+                echo "$(linkDekstopSheet).prop('disabled', true);";
+            } else {
+                echo "$(linkMobileSheet).prop('disabled', true);";
+            }
+
+        ?>
+
+        window.addEventListener('resize', changeCSSStyleSheet);
+
+    </script>
 </head>
 
 <body>
@@ -52,6 +90,7 @@ function isMobile()
         }
     }
     ?>
+    
 </body>
 
 </html>
