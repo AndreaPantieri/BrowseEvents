@@ -1,17 +1,19 @@
 <?php require_once('DBHandler.php');
 
-if (isset($_POST['data'])) {
+if (
+    isset($_POST['username']) &&
+    isset($_POST['password']) &&
+    isset($_POST['email']) &&
+    isset($_POST['firstname']) &&
+    isset($_POST['lastname'])
+) {
     $DBHandler = new DBHandler();
-    $username = isset($_POST['username']);
-    $password = md5(isset($_POST['password'])); //pwd hashed in POST, SSL required
-    $email = isset($_POST['email']);
-    $firstname = isset($_POST['firstname']);
-    $lastname = isset($_POST['lastname']);
+    $username = $_POST['username'];
+    $password = md5($_POST['password']); //pwd hashed in POST, SSL required
+    $email = $_POST['email'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
     $organizer = isset($_POST['organizer']);
-
-    /* foreach($_POST as $key => $value) {
-            echo "<br />" . "{$key} = {$value}";
-        } */
 
     $sql_u = "SELECT Username FROM user WHERE Username ='$username'";
     $sql_e = "SELECT Email FROM user WHERE Email ='$email'";
@@ -19,14 +21,20 @@ if (isset($_POST['data'])) {
     $result_e = $DBHandler->select($sql_e);
 
     if ($result_u) {
-        if (mysqli_num_rows($result_u) > 0) {
-            $name_error = "Username already exist!";
+        if (mysqli_num_rows($result_u) > 0) { //RISOLVERE MYSQLI NUM ROWS NON FUNZIONANTE 
+            echo "Username already exist!";
+            return $userError = true;
+        } else {
+            $userError = false;
         }
     }
 
     if ($result_e) {
         if (mysqli_num_rows($result_e) > 0) {
-            $mail_error = "Email address is already in use!";
+            echo "Email address is already in use!";
+            return $mailError = true;
+        } else {
+            $mailError = false;
         }
     }
 
@@ -36,11 +44,11 @@ if (isset($_POST['data'])) {
         $result = $DBHandler->genericQuery($sql);
 
         if ($result) {
-            echo "<br />Registration success!";
+            return $status = true;
         } else {
-            echo "<br />There was a problem inserting informations to DB, please register again!";
+            echo "There was a problem inserting your informations to DB, please register again!";
         }
     }
 } else {
-    echo "no registration data sent in POST";
+    return $status = false;
 }

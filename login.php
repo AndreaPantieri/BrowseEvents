@@ -1,4 +1,9 @@
-<?php include('./php/addUser.php'); ?>
+<?php include('./php/addUser.php');
+
+/* foreach($_POST as $key => $value) {
+            echo "<br />" . "{$key} = {$value}";
+        } */
+?>
 
 <!-- login -->
 <div>
@@ -37,7 +42,7 @@
 
 <!-- registration -->
 <div>
-    <form id="signupForm" action="base.php" method="POST" enctype="multipart/form-data">
+    <form id="signupForm" action="base.php" onsubmit="display()" method="POST" enctype="multipart/form-data">
         <div class="container">
             <div class="row">
                 <div class="col-sm-5">
@@ -74,6 +79,24 @@
                     <input type="checkbox" id="organizer" name="organizer">
                     <label for="organizer">I'm an organizer</label>
 
+                    <!-- warnings definition -->
+                    <div id="errorMessage" class="text-danger">
+                        <p></p>
+                    </div>
+
+                    <div id="usernameWarning" class="text-danger">
+                        <p></p>
+                    </div>
+
+                    <div id="passwordWarning1" class="text-danger">
+                        <p></p>
+                    </div>
+
+                    <div id="passwordWarning2" class="text-danger">
+                        <p></p>
+                    </div>
+
+
                     <hr class="mb-3">
                     <button type="button" class="btn btn-primary" id="register" onclick="checkRegistration();">Register</button>
                 </div>
@@ -82,63 +105,76 @@
     </form>
 </div>
 
-<!-- warnings definition -->
-<div id="usernameWarning" class="invisible text-danger">
-    <p>Username must be at least 5 characters long!</p>
-</div>
-
-<div id="passwordWarning1" class="invisible text-danger">
-    <p>Password must be at least 8 characters long!</p>
-</div>
-
-<div id="passwordWarning2" class="invisible text-danger">
-    <p>Passwords don't match!</p>
-</div>
-
 <!-- login/registration scripts -->
 <script>
     const USERMINLENGTH = 5;
     const PASSMINLENGTH = 8;
 
+    document.onload = checkCompletion();
+
+    function checkCompletion() {
+        var status = "<?php echo $status; ?>";
+        /* var userError = "";
+        var mailError = "";
+
+        if(userError) {
+            swal.fire({
+                'title': 'Registration failed!',
+                'text': 'Username: ' + $("#username").val() + ' is already in use',
+                'type': 'error'
+            })
+        }
+
+        if(mailError) {
+            swal.fire({
+                'title': 'Registration failed!',
+                'text': $("#email").val() + 'is already in use!',
+                'type': 'error'
+            })
+        }*/
+
+        if (status) {
+            swal.fire({
+                'title': 'Registration success!',
+                'text': $("#firstname").val() + ', check the mail we sent to ' + $("#email").val() + ' to confirm your account',
+                'type': 'success'
+            })
+        }
+    }
+
     function checkUsername() {
         if (Number($("#username").val().length) < USERMINLENGTH) {
-            $("#usernameWarning").removeClass("invisible");
+            document.getElementById("usernameWarning").innerHTML = "Username must be at least 5 characters long!";
         } else {
-            $("#usernameWarning").addClass("invisible");
+            document.getElementById("usernameWarning").innerHTML = "";
         }
     }
 
     function checkPassword() {
         if (Number($("#password").val().length) < PASSMINLENGTH) {
-            $("#passwordWarning1").removeClass("invisible");
+            document.getElementById("passwordWarning1").innerHTML = "Password must be at least 8 characters long!";
         } else {
-            $("#passwordWarning1").addClass("invisible");
+            document.getElementById("passwordWarning1").innerHTML = "";
         }
 
         if ($("#password").val() != $("#passwordrepeat").val()) {
-            $("#passwordWarning2").removeClass("invisible");
+            document.getElementById("passwordWarning2").innerHTML = "Passwords don't match!";
         } else {
-            $("#passwordWarning2").addClass("invisible");
+            document.getElementById("passwordWarning2").innerHTML = "";
         }
     }
 
     function checkRegistration() {
         if (Number($("#username").val().length) < USERMINLENGTH ||
-            Number($("#password").val().length) < PASSMINLENGTH || $("#password").val() != $("#passwordrepeat").val()) {
-            die("error with form compilation"); //doesn't send anything in POST to addUser.php
+            Number($("#password").val().length) < PASSMINLENGTH ||
+            $("#password").val() != $("#passwordrepeat").val() ||
+            $("#firstname").val() == "" ||
+            $("#lastname").val() == "" ||
+            $("#email").val() == "") {
+            document.getElementById("errorMessage").innerHTML = "Some informations are not filled in!";
         } else {
-            /*$.ajax({
-            type: 'POST',
-            url: 'base.php',
-            data: data
-        });*/
+            document.getElementById("errorMessage").innerHTML = "";
             document.getElementById("signupForm").submit();
-
-            /*swal.fire({
-                'title': 'Registration success',
-                'text': 'Registration success!',
-                'type': 'success'
-            })*/
         }
     }
 

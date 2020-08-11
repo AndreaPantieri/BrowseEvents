@@ -78,7 +78,7 @@ function isMobile()
     <?php
     $cookie_name = "logged";
 
-    if (isset($_COOKIE[$cookie_name])) {
+    if (!isset($_COOKIE[$cookie_name])) {
         include 'login.php';
     } else {
         $cookie_name_type_account = "type_account";
