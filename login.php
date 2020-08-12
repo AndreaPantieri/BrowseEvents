@@ -3,6 +3,11 @@
 /* foreach($_POST as $key => $value) {
             echo "<br />" . "{$key} = {$value}";
         } */
+
+/*if(isset($_POST['login'])) {
+    echo 'ciao';
+}*/
+
 ?>
 
 <!-- login -->
@@ -29,7 +34,7 @@
                     <label for="reminder">Keep me signed in</label>
 
                     <hr class="mb-3">
-                    <button type="submit" class="btn btn-primary" id="login" onclick="checkLogin();">Login</button>
+                    <button type="submit" class="btn btn-primary" id="login">Login</button>
                 </div>
             </div>
         </div>
@@ -134,10 +139,20 @@
         }*/
 
         if (status) {
-            swal.fire({
-                'title': 'Registration success!',
-                'text': $("#firstname").val() + ', check the mail we sent to ' + $("#email").val() + ' to confirm your account',
+            Swal.queue([{
+                title: 'Registration success!',
+                confirmButtonText: 'Ok',
+                text: $("#firstname").val() + ', check the mail we sent to ' + $("#email").val() + ' to confirm your account',
                 'type': 'success'
+            }])
+
+            Swal.insertQueueStep({
+                title: 'Insert the confermation code we sent you via-mail',
+                input: 'text'
+            }).then((result) => {
+                if (result.value) {
+                    const answer = result.value;
+                }
             })
         }
     }
@@ -176,13 +191,5 @@
             document.getElementById("errorMessage").innerHTML = "";
             document.getElementById("signupForm").submit();
         }
-    }
-
-    function checkLogin() {
-        $.ajax({
-            type: 'POST',
-            url: 'php/checkLogin.php',
-            data: 'loginData'
-        });
     }
 </script>

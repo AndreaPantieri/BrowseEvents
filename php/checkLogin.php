@@ -2,7 +2,7 @@
 
 $DBHandler = new DBHandler();
 $username = isset($_POST['user']);
-$password = md5(isset($_POST['pwd']));
+$password = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
 
 echo $password;
 

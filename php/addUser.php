@@ -9,14 +9,14 @@ if (
 ) {
     $DBHandler = new DBHandler();
     $username = $_POST['username'];
-    $password = md5($_POST['password']); //pwd hashed in POST, SSL required
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); //pwd hashed in POST, SSL required
     $email = $_POST['email'];
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $organizer = isset($_POST['organizer']);
 
-    $sql_u = "SELECT Username FROM user WHERE Username ='$username'";
-    $sql_e = "SELECT Email FROM user WHERE Email ='$email'";
+    $sql_u = "SELECT Username FROM user WHERE Username = '$username'";
+    $sql_e = "SELECT Email FROM user WHERE Email = '$email'";
     $result_u = $DBHandler->select($sql_u);
     $result_e = $DBHandler->select($sql_e);
 
@@ -39,8 +39,12 @@ if (
     }
 
     if (!$result_e && !$result_u) {
-        $sql = "INSERT INTO user (Username, Password, Email, FirstName, LastName, UserType_idUserType)"
-            . "VALUES ('$username', '$password', '$email', '$firstname', '$lastname', '$organizer')";
+        $verificationCode = rand(100000, time()); //generates a random verification code for user based on current time..
+        mail($email, 'Confirm your registration to BrowseEvents.com', 'Thanks for signing to BrowseEvents! Here\'s your code: ' . $verificationCode, 'From: infobrowseevents@gmail.com');
+        $verificationCode = md5($verificationCode); //..and hashes it before saving it in DB
+
+        $sql = "INSERT INTO user (Username, Password, Email, FirstName, LastName, UserType_idUserType, VerificationCode)"
+            . "VALUES ('$username', '$password', '$email', '$firstname', '$lastname', '$organizer', '$verificationCode')";
         $result = $DBHandler->genericQuery($sql);
 
         if ($result) {
