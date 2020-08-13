@@ -22,19 +22,13 @@ if (
 
     if ($result_u) {
         if (mysqli_num_rows($result_u) > 0) { //RISOLVERE MYSQLI NUM ROWS NON FUNZIONANTE 
-            echo "Username already exist!";
             return $userError = true;
-        } else {
-            $userError = false;
         }
     }
 
     if ($result_e) {
         if (mysqli_num_rows($result_e) > 0) {
-            echo "Email address is already in use!";
             return $mailError = true;
-        } else {
-            $mailError = false;
         }
     }
 
@@ -53,6 +47,4 @@ if (
             echo "There was a problem inserting your informations to DB, please register again!";
         }
     }
-} else {
-    return $status = false;
 }

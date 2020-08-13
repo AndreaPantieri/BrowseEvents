@@ -101,6 +101,14 @@
                         <p></p>
                     </div>
 
+                    <div id="userAlreadyTaken" class="text-danger">
+                        <p></p>
+                    </div>
+
+                    <div id="mailAlreadyTaken" class="text-danger">
+                        <p></p>
+                    </div>
+
 
                     <hr class="mb-3">
                     <button type="button" class="btn btn-primary" id="register" onclick="checkRegistration();">Register</button>
@@ -118,42 +126,47 @@
     document.onload = checkCompletion();
 
     function checkCompletion() {
-        var status = "<?php echo $status; ?>";
-        /* var userError = "";
-        var mailError = "";
+        var status = "<?php if (isset($status)) echo $status; ?>";
+        var userError = "<?php if (isset($userError)) echo $userError; ?>";
+        var mailError = "<?php if (isset($mailError)) echo $mailError; ?>";
 
-        if(userError) {
-            swal.fire({
-                'title': 'Registration failed!',
-                'text': 'Username: ' + $("#username").val() + ' is already in use',
-                'type': 'error'
-            })
+        if (userError) {
+            document.getElementById("userAlreadyTaken").innerHTML = "This username is already taken!";
+        } else {
+            document.getElementById("userAlreadyTaken").innerHTML = "";
         }
 
-        if(mailError) {
-            swal.fire({
-                'title': 'Registration failed!',
-                'text': $("#email").val() + 'is already in use!',
-                'type': 'error'
-            })
-        }*/
+        if (mailError) {
+            document.getElementById("mailAlreadyTaken").innerHTML = "This email address is already in use!";
+        } else {
+            document.getElementById("mailAlreadyTaken").innerHTML = "";
+        }
 
         if (status) {
-            Swal.queue([{
-                title: 'Registration success!',
-                confirmButtonText: 'Ok',
+            Swal.fire({
                 text: $("#firstname").val() + ', check the mail we sent to ' + $("#email").val() + ' to confirm your account',
-                'type': 'success'
-            }])
-
-            Swal.insertQueueStep({
-                title: 'Insert the confermation code we sent you via-mail',
-                input: 'text'
-            }).then((result) => {
-                if (result.value) {
-                    const answer = result.value;
-                }
-            })
+                icon: "success",
+            }).then(() => {
+                Swal.fire({
+                    title: "Insert the confermation code we sent you via-mail",
+                    input: "text",
+                }).then((result) => {
+                    // get DatabaseCode
+                    //var input = md5(result);
+                    if (result == 150) {
+                        Swal.fire({
+                            title: "Successfully registered to BrowseEvents.com!",
+                            text: "Codes match!",
+                            icon: "success",
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Codes don't match!",
+                            icon: "error",
+                        });
+                    }
+                });
+            });
         }
     }
 
