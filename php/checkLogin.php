@@ -1,19 +1,30 @@
 <?php require_once('./DBHandler.php');
 
 $DBHandler = new DBHandler();
-$username = isset($_POST['user']);
-$password = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
+if(isset($_POST['user']) && isset($_POST['pwd'])){
+	$username = $_POST['user'];
+	$password = md5($_POST['pwd']);
 
-echo $password;
+	echo $password;
 
-$sql = "SELECT Username, Password FROM user WHERE (Username = '$username' OR Email = '$username') AND Password = '$password'";
-$result = $DBHandler->select($sql);
+	$sql = "SELECT Username, Password, UserType_idUserType FROM user WHERE (Username = '$username' OR Email = '$username') AND Password = '$password'";
+	$result = $DBHandler->select($sql);
 
-if ($result) {
-    if (mysqli_num_rows($result) > 0) {
-        echo "Login successful!";
-        //TODO set cookie o informazioni per sessione utente.
-    }
-} else {
-    echo "Login failed, wrong username or password!"; //mancano i messaggi di errore che ritornano su login.php
+	if ($result) {
+		$counts = array_map('count', $result);
+	    if (count($counts) == 1) {
+	        echo "Login successful!";
+	        echo $username . "<br/>" . $result[0]["UserType_idUserType"];
+	        setcookie("logged", $username, time() + (86400 * 2), "/");
+	        setcookie("typeaccount", $result[0]["UserType_idUserType"], time() + (86400 * 2), "/");
+	        header("Refresh:0");
+
+	    }
+	} else {
+	    echo "Login failed, wrong username or password!"; //mancano i messaggi di errore che ritornano su login.php
+	}	
 }
+else{
+	die("Wrong credentials");
+}
+

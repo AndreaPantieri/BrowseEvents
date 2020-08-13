@@ -1,15 +1,3 @@
-<?php include('./php/addUser.php');
-
-/* foreach($_POST as $key => $value) {
-            echo "<br />" . "{$key} = {$value}";
-        } */
-
-/*if(isset($_POST['login'])) {
-    echo 'ciao';
-}*/
-
-?>
-
 <!-- login -->
 <div>
     <form id="loginForm" action="php/checkLogin.php" method="POST" enctype="multipart/form-data">
@@ -34,7 +22,7 @@
                     <label for="reminder">Keep me signed in</label>
 
                     <hr class="mb-3">
-                    <button type="submit" class="btn btn-primary" id="login">Login</button>
+                    <button type="button" class="btn btn-primary" id="login" onclick="checkLogin()">Login</button>
                 </div>
             </div>
         </div>
@@ -47,7 +35,7 @@
 
 <!-- registration -->
 <div>
-    <form id="signupForm" action="base.php" onsubmit="display()" method="POST" enctype="multipart/form-data">
+    <form id="signupForm" action="addUser.php" method="POST" enctype="multipart/form-data">
         <div class="container">
             <div class="row">
                 <div class="col-sm-5">
@@ -123,9 +111,28 @@
     const USERMINLENGTH = 5;
     const PASSMINLENGTH = 8;
 
+    $("#signupForm").submit(function(e){
+        e.preventDefault();
+
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize();
+            success: function(data){
+                checkCompletion(data);
+            },
+            error: function(data){
+                $("#firstname").value = data["firstname"];
+            }
+        });
+    });
+
     document.onload = checkCompletion();
 
-    function checkCompletion() {
+    function checkCompletion(data) {
         var status = "<?php if (isset($status)) echo $status; ?>";
         var userError = "<?php if (isset($userError)) echo $userError; ?>";
         var mailError = "<?php if (isset($mailError)) echo $mailError; ?>";
@@ -153,7 +160,7 @@
                 }).then((result) => {
                     // get DatabaseCode
                     //var input = md5(result);
-                    if (result == 150) {
+                    if (result.value == 150) {
                         Swal.fire({
                             title: "Successfully registered to BrowseEvents.com!",
                             text: "Codes match!",

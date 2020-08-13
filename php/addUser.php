@@ -7,27 +7,29 @@ if (
     isset($_POST['firstname']) &&
     isset($_POST['lastname'])
 ) {
+
     $DBHandler = new DBHandler();
     $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); //pwd hashed in POST, SSL required
+    $password = md5($_POST['password']); //pwd hashed in POST, SSL required
     $email = $_POST['email'];
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
-    $organizer = isset($_POST['organizer']);
+    $organizer = isset($_POST['organizer']) ? 2 : 3;
 
     $sql_u = "SELECT Username FROM user WHERE Username = '$username'";
     $sql_e = "SELECT Email FROM user WHERE Email = '$email'";
     $result_u = $DBHandler->select($sql_u);
     $result_e = $DBHandler->select($sql_e);
-
+    $counts_u = array_map('count', $result_u);
+    $counts_e = array_map('count', $result_e);
     if ($result_u) {
-        if (mysqli_num_rows($result_u) > 0) { //RISOLVERE MYSQLI NUM ROWS NON FUNZIONANTE 
+        if (count($counts_u) > 0) { //RISOLVERE MYSQLI NUM ROWS NON FUNZIONANTE 
             return $userError = true;
         }
     }
 
     if ($result_e) {
-        if (mysqli_num_rows($result_e) > 0) {
+        if (count($counts_e) > 0) {
             return $mailError = true;
         }
     }

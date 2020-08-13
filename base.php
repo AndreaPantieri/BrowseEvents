@@ -81,11 +81,11 @@ function isMobile()
     if (!isset($_COOKIE[$cookie_name])) {
         include 'login.php';
     } else {
-        $cookie_name_type_account = "type_account";
-        if (isset($_COOKIE[$cookie_name_type_account])) {
+        $cookie_name_type_account = "typeaccount";
+        if (!isset($_COOKIE[$cookie_name_type_account])) {
             die('Error, type of account missing!');
         } else {
-            $type_account = 1/*$_COOKIE[$cookie_name_type_account]*/;
+            $type_account = $_COOKIE[$cookie_name_type_account];
             include 'baseLogged.php';
         }
     }
