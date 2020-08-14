@@ -26,19 +26,11 @@ function isMobile()
     <link rel="stylesheet" href="css/style-common.css">
     <link rel="stylesheet" href="css/style-mobile.css">
     <link rel="stylesheet" href="css/style-dekstop.css">
-    <?php
-
-        //if (isMobile()) {
-         //   echo "<link rel=\"stylesheet\" href=\"css/style-mobile.css\">";
-        //} else {
-          //  echo "<link rel=\"stylesheet\" href=\"css/style-dekstop.css\">";
-        //}
-
-    ?>
 
     <script type="text/javascript">
         var linkMobileSheet = 'LINK[href="css/style-mobile.css"]';
         var linkDekstopSheet = 'LINK[href="css/style-dekstop.css"]';
+        
         function changeCSSStyleSheet(){
             var w = window.innerWidth;
             var h = window.innerHeight;

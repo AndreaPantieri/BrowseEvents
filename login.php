@@ -22,7 +22,7 @@
                     <label for="reminder">Keep me signed in</label>
 
                     <hr class="mb-3">
-                    <button type="button" class="btn btn-primary" id="login" onclick="checkLogin()">Login</button>
+                    <button type="submit" class="btn btn-primary" id="login">Login</button>
                 </div>
             </div>
         </div>
@@ -130,7 +130,7 @@
             url: url,
             data: form.serialize();
             success: function(data){
-                location.reload();
+                
             },
             error: function(data){
                 Swal.fire({
@@ -139,6 +139,7 @@
                 });
             }
         });
+        location.reload();
     });
 
     $("#signupForm").submit(function(e){
