@@ -152,6 +152,7 @@
             data: form.serialize();
             success: function(data){
                 checkCompletion(data);
+                location.reload();
             },
             error: function(data){
                 $("#firstname").value = data["firstname"];
