@@ -31,7 +31,7 @@ if (
     $counts_u = array_map('count', $result_u);
     $counts_e = array_map('count', $result_e);
     if ($result_u) {
-        if (count($counts_u) > 0) { //RISOLVERE MYSQLI NUM ROWS NON FUNZIONANTE 
+        if (count($counts_u) > 0) {
             $addUserResponse->userError = true;
         }
     }

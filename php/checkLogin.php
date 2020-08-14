@@ -1,6 +1,10 @@
-<?php require_once('./DBHandler.php');
+<?php 
+require_once('./DBHandler.php');
+require_once('./checkLoginResponse.php');
 
 $DBHandler = new DBHandler();
+$checkLoginResponse = new checkLoginResponse();
+
 if(isset($_POST['user']) && isset($_POST['pwd'])){
 	$username = $_POST['user'];
 	$password = md5($_POST['pwd']);
@@ -13,7 +17,7 @@ if(isset($_POST['user']) && isset($_POST['pwd'])){
 	    if (count($counts) == 1) {
 	        setcookie("logged", $username, time() + (86400 * 2), "/");
 	        setcookie("typeaccount", $result[0]["UserType_idUserType"], time() + (86400 * 2), "/");
-	        
+	        $checkLoginResponse->result = true;
 	    }
 	} else {
 	    die("Login failed, wrong username or password!"); //mancano i messaggi di errore che ritornano su login.php
@@ -22,4 +26,6 @@ if(isset($_POST['user']) && isset($_POST['pwd'])){
 else{
 	die("Wrong credentials");
 }
+
+return json_encode($checkLoginResponse);
 

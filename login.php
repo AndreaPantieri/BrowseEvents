@@ -22,7 +22,7 @@
                     <label for="reminder">Keep me signed in</label>
 
                     <hr class="mb-3">
-                    <button type="submit" class="btn btn-primary" id="login">Login</button>
+                    <button type="button" class="btn btn-primary" id="login" onclick="checkLogin()">Login</button>
                 </div>
             </div>
         </div>
@@ -111,35 +111,36 @@
     const USERMINLENGTH = 5;
     const PASSMINLENGTH = 8;
 
+
     $("#loginForm").submit(function(e){
         e.preventDefault();
 
         var form = $(this);
         var url = form.attr('action');
 
-        if(!checkLogin()){
-            Swal.fire({
-                title: "Credentials length error!",
-                icon: "error"
-            });
-            return;
-        }
 
         $.ajax({
             type: "POST",
             url: url,
-            data: form.serialize();
+            data: form.serialize(),
             success: function(data){
-                
+                if(data["result"]){
+                    location.reload();
+                }
+                else{
+                    Swal.fire({
+                        title: "Credentials don't match error!",
+                        icon: "error"
+                    });
+                }
             },
             error: function(data){
                 Swal.fire({
-                    title: "Credentials don't match error!",
+                    title: "Error!",
                     icon: "error"
                 });
             }
         });
-        location.reload();
     });
 
     $("#signupForm").submit(function(e){
@@ -150,16 +151,15 @@
         $.ajax({
             type: "POST",
             url: url,
-            data: form.serialize();
+            data: form.serialize(),
             success: function(data){
                 checkCompletion(data);
-                location.reload();
             },
             error: function(data){
-                $("#firstname").value = data["firstname"];
-                $("#lastname").value = data["lastname"];
-                $("#username").value = data["username"];
-                $("#email").value = data["email"];
+                Swal.fire({
+                    title: "Error!",
+                    icon: "error"
+                });
             }
         });
     });
@@ -167,10 +167,13 @@
     function checkLogin(){
         if(Number($("#user").val().length) < USERMINLENGTH ||
             Number($("#pwd").val().length) < PASSMINLENGTH){
-            return true;
+            $("#loginForm").submit();
         }
         else{
-            return false;
+            Swal.fire({
+                title: "Credentials length error!",
+                icon: "error"
+            });
         }
     }
 
@@ -218,6 +221,13 @@
                     }
                 });
             });
+            //location.reload();
+        }
+        else{
+            $("#firstname").value = data["firstname"];
+            $("#lastname").value = data["lastname"];
+            $("#username").value = data["username"];
+            $("#email").value = data["email"];
         }
     }
 
@@ -253,7 +263,7 @@
             document.getElementById("errorMessage").innerHTML = "Some informations are not filled in!";
         } else {
             document.getElementById("errorMessage").innerHTML = "";
-            document.getElementById("signupForm").submit();
+            $("#signupForm").submit();
         }
     }
 </script>
