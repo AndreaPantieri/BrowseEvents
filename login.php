@@ -199,35 +199,7 @@
                 text: $("#firstname").val() + ', check the mail we sent to ' + $("#email").val() + ' to confirm your account',
                 icon: "success",
             }).then(() => {
-                Swal.fire({
-                    title: "Insert the confermation code we sent you via-mail",
-                    input: "text",
-                }).then((result) => {
-                    $.ajax({
-                        type: "POST",
-                        url: "php/getUserVerificationCode.php",
-                        data: {
-                            username : $("#username").val(),
-                            code : md5(result.value)
-                        },
-                        success : function(r){
-                            var tmp = JSON.parse(r);
-
-                            if (tmp["result"]) {
-                                Swal.fire({
-                                    title: "Successfully registered to BrowseEvents.com!",
-                                    text: "Codes match!",
-                                    icon: "success",
-                                }).then(() => location.reload());
-                            } else {
-                                Swal.fire({
-                                    title: "Codes don't match!",
-                                    icon: "error",
-                                });
-                            }
-                        }
-                    });
-                });
+                checkVerificationCode();
             });
         }
         else{
@@ -238,6 +210,37 @@
         }
     }
 
+    function checkVerificationCode(){
+        Swal.fire({
+            title: "Insert the confermation code we sent you via-mail",
+            input: "text",
+        }).then((result) => {
+            $.ajax({
+                type: "POST",
+                url: "php/getUserVerificationCode.php",
+                data: {
+                    username : $("#username").val(),
+                    code : md5(result.value)
+                },
+                success : function(r){
+                    var tmp = JSON.parse(r);
+
+                    if (tmp["result"]) {
+                        Swal.fire({
+                            title: "Successfully registered to BrowseEvents.com!",
+                            text: "Codes match!",
+                            icon: "success",
+                        }).then(() => location.reload());
+                    } else {
+                        Swal.fire({
+                            title: "Codes don't match, repeat the procedure please!",
+                            icon: "error",
+                        }).then(() => checkVerificationCode());
+                    }
+                }
+            });
+        });
+    }
     function checkUsername() {
         if (Number($("#username").val().length) < USERMINLENGTH) {
             document.getElementById("usernameWarning").innerHTML = "Username must be at least 5 characters long!";
