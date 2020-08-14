@@ -21,6 +21,7 @@ function isMobile()
 
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script type="text/javascript" src="js/md5.js"></script>
 
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="css/style-common.css">

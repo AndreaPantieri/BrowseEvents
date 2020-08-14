@@ -177,8 +177,6 @@
         }
     }
 
-    
-
     function checkCompletion(data) {
         var status = data["status"];
         var userError = data["userError"];
@@ -205,22 +203,32 @@
                     title: "Insert the confermation code we sent you via-mail",
                     input: "text",
                 }).then((result) => {
-                    // get DatabaseCode
-                    //var input = md5(result);
-                    if (result.value == 150) {
-                        Swal.fire({
-                            title: "Successfully registered to BrowseEvents.com!",
-                            text: "Codes match!",
-                            icon: "success",
-                        });
-                    } else {
-                        Swal.fire({
-                            title: "Codes don't match!",
-                            icon: "error",
-                        });
-                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "php/getUserVerificationCode.php",
+                        data: {
+                            username : $("#username").val(),
+                            code : md5(result.value)
+                        },
+                        success : function(r){
+                            var tmp = JSON.parse(r);
+
+                            if (tmp["result"]) {
+                                Swal.fire({
+                                    title: "Successfully registered to BrowseEvents.com!",
+                                    text: "Codes match!",
+                                    icon: "success",
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: "Codes don't match!",
+                                    icon: "error",
+                                });
+                            }
+                        }
+                    });
                 }).then(() => {
-                    location.reload();
+
                 });
             });
         }
