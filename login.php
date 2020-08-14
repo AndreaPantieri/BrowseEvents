@@ -111,6 +111,36 @@
     const USERMINLENGTH = 5;
     const PASSMINLENGTH = 8;
 
+    $("#loginForm").submit(function(e){
+        e.preventDefault();
+
+        var form = $(this);
+        var url = form.attr('action');
+
+        if(!checkLogin()){
+            Swal.fire({
+                title: "Credentials length error!",
+                icon: "error"
+            });
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize();
+            success: function(data){
+                location.reload();
+            },
+            error: function(data){
+                Swal.fire({
+                    title: "Credentials don't match error!",
+                    icon: "error"
+                });
+            }
+        });
+    });
+
     $("#signupForm").submit(function(e){
         e.preventDefault();
         var form = $(this);
@@ -133,7 +163,13 @@
     });
 
     function checkLogin(){
-
+        if(Number($("#user").val().length) < USERMINLENGTH ||
+            Number($("#pwd").val().length) < PASSMINLENGTH){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     
@@ -206,7 +242,6 @@
     }
 
     function checkRegistration() {
-        alert("ok");
         if (Number($("#username").val().length) < USERMINLENGTH ||
             Number($("#password").val().length) < PASSMINLENGTH ||
             $("#password").val() != $("#passwordrepeat").val() ||

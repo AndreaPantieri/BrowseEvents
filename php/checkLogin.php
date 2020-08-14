@@ -17,7 +17,6 @@ if(isset($_POST['user']) && isset($_POST['pwd'])){
 	        echo $username . "<br/>" . $result[0]["UserType_idUserType"];
 	        setcookie("logged", $username, time() + (86400 * 2), "/");
 	        setcookie("typeaccount", $result[0]["UserType_idUserType"], time() + (86400 * 2), "/");
-	        header("Refresh:0");
 
 	    }
 	} else {
