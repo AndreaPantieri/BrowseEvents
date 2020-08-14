@@ -35,7 +35,7 @@
 
 <!-- registration -->
 <div>
-    <form id="signupForm" action="addUser.php" method="POST" enctype="multipart/form-data">
+    <form id="signupForm" action="php/addUser.php" method="POST" enctype="multipart/form-data">
         <div class="container">
             <div class="row">
                 <div class="col-sm-5">
@@ -46,27 +46,27 @@
 
                     <!-- first name -->
                     <label><b>First name:</b></label>
-                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name" value="<?php if (isset($_POST['firstname'])) echo $firstname; ?>" required />
+                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name" value ="" required />
 
                     <!-- last name -->
                     <label><b>Last name:</b></label>
-                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name" value="<?php if (isset($_POST['lastname'])) echo $lastname; ?>" required />
+                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name" value ="" required />
 
                     <!-- username -->
                     <label><b>Username:</b></label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?php if (isset($_POST['username'])) echo $username; ?>" onkeyup='checkUsername();' required />
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" value ="" onkeyup='checkUsername();' required />
 
                     <!-- email -->
                     <label><b>Email address:</b></label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email address" value="<?php if (isset($_POST['email'])) echo $email; ?>" required />
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email address" value ="" required />
 
                     <!-- password -->
                     <label><b>Password:</b></label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" onkeyup='checkPassword();' required />
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" value ="" onkeyup='checkPassword();' required />
 
                     <!-- password confirmation -->
                     <label><b>Repeat your password:</b></label>
-                    <input type="password" class="form-control" id="passwordrepeat" name="passwordrepeat" placeholder="Password" onkeyup='checkPassword();' required />
+                    <input type="password" class="form-control" id="passwordrepeat" name="passwordrepeat" placeholder="Password" value ="" onkeyup='checkPassword();' required />
 
                     <!-- organizer check -->
                     <input type="checkbox" id="organizer" name="organizer">
@@ -107,13 +107,12 @@
 </div>
 
 <!-- login/registration scripts -->
-<script>
+<script type="application/javascript">
     const USERMINLENGTH = 5;
     const PASSMINLENGTH = 8;
 
     $("#signupForm").submit(function(e){
         e.preventDefault();
-
         var form = $(this);
         var url = form.attr('action');
 
@@ -126,16 +125,23 @@
             },
             error: function(data){
                 $("#firstname").value = data["firstname"];
+                $("#lastname").value = data["lastname"];
+                $("#username").value = data["username"];
+                $("#email").value = data["email"];
             }
         });
     });
 
-    document.onload = checkCompletion();
+    function checkLogin(){
+
+    }
+
+    
 
     function checkCompletion(data) {
-        var status = "<?php if (isset($status)) echo $status; ?>";
-        var userError = "<?php if (isset($userError)) echo $userError; ?>";
-        var mailError = "<?php if (isset($mailError)) echo $mailError; ?>";
+        var status = data["status"];
+        var userError = data["userError"];
+        var mailError = data["mailError"];
 
         if (userError) {
             document.getElementById("userAlreadyTaken").innerHTML = "This username is already taken!";
@@ -200,6 +206,7 @@
     }
 
     function checkRegistration() {
+        alert("ok");
         if (Number($("#username").val().length) < USERMINLENGTH ||
             Number($("#password").val().length) < PASSMINLENGTH ||
             $("#password").val() != $("#passwordrepeat").val() ||
