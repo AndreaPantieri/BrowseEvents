@@ -218,7 +218,7 @@
                                     title: "Successfully registered to BrowseEvents.com!",
                                     text: "Codes match!",
                                     icon: "success",
-                                });
+                                }).then(() => location.reload());
                             } else {
                                 Swal.fire({
                                     title: "Codes don't match!",
@@ -227,8 +227,6 @@
                             }
                         }
                     });
-                }).then(() => {
-
                 });
             });
         }
