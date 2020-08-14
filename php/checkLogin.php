@@ -20,12 +20,12 @@ if(isset($_POST['user']) && isset($_POST['pwd'])){
 	        $checkLoginResponse->result = true;
 	    }
 	} else {
-	    die("Login failed, wrong username or password!"); //mancano i messaggi di errore che ritornano su login.php
+	    //mancano i messaggi di errore che ritornano su login.php
 	}	
 }
 else{
-	die("Wrong credentials");
+	//die("Wrong credentials");
 }
 
-return json_encode($checkLoginResponse);
+echo json_encode($checkLoginResponse);
 

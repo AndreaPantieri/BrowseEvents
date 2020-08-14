@@ -124,7 +124,7 @@
             url: url,
             data: form.serialize(),
             success: function(data){
-                if(data["result"]){
+                if(JSON.parse(data)["result"]){
                     location.reload();
                 }
                 else{
@@ -153,7 +153,7 @@
             url: url,
             data: form.serialize(),
             success: function(data){
-                checkCompletion(data);
+                checkCompletion(JSON.parse(data));
             },
             error: function(data){
                 Swal.fire({
@@ -219,9 +219,10 @@
                             icon: "error",
                         });
                     }
+                }).then(() => {
+                    location.reload();
                 });
             });
-            //location.reload();
         }
         else{
             $("#firstname").value = data["firstname"];

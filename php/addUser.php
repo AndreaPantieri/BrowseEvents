@@ -10,10 +10,9 @@ if (
     isset($_POST['firstname']) &&
     isset($_POST['lastname'])
 ) {
-
     $DBHandler = new DBHandler();
     $username = $_POST['username'];
-    $password = md5($_POST['password']); //pwd hashed in POST, SSL required
+    $password = md5($_POST['password']);
     $email = $_POST['email'];
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
@@ -59,4 +58,4 @@ if (
     }
 }
 
-return json_encode($addUserResponse);
+echo json_encode($addUserResponse);
