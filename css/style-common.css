@@ -72,6 +72,17 @@ body{
 	justify-content: center;
 }
 
+#form-newevent{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: auto;
+}
+
+#title-newevent{
+	text-align: center;
+}
+
 .nonVisible{
 	display: none;
 }
