@@ -165,8 +165,8 @@
     });
 
     function checkLogin(){
-        if(Number($("#user").val().length) < USERMINLENGTH ||
-            Number($("#pwd").val().length) < PASSMINLENGTH){
+        if(Number($("#user").val().length) >= USERMINLENGTH &&
+            Number($("#pwd").val().length) >= PASSMINLENGTH){
             $("#loginForm").submit();
         }
         else{
