@@ -15,7 +15,7 @@ if(isset($_COOKIE["logged"])){
 	"SELECT Notification.idNotification, Notification.Title, Notification.Description, Notification.Date, Notification.isRead
 	FROM Notification INNER JOIN user_has_notification ON Notification.idNotification = user_has_notification.Notification_idNotification
 	WHERE user_has_notification.User_idUsers = $user_id AND Notification.isRead = 1
-	ORDER BY Notification.Date
+	ORDER BY Notification.Date DESC
 	";
 	$result = $DBHandler->select($sql_n);
 
