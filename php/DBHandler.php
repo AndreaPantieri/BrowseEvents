@@ -66,11 +66,13 @@
 
 		function select($querySQL){
 			$result = $this->queryDB($querySQL);
-			$setResult = mysqli_fetch_all($result, MYSQLI_ASSOC);
-			mysqli_free_result($result);
-			
-			return $setResult;
-			
+			if($result){
+				$setResult = mysqli_fetch_all($result, MYSQLI_ASSOC);
+				mysqli_free_result($result);
+				
+				return $setResult;
+			}
+			return NULL;
 		}
 
 		function genericQuery($querySQL){
