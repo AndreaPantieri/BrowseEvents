@@ -11,7 +11,7 @@
 
                     <!-- username -->
                     <label for="user"><b>Username:</b></label>
-                    <input type="text" class="form-control" id="user" name="user" placeholder="Username" required />
+                    <input type="text" class="form-control" id="user" name="user" placeholder="Username or email address" required />
 
                     <!-- password -->
                     <label for="password"><b>Password:</b></label>
@@ -46,27 +46,27 @@
 
                     <!-- first name -->
                     <label><b>First name:</b></label>
-                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name" value ="" required />
+                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name" value="" required />
 
                     <!-- last name -->
                     <label><b>Last name:</b></label>
-                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name" value ="" required />
+                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name" value="" required />
 
                     <!-- username -->
                     <label><b>Username:</b></label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" value ="" onkeyup='checkUsername();' required />
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="" onkeyup='checkUsername();' required />
 
                     <!-- email -->
                     <label><b>Email address:</b></label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email address" value ="" required />
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email address" value="" required />
 
                     <!-- password -->
                     <label><b>Password:</b></label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" value ="" onkeyup='checkPassword();' required />
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="" onkeyup='checkPassword();' required />
 
                     <!-- password confirmation -->
                     <label><b>Repeat your password:</b></label>
-                    <input type="password" class="form-control" id="passwordrepeat" name="passwordrepeat" placeholder="Password" value ="" onkeyup='checkPassword();' required />
+                    <input type="password" class="form-control" id="passwordrepeat" name="passwordrepeat" placeholder="Password" value="" onkeyup='checkPassword();' required />
 
                     <!-- organizer check -->
                     <input type="checkbox" id="organizer" name="organizer">
@@ -111,30 +111,27 @@
     const USERMINLENGTH = 5;
     const PASSMINLENGTH = 8;
 
-
-    $("#loginForm").submit(function(e){
-        e.preventDefault();
-
+    $("#loginForm").submit(function(e) {
         var form = $(this);
         var url = form.attr('action');
 
+        e.preventDefault();
 
         $.ajax({
             type: "POST",
             url: url,
             data: form.serialize(),
-            success: function(data){
-                if(JSON.parse(data)["result"]){
+            success: function(data) {
+                if (JSON.parse(data)["result"]) {
                     location.reload();
-                }
-                else{
+                } else {
                     Swal.fire({
-                        title: "Credentials don't match error!",
+                        title: "Credentials don't match!",
                         icon: "error"
                     });
                 }
             },
-            error: function(data){
+            error: function(data) {
                 Swal.fire({
                     title: "Error!",
                     icon: "error"
@@ -143,7 +140,7 @@
         });
     });
 
-    $("#signupForm").submit(function(e){
+    $("#signupForm").submit(function(e) {
         e.preventDefault();
         var form = $(this);
         var url = form.attr('action');
@@ -152,10 +149,10 @@
             type: "POST",
             url: url,
             data: form.serialize(),
-            success: function(data){
+            success: function(data) {
                 checkCompletion(JSON.parse(data));
             },
-            error: function(data){
+            error: function(data) {
                 Swal.fire({
                     title: "Error!",
                     icon: "error"
@@ -164,53 +161,37 @@
         });
     });
 
-    function checkLogin(){
-        if(Number($("#user").val().length) >= USERMINLENGTH &&
-            Number($("#pwd").val().length) >= PASSMINLENGTH){
-            $("#loginForm").submit();
-        }
-        else{
+    function checkLogin() {
+        if (Number($("#user").val().length) <= USERMINLENGTH &&
+            Number($("#pwd").val().length) <= PASSMINLENGTH) {
             Swal.fire({
-                title: "Credentials length error!",
+                title: "Credentials are too short!",
+                text: "Make sure to type your credentials correctly",
                 icon: "error"
             });
-        }
-    }
-
-    function checkCompletion(data) {
-        var status = data["status"];
-        var userError = data["userError"];
-        var mailError = data["mailError"];
-
-        if (userError) {
-            document.getElementById("userAlreadyTaken").innerHTML = "This username is already taken!";
         } else {
-            document.getElementById("userAlreadyTaken").innerHTML = "";
-        }
+            var user = $("#user").val();
 
-        if (mailError) {
-            document.getElementById("mailAlreadyTaken").innerHTML = "This email address is already in use!";
-        } else {
-            document.getElementById("mailAlreadyTaken").innerHTML = "";
-        }
+            $.ajax({
+                type: "POST",
+                url: "php/getUserEmailStatus.php",
+                data: {
+                    username: user,
+                },
+                success: function(r) {
+                    var tmp = JSON.parse(r);
 
-        if (status) {
-            Swal.fire({
-                text: $("#firstname").val() + ', check the mail we sent to ' + $("#email").val() + ' to confirm your account',
-                icon: "success",
-            }).then(() => {
-                checkVerificationCode();
+                    if (tmp["result"]) {
+                        $("#loginForm").submit();
+                    } else {
+                        checkVerificationCode(user);
+                    }
+                }
             });
         }
-        else{
-            $("#firstname").value = data["firstname"];
-            $("#lastname").value = data["lastname"];
-            $("#username").value = data["username"];
-            $("#email").value = data["email"];
-        }
     }
 
-    function checkVerificationCode(){
+    function checkVerificationCode(username) {
         Swal.fire({
             title: "Insert the confermation code we sent you via-mail",
             input: "text",
@@ -219,10 +200,10 @@
                 type: "POST",
                 url: "php/getUserVerificationCode.php",
                 data: {
-                    username : $("#username").val(),
-                    code : md5(result.value)
+                    username: username,
+                    code: md5(result.value)
                 },
-                success : function(r){
+                success: function(r) {
                     var tmp = JSON.parse(r);
 
                     if (tmp["result"]) {
@@ -235,12 +216,13 @@
                         Swal.fire({
                             title: "Codes don't match, repeat the procedure please!",
                             icon: "error",
-                        }).then(() => checkVerificationCode());
+                        }).then(() => checkVerificationCode(username));
                     }
                 }
             });
         });
     }
+
     function checkUsername() {
         if (Number($("#username").val().length) < USERMINLENGTH) {
             document.getElementById("usernameWarning").innerHTML = "Username must be at least 5 characters long!";
@@ -275,5 +257,37 @@
             document.getElementById("errorMessage").innerHTML = "";
             $("#signupForm").submit();
         }
+    }
+
+    function checkCompletion(data) {
+        var status = data["status"];
+        var userError = data["userError"];
+        var mailError = data["mailError"];
+
+        if (userError) {
+            document.getElementById("userAlreadyTaken").innerHTML = "This username is already taken!";
+        } else {
+            document.getElementById("userAlreadyTaken").innerHTML = "";
+        }
+
+        if (mailError) {
+            document.getElementById("mailAlreadyTaken").innerHTML = "This email address is already in use!";
+        } else {
+            document.getElementById("mailAlreadyTaken").innerHTML = "";
+        }
+
+        if (status) {
+            Swal.fire({
+                text: $("#firstname").val() + ', check the mail we sent to ' + $("#email").val() + ' to confirm your account',
+                icon: "success",
+            }).then(() => {
+                checkVerificationCode($("#username").val());
+            });
+        } //else {
+        //$("#firstname").value = data["firstname"];
+        //$("#lastname").value = data["lastname"];
+        //$("#username").value = data["username"];
+        //$("#email").value = data["email"];
+        //}
     }
 </script>
