@@ -22,7 +22,8 @@ isset($_POST["event-description"])){
 	$category = $_POST["event-category"];
 	$description = $_POST["event-description"];
 
-
+	$DBHandler = new DBHandler();
+	
 
 }
 echo json_encode($Response);
