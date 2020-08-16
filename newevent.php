@@ -19,22 +19,30 @@
 		</div>
 		<label for="event-place" class="col-sm-2 col-form-label">Place</label>
 		<div class="col-sm-10">
-			<input id="event-place" class="form-control" type="text" name="event-place">
+			<input id="event-place" class="form-control" type="text" name="event-place" placeholder="Type the place">
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="event-price" class="col-sm-2 col-form-label">Price</label>
+		<label for="event-price" class="col-sm-2 col-form-label">Price per ticket</label>
 		<div class="col-sm-10">
-			<input id="event-price" class="form-control" type="number" name="event-price">
+			<input id="event-price" class="form-control" type="number" name="event-price" placeholder="Type the price per ticket">
 		</div>
 		<label for="event-maxtickets" class="col-sm-2 col-form-label">Max num. tickets</label>
 		<div class="col-sm-10">
-			<input id="event-maxtickets" class="form-control" type="number" name="event-maxtickets">
+			<input id="event-maxtickets" class="form-control" type="number" name="event-maxtickets" placeholder="Type the max number of tickets to sell">
 		</div>
+	</div>
+	<div class="form-group row">
+		<label for="event-category">Category</label>
+		<select class="form-control" id="event-category">
+			<?php
+				require 'php/getCategories.php';
+			?>
+		</select>
 	</div>
 	<div class="form-group">
 	    <label for="event-description">Description</label>
-	    <textarea class="form-control" id="event-description" rows="5"></textarea>
+	    <textarea class="form-control" id="event-description" rows="5" placeholder="Type the description of the event"></textarea>
   </div>
   <button id="event-publish" type="button" class="btn btn-primary" onclick="checkEvent()">Publish</button>
 </form>
