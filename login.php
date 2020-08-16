@@ -111,6 +111,7 @@
     const USERMINLENGTH = 5;
     const PASSMINLENGTH = 8;
 
+    //when the login form gets submitted..
     $("#loginForm").submit(function(e) {
         var form = $(this);
         var url = form.attr('action');
@@ -123,10 +124,11 @@
             data: form.serialize(),
             success: function(data) {
                 if (JSON.parse(data)["result"]) {
-                    location.reload();
+                    location.reload(); //if credentials where correct cookies have been set so reloads the page and automatically logs into system
                 } else {
                     Swal.fire({
                         title: "Credentials don't match!",
+                        text: "Make sure to type your credentials correctly",
                         icon: "error"
                     });
                 }
@@ -134,36 +136,43 @@
             error: function(data) {
                 Swal.fire({
                     title: "Error!",
-                    icon: "error"
+                    icon: "Something went wrong when comunicating with our server"
                 });
             }
         });
     });
 
+    //when the signup form gets submitted..
     $("#signupForm").submit(function(e) {
-        e.preventDefault();
         var form = $(this);
         var url = form.attr('action');
+
+        e.preventDefault();
 
         $.ajax({
             type: "POST",
             url: url,
             data: form.serialize(),
             success: function(data) {
-                checkCompletion(JSON.parse(data));
+                checkCompletion(JSON.parse(data)); //checkCompletions controls if the data inserted is fine or if username already exist etc..
             },
             error: function(data) {
                 Swal.fire({
                     title: "Error!",
-                    icon: "error"
+                    icon: "Something went wrong when comunicating with our server"
                 });
             }
         });
     });
 
+    /* this function is called on the onClick event of the login button
+    checks if credentials are appropiate locally before even sending them, and then it checks if the user email has been verified: 
+    yes - the login form is submitted (and then if credentials are ok you are logged into the system)
+    no - asks for the verification code until user email isn't verified
+    */
     function checkLogin() {
-        if (Number($("#user").val().length) <= USERMINLENGTH &&
-            Number($("#pwd").val().length) <= PASSMINLENGTH) {
+        if (Number($("#user").val().length) < USERMINLENGTH ||
+            Number($("#pwd").val().length) < PASSMINLENGTH) {
             Swal.fire({
                 title: "Credentials are too short!",
                 text: "Make sure to type your credentials correctly",
@@ -171,12 +180,11 @@
             });
         } else {
             var user = $("#user").val();
-
             $.ajax({
                 type: "POST",
                 url: "php/getUserEmailStatus.php",
                 data: {
-                    username: user,
+                    username: user
                 },
                 success: function(r) {
                     var tmp = JSON.parse(r);
@@ -186,11 +194,20 @@
                     } else {
                         checkVerificationCode(user);
                     }
+                },
+                error: function(r) {
+                    Swal.fire({
+                        title: "Error!",
+                        icon: "Something went wrong when comunicating with our server"
+                    });
                 }
             });
         }
     }
 
+    /*this is the function for asking the email verification code, works both before login (if user never inserted it before) and/or after registration. 
+    field "username" is used to know where to take the username from for the query (from which textbox, depending if you are trying to login or register).
+    */
     function checkVerificationCode(username) {
         Swal.fire({
             title: "Insert the confermation code we sent you via-mail",
@@ -259,6 +276,10 @@
         }
     }
 
+    /* this function is called after user submits the registration form, to display internal database conflicts (user already taken etc..) 
+    if status of the request is ok (true), calls the function checkVerificationCode to let the user insert the code sent via-mail
+    if everything is ok, checkVerificationCode automatically lets you log into the system
+    */
     function checkCompletion(data) {
         var status = data["status"];
         var userError = data["userError"];
