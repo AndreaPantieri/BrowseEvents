@@ -1,4 +1,4 @@
-<form id="form-newevent">
+<form id="form-newevent" action="php/addEvent.php" method="POST" enctype="multipart/form-data">
 	<h1 id="title-newevent">New Event</h1>
 	
 	<div class="form-group" style="margin: auto;">
@@ -36,5 +36,41 @@
 	    <label for="event-description">Description</label>
 	    <textarea class="form-control" id="event-description" rows="5"></textarea>
   </div>
-  <button type="button" class="btn btn-primary">Publish</button>
+  <button id="event-publish" type="button" class="btn btn-primary" onclick="checkEvent()">Publish</button>
 </form>
+
+<script type="text/javascript">
+	$("#form-newevent").submit(function(e){
+		e.preventDefault();
+
+		var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(),
+            success: function(data){
+                if(JSON.parse(data)["result"]){
+                    
+                }
+                else{
+                    Swal.fire({
+                        title: "Data error!",
+                        icon: "error"
+                    });
+                }
+            },
+            error: function(data){
+                Swal.fire({
+                    title: "Error!",
+                    icon: "error"
+                });
+            }
+        });
+	});
+
+	function checkEvent(){
+		$("#form-newevent").submit();
+	}
+</script>

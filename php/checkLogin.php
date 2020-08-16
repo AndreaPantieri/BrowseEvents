@@ -1,6 +1,9 @@
 <?php 
 require_once('./DBHandler.php');
-require_once('./checkLoginResponse.php');
+
+class checkLoginResponse{
+	public $result = false;
+}
 
 $DBHandler = new DBHandler();
 $checkLoginResponse = new checkLoginResponse();
