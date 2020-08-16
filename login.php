@@ -189,7 +189,7 @@
                 success: function(r) {
                     var tmp = JSON.parse(r);
 
-                    if (tmp["result"]) {
+                    if (tmp["result"] || !tmp["userExists"]) {
                         $("#loginForm").submit();
                     } else {
                         checkVerificationCode(user);

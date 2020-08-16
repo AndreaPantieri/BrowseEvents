@@ -4,6 +4,7 @@ require_once 'DBHandler.php';
 class getUserEmailStatusResponse
 {
     public $result = false;
+    public $userExists;
 }
 
 $DBHandler = new DBHandler();
@@ -16,11 +17,15 @@ if (isset($_POST["username"])) {
     $counts = array_map('count', $result);
 
     if (count($counts) == 1) {
+        $getUserEmailStatusResponse->userExists = true;
+
         if ($result[0]["EmailStatus"] == 'verified') {
             $getUserEmailStatusResponse->result = true;
         } else {
             $getUserEmailStatusResponse->result = false;
         }
+    } else {
+        $getUserEmailStatusResponse->userExists = false;
     }
 }
 echo json_encode($getUserEmailStatusResponse);
