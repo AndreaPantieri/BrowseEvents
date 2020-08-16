@@ -10,8 +10,8 @@ class addUserResponse{
     public $userError = false;
     public $mailError = false;
 }
-
 $addUserResponse = new addUserResponse();
+
 if (
     isset($_POST['username']) &&
     isset($_POST['password']) &&
@@ -38,20 +38,25 @@ if (
     $result_e = $DBHandler->select($sql_e);
     $counts_u = array_map('count', $result_u);
     $counts_e = array_map('count', $result_e);
+
     if ($result_u) {
         if (count($counts_u) > 0) {
             $addUserResponse->userError = true;
+        } else {
+            $addUserResponse->userError = false;
         }
     }
 
     if ($result_e) {
         if (count($counts_e) > 0) {
             $addUserResponse->mailError = true;
+        } else {
+            $addUserResponse->mailError = false;
         }
     }
 
     if (!$result_e && !$result_u) {
-        $verificationCode = rand(100000, time()) + 1; //generates a random verification code for user based on current time..
+        $verificationCode = rand(100000, time()) + 1; //generates a random verification code based on current time..
         mail($email, 'Confirm your registration to BrowseEvents.com', 'Thanks for signing to BrowseEvents! Here\'s your code: ' . $verificationCode, 'From: infobrowseevents@gmail.com');
         $verificationCode = md5($verificationCode); //..and hashes it before saving it in DB
 
@@ -62,7 +67,7 @@ if (
         if ($result) {
             $addUserResponse->status = true;
         } else {
-            //echo "There was a problem inserting your informations to DB, please register again!";
+            $addUserResponse->status = false;
         }
     }
 }

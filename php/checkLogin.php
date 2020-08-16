@@ -23,7 +23,8 @@ if(isset($_POST['user']) && isset($_POST['pwd'])){
 	        $checkLoginResponse->result = true;
 	    }
 	} else {
-	    //mancano i messaggi di errore che ritornano su login.php
+		$checkLoginResponse->result = false;
+	    //echo "There was an error retriving information from our DB, please try again later."
 	}	
 }
 else{
