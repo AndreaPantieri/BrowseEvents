@@ -72,9 +72,58 @@ function isMobile()
 
 <body>
     <?php
-    $cookie_name = "logged";
+    $cookie_name = "remindme";
+    if(isset($_COOKIE[$cookie_name])){
+        //TODO CHECKS COOKIE
+        list ($session_id, $token, $hash) = explode(':', $cookie);
 
-    if (!isset($_COOKIE[$cookie_name])) {
+        if (!hash_equals(hash_hmac('sha256', $user . ':' . $token, "85053461164796801949539541639542805770666392330682673302530819774105141531698707146930307290253537320447270457"), $hash)) {
+            die("Error in cookie");
+        }
+
+        $DBHandler = new DBHandler();
+        $sql = "SELECT User_idUsers AS idUser, Username, UserType_idUserType, Token FROM Session 
+        INNER JOIN User ON Session.User_idUsers = User.idUsers WHERE idSession = '$session_id'";
+        $result = $DBHandler->select($sql);
+
+        if($result){
+            $counts = array_map('count', $result);
+            $count = count($counts);
+
+            if($count == 1){
+                $tokenFromDB = $result[0]["Token"];
+                if (hash_equals($usertoken, $token)) {
+                     if (session_status() == PHP_SESSION_NONE) {
+                        session_id($session_id);
+                        session_start();
+                    }
+
+                    $_SESSION["userid"] = $result[0]['idUser'];
+                    $_SESSION["username"] = $result[0]['Username'];
+                    $_SESSION["idUserType"] = $result[0]['UserType_idUserType'];
+                    include 'baseLogged.php';
+                }
+            } 
+        }
+    }
+    else{
+        if(isset($_SESSION["userid"]) && isset($_SESSION["username"]) && isset($_SESSION["idUserType"])){
+            include 'baseLogged.php';
+        }
+        else{
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+            include 'login.php';
+        }   
+        
+    }
+
+
+    
+
+
+    /*if (!isset($_COOKIE[$cookie_name]) && !sesssion) {
         include 'login.php';
     } else {
         $cookie_name_type_account = "typeaccount";
@@ -84,7 +133,7 @@ function isMobile()
             $type_account = $_COOKIE[$cookie_name_type_account];
             include 'baseLogged.php';
         }
-    }
+    }*/
     ?>
     
 </body>
