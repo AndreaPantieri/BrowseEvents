@@ -205,7 +205,7 @@
         }
     }
 
-    /*this is the function for asking the email verification code, works both before login (if user never inserted it before) and/or after registration. 
+    /* this function asks for the email verification code, works both before login (if user never inserted it before) and/or after registration. 
     field "username" is used to know where to take the username from for the query (from which textbox, depending if you are trying to login or register).
     */
     function checkVerificationCode(username) {
@@ -304,11 +304,6 @@
             }).then(() => {
                 checkVerificationCode($("#username").val());
             });
-        } //else {
-        //$("#firstname").value = data["firstname"];
-        //$("#lastname").value = data["lastname"];
-        //$("#username").value = data["username"];
-        //$("#email").value = data["email"];
-        //}
+        }
     }
 </script>
