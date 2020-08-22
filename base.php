@@ -1,9 +1,9 @@
 <?php
-require_once './php/DBHandler.php';
 function isMobile()
 {
     return is_numeric(strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "mobile"));
 }
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,13 +107,12 @@ function isMobile()
         }
     }
     else{
+        print_r($_SESSION);
         if(isset($_SESSION["userid"]) && isset($_SESSION["username"]) && isset($_SESSION["idUserType"])){
+
             include 'baseLogged.php';
         }
         else{
-            if (session_status() == PHP_SESSION_NONE) {
-                session_start();
-            }
             include 'login.php';
         }   
         

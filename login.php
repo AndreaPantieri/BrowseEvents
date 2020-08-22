@@ -117,14 +117,17 @@
         var url = form.attr('action');
 
         e.preventDefault();
-
+        
         $.ajax({
             type: "POST",
             url: url,
             data: form.serialize(),
             success: function(data) {
+                console.log(data);
                 if (JSON.parse(data)["result"]) {
-                    location.reload(); //if credentials where correct cookies have been set so reloads the page and automatically logs into system
+                    console.log(JSON.parse(data));
+
+                    //location.reload(); //if credentials where correct cookies have been set so reloads the page and automatically logs into system
                 } else {
                     Swal.fire({
                         title: "Credentials don't match!",
@@ -171,6 +174,7 @@
     no - asks for the verification code until user email isn't verified
     */
     function checkLogin() {
+        
         if (Number($("#user").val().length) < USERMINLENGTH ||
             Number($("#pwd").val().length) < PASSMINLENGTH) {
             Swal.fire({
@@ -180,6 +184,7 @@
             });
         } else {
             var user = $("#user").val();
+
             $.ajax({
                 type: "POST",
                 url: "php/getUserEmailStatus.php",
@@ -189,16 +194,21 @@
                 success: function(r) {
                     var tmp = JSON.parse(r);
 
-                    if (tmp["result"] || !tmp["userExists"]) {
+                    if (tmp["result"] && tmp["userExists"]) {
                         $("#loginForm").submit();
-                    } else {
+                    } else if(tmp["result"] && !tmp["userExists"]) {
                         checkVerificationCode(user);
+                    } else {
+                        Swal.fire({
+                            title: "Error!",
+                            text: "Wrong credentials!"
+                        });
                     }
                 },
                 error: function(r) {
                     Swal.fire({
                         title: "Error!",
-                        icon: "Something went wrong when comunicating with our server"
+                        text: "Something went wrong when comunicating with our server"
                     });
                 }
             });

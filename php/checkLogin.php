@@ -4,6 +4,7 @@ require_once('./DBHandler.php');
 class checkLoginResponse
 {
 	public $result = false;
+	public $session;
 }
 
 $DBHandler = new DBHandler();
@@ -28,13 +29,14 @@ if (isset($_POST['user']) && isset($_POST['pwd'])) {
 			$checkLoginResponse->result = true;
 
 			if ($reminder) {
-				$session_id = 2;
+
+				$session_id = $_SESSION["session_id"];
 				$token = bin2hex(random_bytes(2048));
 				$cookie = $session_id . ':' . $token;
 				$hash = hash_hmac('sha256', $cookie, "85053461164796801949539541639542805770666392330682673302530819774105141531698707146930307290253537320447270457");
 				$cookie .= ':' . $hash;
 				setcookie('remindme', $cookie);
-				$sql = "INSERT INTO Session (idSession, User_idUsers, Token) VALUE ('$session_id', $_SESSION[userid], '$token')";
+				$sql = "INSERT INTO Session (idSession, User_idUsers, Token) VALUE ('$session_id', ". $_SESSION['userid'] . ", '$token')";
 				$res = $DBHandler->genericQuery($sql);
 
 				if (!$res) {
@@ -47,5 +49,5 @@ if (isset($_POST['user']) && isset($_POST['pwd'])) {
 		$checkLoginResponse->result = false;
 	}
 }
-
+$checkLoginResponse->session = $_SESSION;
 echo json_encode($checkLoginResponse);
