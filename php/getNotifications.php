@@ -9,8 +9,8 @@ class Response{
 $DBHandler = new DBHandler();
 $Response = new Response();
 
-if(isset($_COOKIE["logged"])){
-	$user_id = $_COOKIE["logged"];
+if(isset($_SESSION["userid"])){
+	$user_id = $_SESSION["userid"];
 	$sql_n = 
 	"SELECT Notification.idNotification, Notification.Title, Notification.Description, Notification.Date, Notification.isRead
 	FROM Notification INNER JOIN user_has_notification ON Notification.idNotification = user_has_notification.Notification_idNotification
@@ -29,7 +29,6 @@ if(isset($_COOKIE["logged"])){
 	</div>';
 		}
 	}
-	
-	echo json_encode($Response);
 }
+echo json_encode($Response);
 ?>

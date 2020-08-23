@@ -1,4 +1,5 @@
 <?php
+require_once 'php/DBHandler.php';
 function isMobile()
 {
     return is_numeric(strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "mobile"));
@@ -74,9 +75,9 @@ function isMobile()
     $cookie_name = "remindme";
     if(isset($_COOKIE[$cookie_name])){
         //TODO CHECKS COOKIE
-        list ($session_id, $token, $hash) = explode(':', $cookie);
+        list ($session_id, $token, $hash) = explode(':', $_COOKIE[$cookie_name]);
 
-        if (!hash_equals(hash_hmac('sha256', $user . ':' . $token, "85053461164796801949539541639542805770666392330682673302530819774105141531698707146930307290253537320447270457"), $hash)) {
+        if (!hash_equals(hash_hmac('sha256', $session_id . ':' . $token, "85053461164796801949539541639542805770666392330682673302530819774105141531698707146930307290253537320447270457"), $hash)) {
             die("Error in cookie");
         }
 
@@ -91,12 +92,16 @@ function isMobile()
 
             if($count == 1){
                 $tokenFromDB = $result[0]["Token"];
-                if (hash_equals($usertoken, $token)) {
+                if (hash_equals($tokenFromDB, $token)) {
+                    session_destroy();
+                    session_id($session_id);
+                    session_start();
 
                     $_SESSION["userid"] = $result[0]['idUser'];
                     $_SESSION["username"] = $result[0]['Username'];
                     $_SESSION["idUserType"] = $result[0]['UserType_idUserType'];
                     $_SESSION["sessionId"] = $session_id;
+                    $type_account = $_SESSION["idUserType"];
                     include 'baseLogged.php';
                 }
             } 
