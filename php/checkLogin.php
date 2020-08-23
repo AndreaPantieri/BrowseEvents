@@ -30,7 +30,7 @@ if (isset($_POST['user']) && isset($_POST['pwd'])) {
 
 			if ($reminder) {
 
-				$session_id = $_SESSION["session_id"];
+				$session_id = $_SESSION["sessionId"];
 				$token = bin2hex(random_bytes(2048));
 				$cookie = $session_id . ':' . $token;
 				$hash = hash_hmac('sha256', $cookie, "85053461164796801949539541639542805770666392330682673302530819774105141531698707146930307290253537320447270457");

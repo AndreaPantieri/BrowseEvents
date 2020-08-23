@@ -3,7 +3,6 @@ function isMobile()
 {
     return is_numeric(strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "mobile"));
 }
-session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,23 +92,19 @@ session_start();
             if($count == 1){
                 $tokenFromDB = $result[0]["Token"];
                 if (hash_equals($usertoken, $token)) {
-                     if (session_status() == PHP_SESSION_NONE) {
-                        session_id($session_id);
-                        session_start();
-                    }
 
                     $_SESSION["userid"] = $result[0]['idUser'];
                     $_SESSION["username"] = $result[0]['Username'];
                     $_SESSION["idUserType"] = $result[0]['UserType_idUserType'];
+                    $_SESSION["sessionId"] = $session_id;
                     include 'baseLogged.php';
                 }
             } 
         }
     }
     else{
-        print_r($_SESSION);
         if(isset($_SESSION["userid"]) && isset($_SESSION["username"]) && isset($_SESSION["idUserType"])){
-
+            $type_account = $_SESSION["idUserType"];
             include 'baseLogged.php';
         }
         else{
@@ -117,22 +112,6 @@ session_start();
         }   
         
     }
-
-
-    
-
-
-    /*if (!isset($_COOKIE[$cookie_name]) && !sesssion) {
-        include 'login.php';
-    } else {
-        $cookie_name_type_account = "typeaccount";
-        if (!isset($_COOKIE[$cookie_name_type_account])) {
-            die('Error, type of account missing!');
-        } else {
-            $type_account = $_COOKIE[$cookie_name_type_account];
-            include 'baseLogged.php';
-        }
-    }*/
     ?>
     
 </body>

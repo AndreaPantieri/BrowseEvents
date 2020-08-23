@@ -123,11 +123,8 @@
             url: url,
             data: form.serialize(),
             success: function(data) {
-                console.log(data);
                 if (JSON.parse(data)["result"]) {
-                    console.log(JSON.parse(data));
-
-                    //location.reload(); //if credentials where correct cookies have been set so reloads the page and automatically logs into system
+                    location.reload(); //if credentials where correct cookies have been set so reloads the page and automatically logs into system
                 } else {
                     Swal.fire({
                         title: "Credentials don't match!",
