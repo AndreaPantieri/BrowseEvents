@@ -13,3 +13,9 @@
 	border-radius: 50%;
 	font-size: larger;
 }
+
+.inputImage{
+	width: 20em;
+	height: 20em;
+	margin: auto;
+}
