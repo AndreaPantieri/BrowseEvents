@@ -22,8 +22,11 @@ if (isset($_POST["username"]) && isset($_POST["code"])) {
 			$tmp = $DBHandler->genericQuery($sql_u);
 
 			if ($tmp) {
-				setcookie("logged", $username, time() + (86400 * 2), "/");
-				setcookie("typeaccount", $result[0]["UserType_idUserType"], time() + (86400 * 2), "/");
+				$_SESSION["userid"] = $result[0]['idUser'];
+				$_SESSION["username"] = $result[0]['Username'];
+				$_SESSION["idUserType"] = $result[0]['UserType_idUserType'];
+				$_SESSION["sessionId"] = session_id();
+				$type_account = $_SESSION["idUserType"]; //WTF?	
 				$getUserVerificationCodeResponse->result = true;
 			}
 		}

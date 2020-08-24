@@ -11,7 +11,7 @@
 
                     <!-- username -->
                     <label for="user"><b>Username:</b></label>
-                    <input type="text" class="form-control" id="user" name="user" placeholder="Username or email address" required />
+                    <input type="text" class="form-control" id="user" name="user" placeholder="Username" required />
 
                     <!-- password -->
                     <label for="password"><b>Password:</b></label>
@@ -117,7 +117,7 @@
         var url = form.attr('action');
 
         e.preventDefault();
-        
+
         $.ajax({
             type: "POST",
             url: url,
@@ -125,7 +125,7 @@
             success: function(data) {
                 console.log(data);
                 if (JSON.parse(data)["result"]) {
-                    //location.reload(); //if credentials where correct cookies have been set so reloads the page and automatically logs into system
+                    location.reload(); //if credentials where correct cookies have been set so reloads the page and automatically logs into system
                 } else {
                     Swal.fire({
                         title: "Credentials don't match!",
@@ -172,7 +172,7 @@
     no - asks for the verification code until user email isn't verified
     */
     function checkLogin() {
-        
+
         if (Number($("#user").val().length) < USERMINLENGTH ||
             Number($("#pwd").val().length) < PASSMINLENGTH) {
             Swal.fire({
@@ -194,12 +194,13 @@
 
                     if (tmp["result"] && tmp["userExists"]) {
                         $("#loginForm").submit();
-                    } else if(tmp["result"] && !tmp["userExists"]) {
+                    } else if (!tmp["result"] && tmp["userExists"]) {
                         checkVerificationCode(user);
                     } else {
                         Swal.fire({
-                            title: "Error!",
-                            text: "Wrong credentials!"
+                            title: "Credentials don't match!",
+                            text: "Make sure to type your credentials correctly",
+                            icon: "error"
                         });
                     }
                 },
@@ -243,6 +244,12 @@
                             icon: "error",
                         }).then(() => checkVerificationCode(username));
                     }
+                },
+                error: function(r) {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Something went wrong when comunicating with our server"
+                    });
                 }
             });
         });
