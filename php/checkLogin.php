@@ -24,8 +24,6 @@ if (isset($_POST['user']) && isset($_POST['pwd'])) {
 
 		if (count($counts) == 1) {
 			$_SESSION["userid"] = $result[0]['idUsers'];
-			$_SESSION["username"] = $result[0]['Username'];
-			$_SESSION["idUserType"] = $result[0]['UserType_idUserType'];
 
 			$checkLoginResponse->result = true;
 

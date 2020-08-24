@@ -34,8 +34,8 @@ function isMobile()
     <script type="text/javascript">
         var linkMobileSheet = 'LINK[href="css/style-mobile.css"]';
         var linkDekstopSheet = 'LINK[href="css/style-dekstop.css"]';
-        
-        function changeCSSStyleSheet(){
+
+        function changeCSSStyleSheet() {
             var w = window.innerWidth;
             var h = window.innerHeight;
 
@@ -43,82 +43,94 @@ function isMobile()
             var sH = window.screen.height;
 
 
-            if(w < sW / 2.0 || h < sH / 2.0 || w <= 320){
+            if (w < sW / 2.0 || h < sH / 2.0 || w <= 320) {
                 $(linkDekstopSheet).prop('disabled', true);
                 $(linkMobileSheet).prop('disabled', false);
-                
-            }
-            else{
+
+            } else {
                 $(linkMobileSheet).prop('disabled', true);
                 $(linkDekstopSheet).prop('disabled', false);
-                    
+
             }
         }
 
         <?php
 
-            if (isMobile()) {
-                echo "$(linkDekstopSheet).prop('disabled', true);";
-            } else {
-                echo "$(linkMobileSheet).prop('disabled', true);";
-            }
+        if (isMobile()) {
+            echo "$(linkDekstopSheet).prop('disabled', true);";
+        } else {
+            echo "$(linkMobileSheet).prop('disabled', true);";
+        }
 
         ?>
 
         window.addEventListener('resize', changeCSSStyleSheet);
-
     </script>
 </head>
 
 <body>
     <?php
+    $DBHandler = new DBHandler();
     $cookie_name = "remindme";
-    if(isset($_COOKIE[$cookie_name])){
-        //TODO CHECKS COOKIE
-        list ($session_id, $token, $hash) = explode(':', $_COOKIE[$cookie_name]);
+
+    if (isset($_COOKIE[$cookie_name])) {
+        list($session_id, $token, $hash) = explode(':', $_COOKIE[$cookie_name]);
 
         if (!hash_equals(hash_hmac('sha256', $session_id . ':' . $token, "85053461164796801949539541639542805770666392330682673302530819774105141531698707146930307290253537320447270457"), $hash)) {
             die("Error in cookie");
         }
 
-        $DBHandler = new DBHandler();
-        $sql = "SELECT User_idUsers AS idUser, Username, UserType_idUserType, Token FROM Session 
+        $sql = "SELECT User_idUsers AS idUser, Username, Email, UserType_idUserType, FirstName, LastName, LastLoginDate, Token FROM Session 
         INNER JOIN User ON Session.User_idUsers = User.idUsers WHERE idSession = '$session_id'";
         $result = $DBHandler->select($sql);
 
-        if($result){
+        if ($result) {
             $counts = array_map('count', $result);
             $count = count($counts);
 
-            if($count == 1){
+            if ($count == 1) {
                 $tokenFromDB = $result[0]["Token"];
+
                 if (hash_equals($tokenFromDB, $token)) {
                     session_destroy();
                     session_id($session_id);
                     session_start();
 
+                    $_SESSION["sessionId"] = $session_id;
                     $_SESSION["userid"] = $result[0]['idUser'];
                     $_SESSION["username"] = $result[0]['Username'];
-                    $_SESSION["idUserType"] = $result[0]['UserType_idUserType'];
-                    $_SESSION["sessionId"] = $session_id;
-                    $type_account = $_SESSION["idUserType"];
+                    $_SESSION["email"] = $result[0]['Email'];
+                    $_SESSION["firstname"] = $result[0]['FirstName'];
+                    $_SESSION["lastname"] = $result[0]['LastName'];
+                    $_SESSION["lastlogin"] = $result[0]['LastLoginDate'];
+
+                    $type_account = $result[0]['UserType_idUserType']; //MODIFICARLO IN  $_SESSION["idUserType"] = $result[0]['UserType_idUserType'];
                     include 'baseLogged.php';
                 }
-            } 
+            }
         }
-    }
-    else{
-        if(isset($_SESSION["userid"]) && isset($_SESSION["username"]) && isset($_SESSION["idUserType"])){
-            $type_account = $_SESSION["idUserType"];
-            include 'baseLogged.php';
-        }
-        else{
+    } else {
+        if (isset($_SESSION["userid"])) {
+            $tmp = $_SESSION["userid"];
+            
+            $sql = "SELECT idUsers, Username, Email, UserType_idUserType, FirstName, LastName, LastLoginDate FROM User WHERE idUsers = '$tmp'";
+            $result = $DBHandler->select($sql);
+
+            if ($result) {
+                $_SESSION["username"] = $result[0]['Username'];
+                $_SESSION["email"] = $result[0]['Email'];
+                $_SESSION["firstname"] = $result[0]['FirstName'];
+                $_SESSION["lastname"] = $result[0]['LastName'];
+                $_SESSION["lastlogin"] = $result[0]['LastLoginDate'];
+
+                $type_account = $result[0]['UserType_idUserType']; //MODIFICARLO IN $_SESSION["idUserType"] = $result[0]['UserType_idUserType'];
+                include 'baseLogged.php';
+            }
+        } else {
             include 'login.php';
-        }   
-        
+        }
     }
     ?>
-    
 </body>
 
 </html>

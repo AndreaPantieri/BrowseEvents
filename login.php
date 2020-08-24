@@ -235,9 +235,9 @@
                     if (tmp["result"]) {
                         Swal.fire({
                             title: "Successfully registered to BrowseEvents.com!",
-                            text: "Codes match!",
+                            text: "Codes match! Now you can login in to the website",
                             icon: "success",
-                        }).then(() => location.reload());
+                        })
                     } else {
                         Swal.fire({
                             title: "Codes don't match, repeat the procedure please!",
