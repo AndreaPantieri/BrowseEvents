@@ -35,7 +35,12 @@ function isMobile()
         var linkMobileSheet = 'LINK[href="css/style-mobile.css"]';
         var linkDekstopSheet = 'LINK[href="css/style-dekstop.css"]';
 
+<<<<<<< HEAD
         function changeCSSStyleSheet() {
+=======
+        
+        function changeCSSStyleSheet(){
+>>>>>>> d8ec99af002cdb5744177f5ba0d94b146e385390
             var w = window.innerWidth;
             var h = window.innerHeight;
 
@@ -52,6 +57,12 @@ function isMobile()
                 $(linkDekstopSheet).prop('disabled', false);
 
             }
+
+            var sm = $("#slidemenu"), tp = $("#topbar"), mc = $("#maincontent");
+            if(typeof sm != "undefined" && typeof tp != "undefined" && typeof mc != "undefined"){
+                sm.css("top", tp.height());
+                mc.css("top", tp.height());
+            }
         }
 
         <?php
@@ -65,6 +76,14 @@ function isMobile()
         ?>
 
         window.addEventListener('resize', changeCSSStyleSheet);
+
+        $(document).ready(function(){
+            var sm = $("#slidemenu"), tp = $("#topbar"), mc = $("#maincontent");
+            if(typeof sm != "undefined" && typeof tp != "undefined" && typeof mc != "undefined"){
+                sm.css("top", tp.height());
+                mc.css("top", tp.height());
+            }
+        });
     </script>
 </head>
 
@@ -112,7 +131,7 @@ function isMobile()
     } else {
         if (isset($_SESSION["userid"])) {
             $tmp = $_SESSION["userid"];
-            
+
             $sql = "SELECT idUsers, Username, Email, UserType_idUserType, FirstName, LastName, LastLoginDate FROM User WHERE idUsers = '$tmp'";
             $result = $DBHandler->select($sql);
 
