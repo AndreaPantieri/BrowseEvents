@@ -98,8 +98,6 @@
     
 </div>
 
-<!-- Footbar -->
-<div id="footbar"></div>
 
 <!-- Slide Menu -->
 <div id="slidemenu" style="display: none;">

@@ -34,6 +34,7 @@ function isMobile()
     <script type="text/javascript">
         var linkMobileSheet = 'LINK[href="css/style-mobile.css"]';
         var linkDekstopSheet = 'LINK[href="css/style-dekstop.css"]';
+
         
         function changeCSSStyleSheet(){
             var w = window.innerWidth;
@@ -53,6 +54,12 @@ function isMobile()
                 $(linkDekstopSheet).prop('disabled', false);
                     
             }
+
+            var sm = $("#slidemenu"), tp = $("#topbar"), mc = $("#maincontent");
+            if(typeof sm != "undefined" && typeof tp != "undefined" && typeof mc != "undefined"){
+                sm.css("top", tp.height());
+                mc.css("top", tp.height());
+            }
         }
 
         <?php
@@ -67,6 +74,13 @@ function isMobile()
 
         window.addEventListener('resize', changeCSSStyleSheet);
 
+        $(document).ready(function(){
+            var sm = $("#slidemenu"), tp = $("#topbar"), mc = $("#maincontent");
+            if(typeof sm != "undefined" && typeof tp != "undefined" && typeof mc != "undefined"){
+                sm.css("top", tp.height());
+                mc.css("top", tp.height());
+            }
+        });
     </script>
 </head>
 
