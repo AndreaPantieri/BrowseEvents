@@ -136,7 +136,19 @@
         xhttp.send();
     }
     function includeMainContent(filePHP){
-        includeContent(filePHP, (h) => document.getElementById("maincontent").innerHTML = h);
+        includeContent(filePHP, (h) => {
+            document.getElementById("maincontent").innerHTML = h;
+            var s = document.getElementById("maincontent").getElementsByTagName('script');
+            for (var i = 0; i < s.length ; i++) {
+                var node=s[i], parent=node.parentElement, d = document.createElement('script');
+                d.async=node.async;
+                d.textContent = node.textContent;
+                d.setAttribute('type','text/javascript');
+                parent.insertBefore(d,node);
+                parent.removeChild(node);
+            }
+            
+        });
     }
 
     function clickMyAccount(){
