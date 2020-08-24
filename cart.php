@@ -1,17 +1,19 @@
-<h1>My Cart</h1>
-
-<div class="container">
-    <div class="row text-center py-5">
-        <div class="col-md-3 col-sm-6 my-md-0">
-            <form action="index.php" method="POST">
-                <div class="card shadow">
-                    <img src="" alt="" class="img-fluid card-img-top">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Product</h5>
-                    <h6><i class="fas fa-star"></i></h6>
-                </div>
-            </form>
+<div class="container-fluid">
+    <div class="row px-5">
+        <div class="col-md-7">
+            <div class="shopping-cart">
+                <h6>My Cart</h6>
+            </div>
+            <hr>
+            <div id="cart-elements"></div>
         </div>
     </div>
 </div>
+
+<script>
+    includeContent("php/getCartElements.php", (r) => {
+        var res = JSON.parse(r);
+        var html = res["HTML"];
+        document.getElementById("cart-elements").innerHTML = html;
+    });
+</script>

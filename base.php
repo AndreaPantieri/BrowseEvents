@@ -26,6 +26,9 @@ function isMobile()
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script type="text/javascript" src="js/md5.js"></script>
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="css/style-common.css">
     <link rel="stylesheet" href="css/style-mobile.css">

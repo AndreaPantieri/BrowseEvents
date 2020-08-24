@@ -20,7 +20,7 @@ if(isset($_SESSION["userid"])){
 	$result = $DBHandler->select($sql_n);
 
 	if($result){
-		$Response->count = count(array_map('count', result));
+		$Response->count = count(array_map('count', $result));
 		$Response->HTML = "<span id='num_notifications'>" . $count > 99 ? "99+" : $count . "</span>";
 		foreach ($result as $row) {
 			$HTML .= '<div class="dropdown-item" role="button">
