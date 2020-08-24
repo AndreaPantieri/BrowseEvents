@@ -45,13 +45,11 @@ function isMobile()
 
 
             if (w < sW / 2.0 || h < sH / 2.0 || w <= 320) {
-                $(linkDekstopSheet).prop('disabled', true);
                 $(linkMobileSheet).prop('disabled', false);
-
+                $(linkDekstopSheet).prop('disabled', true);
             } else {
-                $(linkMobileSheet).prop('disabled', true);
                 $(linkDekstopSheet).prop('disabled', false);
-
+                $(linkMobileSheet).prop('disabled', true);
             }
 
             var sm = $("#slidemenu"), tp = $("#topbar"), mc = $("#maincontent");
@@ -74,11 +72,7 @@ function isMobile()
         window.addEventListener('resize', changeCSSStyleSheet);
 
         $(document).ready(function(){
-            var sm = $("#slidemenu"), tp = $("#topbar"), mc = $("#maincontent");
-            if(typeof sm != "undefined" && typeof tp != "undefined" && typeof mc != "undefined"){
-                sm.css("top", tp.height());
-                mc.css("top", tp.height());
-            }
+            changeCSSStyleSheet();
         });
     </script>
 </head>

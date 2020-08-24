@@ -14,7 +14,7 @@
         <h1 id="title">Browse Events</h1>
         <?php
             if(!isMobile()){
-                echo "<p style=\"text-align:center;\">Browse all events nearby you!</p>";
+                echo "<p id='secondtitle' style=\"text-align:center;\">Browse all events nearby you!</p>";
             }
         ?>
     </div>
