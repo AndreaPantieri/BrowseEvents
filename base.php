@@ -35,12 +35,8 @@ function isMobile()
         var linkMobileSheet = 'LINK[href="css/style-mobile.css"]';
         var linkDekstopSheet = 'LINK[href="css/style-dekstop.css"]';
 
-<<<<<<< HEAD
-        function changeCSSStyleSheet() {
-=======
-        
         function changeCSSStyleSheet(){
->>>>>>> d8ec99af002cdb5744177f5ba0d94b146e385390
+
             var w = window.innerWidth;
             var h = window.innerHeight;
 
