@@ -4,6 +4,7 @@ require_once 'DBHandler.php';
 class getCartElementsResponse{
     public $total = 0;
     public $HTML = "<div class='cart-element'><h1>Your cart is empty!</h1></div>";
+    public $count = 0;
 }
 $getCartElementsResponse = new getCartElementsResponse();
 $DBHandler = new DBHandler();
@@ -21,6 +22,7 @@ if (isset($_SESSION["userid"])) {
     if ($result) {
         $counts = array_map('count', $result);
         if (count($counts) != 0) {
+            $getCartElementsResponse->count = count($counts);
             $getCartElementsResponse->HTML = "";
 
             foreach ($result as $row) {

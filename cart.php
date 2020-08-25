@@ -13,14 +13,8 @@
                 <h6>PRICE DETAILS</h6>
                 <hr>
                 <div class="row price-details">
-                    <div class="col-md-6">
-                        <?php
-                        //if (isset($_SESSION['cart'])) {
-                        //echo "<h6>Price ($_SESSION["cart"] items)</h6>";
-                        //} else {
-                        echo "<h6>Price (0 items)</h6>";
-                        // }
-                        ?>
+                    <div class="col-md-6" id="itemNumber">
+                        <h6></h6>;
                     </div>
                 </div>
                 <div id="total">
@@ -38,5 +32,10 @@
             var tmp = JSON.parse(data);
             document.getElementById("cart-elements").innerHTML = tmp["HTML"];
             document.getElementById("total").innerHTML = "Total: " + tmp["total"] + "€";
+            if(tmp["count"] == 1) {
+                document.getElementById("itemNumber").innerHTML = "Price (" + tmp["count"] + " item)";
+            } else {
+                document.getElementById("itemNumber").innerHTML = "Price (" + tmp["count"] + " items)";
+            }     
         });
     </script>
