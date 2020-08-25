@@ -23,7 +23,7 @@
 	<div class="form-group" style="margin: auto;">
 		<input type="file" id="selectImage" style="display: none;" accept=".jpg, .jpeg, .png">
 		<input type="button" class="btn btn-primary mb-2" value="Load a new photo" onclick="document.getElementById('selectImage').click();" />
-		<button type="button" class="btn btn-primary mb-2">Remove selected</button>
+		<button type="button" class="btn btn-primary mb-2" onclick="removeImage()">Remove selected</button>
 	</div>
 	<div class="form-group row">
 		<label for="name-event" class="col-sm-2 col-form-label">Event name</label>
@@ -100,6 +100,7 @@
 	function updateImageDisplay(event){
 		var target = event.target, files = target.files;
 		var imagesPresents = $("#carousel .carousel-indicators li").length;
+
 		var div = $("<div />"), img = $("<img />");
 		div.addClass("carousel-item");
 		div.attr('id', 'carousel-item-div-' + imagesPresents);
@@ -119,20 +120,63 @@
 	        var fr = new FileReader();
 	        fr.onload = function (e) {
 	            img.prop("src", e.target.result);
-	            
 	        };
 	        fr.readAsDataURL(files[0]);
 	        div.append(img);
 	        $("#carousel .carousel-inner").append(div);
 	    	$("#carousel-item-div-0").addClass("active");
-	    	console.log(div);
 	    }
 	    $("#carousel").removeClass("nonVisible");
 	    $("#emptyEventImage").addClass("nonVisible");
 	    $("#emptyEventImage").removeClass("d-block");
 	}
 
+	function removeImage(){
+		var indicators = $("#carousel .carousel-indicators");
+		var items = $("#carousel .carousel-inner");
+		var imagesPresents = $("#carousel .carousel-indicators li").length;
+
+		if(imagesPresents > 0){
+			var indexActive = $(".carousel-indicators .active").attr("data-slide-to");
+			var imgToRemove = $("#carousel-item-div-" + indexActive);
+
+			var imgSrc = [];
+			var i;
+			for(i = 0; i < imagesPresents; i++){
+				imgSrc.push($("#carousel-item-div-" + i + " img").attr('src'));
+			}
+			imgSrc.splice(indexActive, 1);
+
+			indicators.empty();
+			items.empty();
+
+			if(imgSrc.length == 0){
+				$("#carousel").addClass("nonVisible");
+			    $("#emptyEventImage").removeClass("nonVisible");
+			    $("#emptyEventImage").addClass("d-block");
+			} else {
+				for(i = 0; i < imgSrc.length; i++){
+					indicators.append('<li id="carousel-li-'+ i + '" data-target="#carousel" data-slide-to="' + i + '"></li>');
+
+					var div = $("<div />"), img = $("<img />");
+					div.addClass("carousel-item");
+					div.attr('id', 'carousel-item-div-' + i);
+					img.addClass("inputImage d-block");
+					img.prop("alt", i + "° slide");
+					img.prop("src", imgSrc[i]);
+					div.append(img);
+					items.append(div);
+				}
+				$("#carousel-li-0").addClass("active");
+				$("#carousel-item-div-0").addClass("active");
+			}
+			
+		}
+		
+	}
+
 	function checkEvent(){
+
 		$("#form-newevent").submit();
 	}
 
