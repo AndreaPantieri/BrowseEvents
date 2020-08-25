@@ -45,9 +45,9 @@
     }
 
     function decreaseQuantity(elem) {
-        var parent = $(elem).closest("div");
+        var parent = jQuery(elem).parent(); //prima era $(elem).closest("div"), peggiore
         var input = parent.find('input');
-        var product_id = $(elem).closest("div").attr('id'); //id of the product to update in cart
+        var product_id = jQuery(elem).parent().attr('id'); //id of the product to update in cart
         var newQuantity = parseInt(input.val()) - 1; //new ticket quantity to set
 
         if (input.val() > 1) {
@@ -62,10 +62,10 @@
         }
     }
 
-    function inreaseQuantity(elem) {
-        var parent = $(elem).closest("div");
+    function increaseQuantity(elem) {
+        var parent = jQuery(elem).parent();
         var input = parent.find('input');
-        var product_id = $(elem).closest("div").attr('id'); //id of the product to update in cart
+        var product_id = jQuery(elem).parent().attr('id'); //id of the product to update in cart
         var newQuantity = parseInt(input.val()) + 1; //new ticket quantity to set
 
         if (input.val() < 99) {
@@ -86,10 +86,10 @@
     }
 
     function updateQuantity(elem) {
-        var parent = $(elem).closest("div");
+        var parent = jQuery(elem).parent();
         var input = parent.find('input');
         var newQuantity = parent.find('input').val();
-        var product_id = $(elem).closest("div").attr('id'); //id of the product to update in cart
+        var product_id = jQuery(elem).parent().attr('id'); //id of the product to update in cart
 
         if (input.val() > 0 && input.val() < 99) {
             $.ajax({
