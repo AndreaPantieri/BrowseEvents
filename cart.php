@@ -26,17 +26,57 @@
 </div>
 
 <script>
-    $.ajax({
-        type: "GET",
-        url: "php/getCartElements.php"
-    }).then(function(data) {
-        var tmp = JSON.parse(data);
-        document.getElementById("cart-elements").innerHTML = tmp["HTML"];
-        document.getElementById("total").innerHTML = "Total: " + tmp["total"] + "€";
-        if (tmp["count"] == 1) {
-            document.getElementById("itemNumber").innerHTML = "Price (" + tmp["count"] + " item)";
-        } else {
-            document.getElementById("itemNumber").innerHTML = "Price (" + tmp["count"] + " items)";
-        }
-    });
+    $(document).ready(getCartElements);
+
+    function getCartElements() {
+        $.ajax({
+            type: "GET",
+            url: "php/getCartElements.php"
+        }).then(function(data) {
+            var tmp = JSON.parse(data);
+            document.getElementById("cart-elements").innerHTML = tmp["HTML"];
+            document.getElementById("total").innerHTML = "Total: " + tmp["total"] + "€";
+            if (tmp["count"] == 1) {
+                document.getElementById("itemNumber").innerHTML = "Price (" + tmp["count"] + " item)";
+            } else {
+                document.getElementById("itemNumber").innerHTML = "Price (" + tmp["count"] + " items)";
+            }
+        });
+    }
+
+    function decreaseQuantity(elem) {
+        var parent = $(elem).closest("div");
+        var input = parent.find('input');
+        var product_id = $(elem).closest("div").attr('id'); //id of the product to update in cart
+        var newQuantity = parseInt(input.val()) - 1; //new ticket quantity to set
+
+        if (input.val() > 1) {
+            $.ajax({
+                type: "POST",
+                url: "php/updateCartQuantity.php",
+                data: {
+                    product_id,
+                    newQuantity
+                }
+            }).then(getCartElements);
+        };
+    }
+
+    function inreaseQuantity(elem) {
+        var parent = $(elem).closest("div");
+        var input = parent.find('input');
+        var product_id = $(elem).closest("div").attr('id'); //id of the product to update in cart
+        var newQuantity = parseInt(input.val()) + 1; //new ticket quantity to set
+
+        if (input.val() < 100) {
+            $.ajax({
+                type: "POST",
+                url: "php/updateCartQuantity.php",
+                data: {
+                    product_id,
+                    newQuantity
+                }
+            }).then(getCartElements);
+        };
+    }
 </script>
