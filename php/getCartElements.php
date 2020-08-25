@@ -1,7 +1,8 @@
 <?php
 require_once 'DBHandler.php';
 
-class getCartElementsResponse{
+class getCartElementsResponse
+{
     public $total = 0;
     public $HTML = "<div class='cart-element'><h1>Your cart is empty!</h1></div>";
     public $count = 0;
@@ -26,27 +27,36 @@ if (isset($_SESSION["userid"])) {
             $getCartElementsResponse->HTML = "";
 
             foreach ($result as $row) {
-                $getCartElementsResponse->total += $row["Price"];
+                $getCartElementsResponse->total += $row["Price"] * $row["TicketQuantity"];
                 $getCartElementsResponse->HTML .= '
                 <div class="border rounded">
-                    <div class="row bg-white">
-                        <div class="col-md-3">
-                            <img src="' . $row["Image"] . '" alt="' . $row["Description"] . '" class="img-fluid">
-                        </div>
-                        <div class="col-md-6">
-                            <h5 class="pt-2">' . $row["Name"] . '</h5>
-                            <small class="text-secondary">Organizer: ' . $row["Username"] . '</small>
-                            <h5 class="pt-2">Price: ' . $row["Price"] . '€</h5>
-                        </div>
-                        <div class="col-md-5 py-3">
-                            <div>
-                                <button type="button" class="btn bg-light border rounded-circle"><i class="fas fa-minus"></i></button>
-                                <input type="text" value="' . $row["TicketQuantity"] . '" class="form-control w-25 d-inline">
-                                <button type="button" class="btn bg-light border rounded-circle"><i class="fas fa-plus"></i></button>
-                                <button type="submit" class="btn btn-danger mx-2" name="remove">Remove</button>
+                    <div class="bg-white">
+                        <div class="row px-3">
+                            <div class="col-md-2 py-3">
+                                <img src="' . $row["Image"] . '" alt="' . $row["Description"] . '" class="img-fluid">
+                            </div>
+                            <div class="col-md-7 py-3">
+                                <h5 class="pt-2">' . $row["Name"] . '</h5>
+                                <small class="text-secondary">Organizer: ' . $row["Username"] . '</small>
+                                <h5 class="pt-4">Price: ' . $row["Price"] . '€</h5>
+                            </div>
+                            <div class="col-md-3 py-4">
+                            <h5>Partial Price: ' . $row["Price"] * $row["TicketQuantity"] . '€</h5>
+                                <div class="px-3">
+                                        <button type="button" class="btn bg-light border rounded-circle"><i class="fas fa-minus"></i></button>
+                                        <input type="text" value="' . $row["TicketQuantity"] . '" class="form-control w-25 d-inline">
+                                        <button type="button" class="btn bg-light border rounded-circle"><i class="fas fa-plus"></i></button>
+                                    <div class="py-2">
+                                        <div class="px-4">
+                                            <button type="submit" class="btn btn-danger mx-2" name="remove">Remove</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="py-2">
                 </div>';
             }
         }
