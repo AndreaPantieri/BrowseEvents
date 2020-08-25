@@ -44,7 +44,7 @@ if (isset($_SESSION["userid"])) {
                             <h5>Partial Price: ' . $row["Price"] * $row["TicketQuantity"] . '€</h5>
                                 <div class="px-3" id="' . $row["idEvent"] . '">
                                     <button type="button" class="btn bg-light border rounded-circle"><i class="fas fa-minus" onClick="decreaseQuantity(this)"></i></button>
-                                    <input type="text" class="form-control w-25 d-inline" value="' . $row["TicketQuantity"] . '">
+                                    <input type="text" class="form-control w-25 d-inline" value="' . $row["TicketQuantity"] . '" onChange="updateQuantity(this)">
                                     <button type="button" class="btn bg-light border rounded-circle"><i class="fas fa-plus" onClick="inreaseQuantity(this)"></i></button>
                                     <div class="py-2">
                                         <div class="px-4">

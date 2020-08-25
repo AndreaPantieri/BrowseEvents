@@ -84,4 +84,27 @@
             });
         }
     }
+
+    function updateQuantity(elem) {
+        var parent = $(elem).closest("div");
+        var input = parent.find('input');
+        var newQuantity = parent.find('input').val();
+        var product_id = $(elem).closest("div").attr('id'); //id of the product to update in cart
+
+        if (input.val() > 0 && input.val() < 99) {
+            $.ajax({
+                type: "POST",
+                url: "php/updateCartQuantity.php",
+                data: {
+                    product_id,
+                    newQuantity
+                }
+            }).then(getCartElements);
+        } else {
+            Swal.fire({
+                title: "Input must be greater than 0 and lower than 99!",
+                icon: "error"
+            });
+        }
+    }
 </script>
