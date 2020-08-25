@@ -59,7 +59,7 @@
                     newQuantity
                 }
             }).then(getCartElements);
-        };
+        }
     }
 
     function inreaseQuantity(elem) {
@@ -68,7 +68,7 @@
         var product_id = $(elem).closest("div").attr('id'); //id of the product to update in cart
         var newQuantity = parseInt(input.val()) + 1; //new ticket quantity to set
 
-        if (input.val() < 100) {
+        if (input.val() < 99) {
             $.ajax({
                 type: "POST",
                 url: "php/updateCartQuantity.php",
@@ -77,6 +77,11 @@
                     newQuantity
                 }
             }).then(getCartElements);
-        };
+        } else {
+            Swal.fire({
+                title: "You can't buy more than 99 of the same product!",
+                icon: "error"
+            });
+        }
     }
 </script>
