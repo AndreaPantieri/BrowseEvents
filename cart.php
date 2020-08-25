@@ -91,7 +91,7 @@
         var newQuantity = parent.find('input').val();
         var product_id = jQuery(elem).parent().attr('id'); //id of the product to update in cart
 
-        if (input.val() > 0 && input.val() < 99) {
+        if (input.val() > 0 && input.val() < 100) {
             $.ajax({
                 type: "POST",
                 url: "php/updateCartQuantity.php",

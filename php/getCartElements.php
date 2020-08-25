@@ -13,7 +13,7 @@ $DBHandler = new DBHandler();
 if (isset($_SESSION["userid"])) {
     $userid = $_SESSION["userid"];
 
-    $sql = "SELECT cart.TicketQuantity, event.idEvent, event.Name, event.Price, event.Image, user.Username, image.Description FROM cart 
+    $sql = "SELECT cart.TicketQuantity, event.idEvent, event.Name, event.Price, event.TicketNumber, event.Image, user.Username, image.Description FROM cart 
     INNER JOIN event ON cart.Event_idEvent = event.idEvent 
     INNER JOIN user ON cart.User_idUsers = user.idUsers 
     INNER JOIN image ON image.Event_idEvent = event.idEvent 
@@ -38,7 +38,8 @@ if (isset($_SESSION["userid"])) {
                             <div class="col-md-7 py-3">
                                 <h5 class="pt-2">' . $row["Name"] . '</h5>
                                 <small class="text-secondary">Organizer: ' . $row["Username"] . '</small>
-                                <h5 class="pt-4">Price: ' . $row["Price"] . '€</h5>
+                                <h6 class="pt-4"><b>Available Quantity: </b>' . $row["TicketNumber"] . '</h5>
+                                <h6 class=""><b>Price: </b>' . $row["Price"] . '€</h5>
                             </div>
                             <div class="col-md-3 py-4">
                             <h5>Partial Price: ' . $row["Price"] * $row["TicketQuantity"] . '€</h5>
