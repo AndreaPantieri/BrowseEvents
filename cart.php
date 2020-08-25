@@ -49,7 +49,7 @@
         var input = parent.find('input');
         var product_id = jQuery(elem).parent().attr('id'); //id of the product to update in cart
         var newQuantity = parseInt(input.val()) - 1; //new ticket quantity to set
-        var maxQuantity = jQuery(elem).parent().attr('value');
+        var maxQuantity = Number(jQuery(elem).parent().attr('value'));
 
         if (input.val() > 1 && input.val() <= maxQuantity) {
             $.ajax({
@@ -73,7 +73,7 @@
         var input = parent.find('input');
         var product_id = jQuery(elem).parent().attr('id'); //id of the product to update in cart
         var newQuantity = parseInt(input.val()) + 1; //new ticket quantity to set
-        var maxQuantity = jQuery(elem).parent().attr('value');
+        var maxQuantity = Number(jQuery(elem).parent().attr('value'));
 
         if (input.val() < 99 && input.val() < maxQuantity) {
             $.ajax({
@@ -100,9 +100,9 @@
     function updateQuantity(elem) {
         var parent = jQuery(elem).parent();
         var input = parent.find('input');
-        var newQuantity = parent.find('input').val();
         var product_id = jQuery(elem).parent().attr('id'); //id of the product to update in cart
-        var maxQuantity = jQuery(elem).parent().attr('value');
+        var newQuantity = Number(parent.find('input').val());
+        var maxQuantity = Number(jQuery(elem).parent().attr('value'));
 
         if (input.val() > 0 && input.val() < 100 && input.val() <= maxQuantity) {
             $.ajax({
@@ -124,5 +124,15 @@
                 icon: "error"
             });
         }
+    }
+
+    function removeProduct(elem) {
+        var product_id = jQuery(elem).parent().parent().parent().attr('id');
+
+        $.ajax({
+            type: "POST",
+            url: "php/removeProductFromCart.php",
+            data: product_id
+        }).then(getCartElements);
     }
 </script>
