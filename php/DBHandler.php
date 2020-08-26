@@ -79,6 +79,17 @@
 			$result = $this->queryDB($querySQL);
 			return $result;
 		}
+
+		function insert($querySQL){
+			$conn = $this->connectDB();
+			$result = mysqli_query($conn, $querySQL);
+			$last_id = 0;
+			if($result){
+				$last_id = $conn->insert_id;
+			}
+			$this->closeConnectionDB($conn);
+			return $last_id;
+		}
 	}
 	
 ?>

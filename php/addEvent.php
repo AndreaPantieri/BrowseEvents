@@ -3,6 +3,7 @@ require_once 'DBHandler.php';
 
 class Response{
 	public $result = false;
+	public $tmp = -1;
 }
 
 $Response = new Response();
@@ -39,8 +40,8 @@ isset($_POST["imagesPresents"])){
 
 		$DBHandler = new DBHandler();
 		$sql_e = "INSERT INTO browseeventsdb.event (Name, Datetime, Price, Place, TicketNumber, Description, User_idUsers) VALUES ('$name', '$date', $price, '$place', $maxtickets, '$description', $user_id);";
-		$event_id = $DBHandler->genericQuery($sql_e);
-
+		$event_id = $DBHandler->insert($sql_e);
+		
 		$sql_ci = "SELECT idCategory FROM category WHERE Name = '$category'";
 		$res = $DBHandler->select($sql_ci);
 		if($res){
@@ -51,7 +52,24 @@ isset($_POST["imagesPresents"])){
 			}
 		}
 
-		//TODO SAVE IMAGES
+		$pathForImages = "../res/img/events/" . $event_id . "/";
+		$Response->tmp = $pathForImages;
+		if(!file_exists($pathForImages)){
+			mkdir($pathForImages, 0777, true);
+		}
+
+		for($i = 0; $i < $imagesPresents; $i++){
+			$type = mime_content_type($images[$i]);
+			$extType = substr($type, 6);
+			$path = $pathForImages . $i . "." . $extType;
+			if(!file_exists($path)){
+				$data = $images[$i];
+				list($type, $data) = explode(';', $data);
+				list(, $data)      = explode(',', $data);
+				$data = base64_decode($data);
+				file_put_contents($path, $data);
+			}
+		}
 	}
 	
 	
