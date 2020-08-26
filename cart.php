@@ -18,7 +18,7 @@
                 </div>
                 <div id="total"></div>
                 <div>
-                    <button type="submit" class="btn btn-success mx-2" name="remove">Buy now</button>
+                    <button type="submit" class="btn btn-success mx-2" name="remove" onClick="completeTransaction()">Buy now</button>
                 </div>
             </div>
         </div>
@@ -139,5 +139,48 @@
             url: "php/removeProductFromCart.php",
             data: product_id
         }).then(getCartElements);
+    }
+
+    function completeTransaction() {
+        Swal.fire({
+            title: 'Are you sure with your purchase?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, buy!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "GET",
+                    url: "php/checkTransaction.php"
+
+                }).then(function(data) {
+                    tmp = JSON.parse(data);
+                    if (tmp['status'] && tmp['status2']) {
+                        Swal.fire(
+                            'Thanks for puchasing!',
+                            'Your purchase has been sent correctly',
+                            'success'
+                        );
+                        getCartElements();
+                    } else if (!tmp[status]) {
+                        Swal.fire(
+                            'One of the product you are trying to buy is no longer available in that quantity!',
+                            'Please check again in your cart',
+                            'error'
+                        );
+                        getCartElements();
+                    } else if (!tmp[status2]) {
+                        Swal.fire(
+                            'Something went wrong with your purchase!',
+                            'Please try again later',
+                            'error'
+                        );
+                    }
+                })
+
+            }
+        })
     }
 </script>
