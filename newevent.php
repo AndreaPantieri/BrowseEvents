@@ -53,7 +53,7 @@
 	</div>
 	<div class="form-group row">
 		<label for="event-category">Category</label>
-		<select class="form-control" id="event-category">
+		<select class="form-control" id="event-category" name="event-category">
 			<?php
 				require 'php/getCategories.php';
 			?>
@@ -61,7 +61,7 @@
 	</div>
 	<div class="form-group">
 	    <label for="event-description">Description</label>
-	    <textarea class="form-control" id="event-description" rows="5" placeholder="Type the description of the event"></textarea>
+	    <textarea class="form-control" id="event-description" name="event-description" rows="5" placeholder="Type the description of the event"></textarea>
   </div>
   <button id="event-publish" type="button" class="btn btn-primary" onclick="checkEvent()">Publish</button>
 </form>
@@ -70,14 +70,26 @@
 	$("#form-newevent").submit(function(e){
 		e.preventDefault();
 
+		var items = $("#carousel .carousel-inner");
+		var imagesPresents = $("#carousel .carousel-indicators li").length;
+
 		var form = $(this);
         var url = form.attr('action');
+        var dataToSend = form.serializeArray();
+        dataToSend.push({name: "imagesPresents", value: imagesPresents});
 
+        var i;
+        for(i = 0; i < imagesPresents; i++){
+        	var tmpImgSrc = $("#carousel-item-div-" + i + " img").attr('src');
+        	dataToSend.push({name: "Image" + i, value: tmpImgSrc});
+        }
+        console.log($.param(dataToSend));
         $.ajax({
             type: "POST",
             url: url,
-            data: form.serialize(),
+            data: $.param(dataToSend),
             success: function(data){
+            	console.log(data);
                 if(JSON.parse(data)["result"]){
                     
                 }
