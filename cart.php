@@ -51,7 +51,7 @@
         var newQuantity = parseInt(input.val()) - 1; //new ticket quantity to set
         var maxQuantity = Number(jQuery(elem).parent().attr('value'));
 
-        if (input.val() > 1 && input.val() <= maxQuantity) {
+        if (input.val() > 1 && input.val() <= maxQuantity && input.val() < 99) {
             $.ajax({
                 type: "POST",
                 url: "php/updateCartQuantity.php",
@@ -63,6 +63,11 @@
         } else if (input.val() >= maxQuantity) {
             Swal.fire({
                 title: "You can't buy more than the available quantity!",
+                icon: "error"
+            });
+        } else if (input.val() >= 99) {
+            Swal.fire({
+                title: "You can't buy more than 99 of the same product!",
                 icon: "error"
             });
         }
@@ -101,8 +106,8 @@
         var parent = jQuery(elem).parent();
         var input = parent.find('input');
         var product_id = jQuery(elem).parent().attr('id'); //id of the product to update in cart
-        var newQuantity = Number(parent.find('input').val());
-        var maxQuantity = Number(jQuery(elem).parent().attr('value'));
+        var newQuantity = Number(parent.find('input').val()); //new ticket quantity to set
+        var maxQuantity = Number(jQuery(elem).parent().attr('value')); //available quantity
 
         if (input.val() > 0 && input.val() < 100 && input.val() <= maxQuantity) {
             $.ajax({
@@ -115,7 +120,7 @@
             }).then(getCartElements);
         } else if (input.val() < 0 || input.val() > 100) {
             Swal.fire({
-                title: "Input must be greater than 0 and lower than 99!",
+                title: "Input must be greater than 0 and lower than 100!",
                 icon: "error"
             });
         } else if (input.val() >= maxQuantity) {
