@@ -52,8 +52,8 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="event-category">Category</label>
-		<select class="form-control" id="event-category" name="event-category">
+		<label for="event-category" class="col-sm-2 col-form-label">Category</label>
+		<select class="form-control col-sm-10" id="event-category" name="event-category" >
 			<?php
 				require 'php/getCategories.php';
 			?>
