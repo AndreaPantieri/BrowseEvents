@@ -16,7 +16,7 @@ if (isset($_SESSION["userid"])) {
     INNER JOIN event ON cart.Event_idEvent = event.idEvent 
     INNER JOIN user ON cart.User_idUsers = user.idUsers 
     INNER JOIN image ON image.Event_idEvent = event.idEvent 
-    WHERE cart.User_idUsers = '$userid' AND isAcquired = '1'";
+    WHERE cart.User_idUsers = '$userid' AND isAcquired = 1";
     $result = $DBHandler->select($sql);
 
     if ($result) {
