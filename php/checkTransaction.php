@@ -1,6 +1,8 @@
 <?php
 require_once 'DBHandler.php';
+/*
 
+*/
 class checkTransactionsResponse
 {
     public $status = false;
@@ -23,22 +25,21 @@ if (isset($_SESSION["userid"])) {
                 $newTickets = $row["TicketNumber"] - $row["TicketQuantity"];
                 $actualEvent = $row["Event_idEvent"];
 
+                $sql = "UPDATE cart SET isAcquired = 1 WHERE cart.User_idUsers = '$userid' AND cart.Event_idEvent = '$actualEvent' AND isAcquired = 'false'";
+                $result = $DBHandler->genericQuery($sql);
+
+                if (!$result) {
+                    $checkTransactionsResponse->status2 = false;
+                }
+
                 $sql = "UPDATE event SET TicketNumber = '$newTickets' WHERE idEvent = '$actualEvent'";
                 $result = $DBHandler->genericQuery($sql);
 
-                if(!$result) {
+                if (!$result) {
                     $checkTransactionsResponse->status2 = false;
                 }
             } else {
                 $checkTransactionsResponse->status = false;
-            }
-        }
-        if ($checkTransactionsResponse->status) {
-            $sql = "UPDATE cart SET isAcquired = 1 WHERE cart.User_idUsers = '$userid' AND isAcquired = 'false'";
-            $result = $DBHandler->genericQuery($sql);
-
-            if (!$result) {
-                $checkTransactionsResponse->status2 = false;
             }
         }
     }
