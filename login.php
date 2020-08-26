@@ -219,6 +219,7 @@
     function checkVerificationCode(username) {
         Swal.fire({
             title: "Insert the confermation code we sent you via-mail",
+            showCloseButton: true,
             input: "text",
         }).then((result) => {
             $.ajax({
