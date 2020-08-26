@@ -18,7 +18,7 @@
                 </div>
                 <div id="total"></div>
                 <div>
-                    <button type="submit" class="btn btn-success mx-2" name="remove" onClick="completeTransaction()">Buy now</button>
+                    <button type="submit" class="btn btn-success mt-2 mb-3" onClick="completeTransaction()">Buy now</button>
                 </div>
             </div>
         </div>
@@ -167,7 +167,7 @@
                     } else if (!tmp[status]) {
                         Swal.fire(
                             'One of the product you are trying to buy is no longer available in that quantity!',
-                            'Please check again in your cart for that product. If other products in your cart where available, they have been bought',
+                            'Please check again in your cart. If other products in your cart where available, they have been bought',
                             'error'
                         );
                         getCartElements();

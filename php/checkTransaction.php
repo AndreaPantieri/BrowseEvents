@@ -1,8 +1,6 @@
 <?php
 require_once 'DBHandler.php';
-/*
 
-*/
 class checkTransactionsResponse
 {
     public $status = false;
