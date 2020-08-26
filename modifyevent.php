@@ -4,6 +4,7 @@ $DBHandler = new DBHandler();
 
 if(isset($_GET["event_id"])){
 	$event_id = $_GET["event_id"];
+
 	$sql = "SELECT browseeventsdb.event.*, category.Name AS Category 
 	FROM browseeventsdb.event INNER JOIN category_has_event ON category_has_event.Event_idEvent = browseeventsdb.event.idEvent
 	INNER JOIN category ON category_has_event.Category_idCategory = category.idCategory
@@ -12,11 +13,12 @@ if(isset($_GET["event_id"])){
 	$result = $DBHandler->select($sql);
 
 	if($result){
+		$_SESSION["event_id"] = $event_id;
 		$path = "./res/img/events/" . $result[0]["idEvent"]."/";
 		$images = glob($path . "*.{jpg,png,jpeg}",GLOB_BRACE);
 		$numImages = count($images);
 		?>
-<form id="form-modifyevent" action="php/modifyEvent.php" method="POST" enctype="multipart/form-data">
+<form id="form-modifyevent" action="php/updateEvent.php" method="POST" enctype="multipart/form-data">
 	<h1 id="title-modifyevent">MOdify Event</h1>
 	<svg id="emptyEventImage" viewBox="0 0 16 16" <?php if($numImages > 0){
 		echo 'class="bi bi-card-image inputImage d-block nonVisible"';
