@@ -101,6 +101,7 @@ body{
 }
 .event-container {
 	margin:auto;
+	width: 100%;
 }
 .event-image {
 	height: 100%;
