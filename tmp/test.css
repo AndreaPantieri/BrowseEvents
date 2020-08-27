@@ -5,3 +5,6 @@
 .event-image {
 	height: 20rem;
 }
+.event-arrow{
+	float: right;
+}

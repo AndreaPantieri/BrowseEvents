@@ -93,6 +93,23 @@ body{
 	margin: auto;
 }
 
+#events-display{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 70%;
+}
+.event-container {
+	margin:auto;
+}
+.event-image {
+	height: 100%;
+}
+.event-arrow{
+	float: right;
+}
+
+
 .nonVisible{
 	display: none;
 }
