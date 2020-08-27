@@ -4,7 +4,9 @@
 			include_once 'php/getEvents.php';
 		?>
 	</div>
-
+	<?php
+	if(isset($_SESSION["event_last_id"]) && $_SESSION["event_last_id"] != 0){
+		?>
 	<button id="events-more" onclick="moreEvents()">More</button>
 
 	<script type="text/javascript">
@@ -50,5 +52,13 @@
 	        xhttp.send();
 		}
 	</script>
+		<?php
+	} else {
+		?>
+	<div>There are no events yet!</div>
+		<?php
+	}
+	?>
+	
 </div>
 
