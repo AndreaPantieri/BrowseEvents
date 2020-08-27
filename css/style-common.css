@@ -93,11 +93,18 @@ body{
 	margin: auto;
 }
 
+#events-container{
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 70%;
+}
+
 #events-display{
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	width: 70%;
+	width: 100%;
 }
 .event-container {
 	margin:auto;

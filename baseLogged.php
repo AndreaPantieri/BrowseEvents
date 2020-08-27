@@ -11,7 +11,7 @@
     </div>
     
     <div>
-        <h1 id="title" class="clickable" onclick="includeMainContent('events.php')">Browse Events</h1>
+        <h1 id="title" class="clickable" onclick="location.reload()">Browse Events</h1>
         <?php
             if(!isMobile()){
                 echo "<p id='secondtitle' style=\"text-align:center;\">Browse all events nearby you!</p>";
