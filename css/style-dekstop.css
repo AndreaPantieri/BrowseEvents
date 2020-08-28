@@ -14,11 +14,11 @@
 	font-size: larger;
 }
 
-
 #price_details{
     position: fixed;
     right: 1%;
 }
+
 #container-fluid{
 	display: flex;
 	flex-direction: row;
