@@ -1,13 +1,12 @@
 <div id="container-fluid">
 	<div id="events-container" class="mt-5 mb-5">
-		<div id="events-display">
-			<?php
-			include_once 'php/getEvents.php';
-			?>
-		</div>
+		<div id="events-display" 
 		<?php
-		if(isset($_SESSION["numb_events"]) && $_SESSION["numb_events"] != 0){
-			?>
+		if(isset($_GET["s"])){
+			echo "data-s='" . $_GET["s"] . "' ";
+		}
+		?>>
+		</div>
 		<button id="events-more" class="btn btn-success" onclick="moreEvents()">More</button>
 
 		<script type="text/javascript">
@@ -33,34 +32,32 @@
 			});
 
 			function moreEvents(){
-				var xhttp = new XMLHttpRequest();
-		        xhttp.onreadystatechange = function() {
-		            if (this.readyState == 4 && this.status == 200) {
-		            	$("#events-display").append(xhttp.responseText);
+				var url = "php/getEvents.php?";
+				var ed = $("#events-display");
+				var s = ed.attr("data-s");
+				var o = ed.attr("data-o");
+				var c = ed.attr("data-c");
 
-			            var s = document.getElementById("maincontent").getElementsByTagName('script');
-			            for (var i = 0; i < s.length ; i++) {
-			                var node=s[i], parent=node.parentElement, d = document.createElement('script');
-			                d.async=node.async;
-			                d.textContent = node.textContent;
-			                d.setAttribute('type','text/javascript');
-			                parent.insertBefore(d,node);
-			                parent.removeChild(node);
-			            }
-		            }
-		        };
-		        xhttp.open("GET", "php/getEvents.php", true);
-		        xhttp.send();
+				if(typeof s != "undefined"){
+					url += "s=" + s +"&";
+				}
+				if(typeof o != "undefined"){
+					url += "o=" + o +"&";
+				}
+				if(typeof c != "undefined"){
+					url += "c=" + c +"&";
+				}
+
+				includeContent(url, (h) => {
+		            $("#events-display").append(h);
+	        	});
 			}
-		</script>
-			<?php
-		} else {
-			?>
-		<div>There are no events yet!</div>
-			<?php
-		}
-		?>
-		
+			$(document).ready(() =>{
+				includeContent("php/getEvents.php?r=1", (h) => {
+		            document.getElementById("events-display").innerHTML = h;
+	        	});
+			});
+		</script>	
 	</div>
 	<div id="filters" class="col-md-4 offset-md-1 border rounded mt-5 bg-white">
         <div class="pt-4">
@@ -68,7 +65,7 @@
             <hr>
             <div class="form-group">
             	<label class="col-form-label">Order by</label>
-	            <select class="form-control col-sm-8" id="categories">
+	            <select class="form-control col-sm-8" id="orderby">
 	            	<option selected="">Datetime</option>
 					<option>Price</option>
 					<option>Name</option>
@@ -89,6 +86,35 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+    	function apply(){
+    		var o = $("#orderby").val();
+    		var c = $("#categories").val();
+    		var s = $("#events-display").attr("data-s");
+    		var url = "php/getEvents.php?r=1&c=" + c + "&o=" + o;
+
+    		if(typeof s != "undefined"){
+    			url += "&s=" + s;
+    		}
+
+    		$("#events-display").attr("data-o", o);
+    		$("#events-display").attr("data-c", c);
+
+    		includeContent(url, (h) => {
+	            document.getElementById("events-display").innerHTML = h;
+	            var s = document.getElementById("events-display").getElementsByTagName('script');
+	            for (var i = 0; i < s.length ; i++) {
+	                var node=s[i], parent=node.parentElement, d = document.createElement('script');
+	                d.async=node.async;
+	                d.textContent = node.textContent;
+	                d.setAttribute('type','text/javascript');
+	                parent.insertBefore(d,node);
+	                parent.removeChild(node);
+	            }
+        	});
+    	}
+    </script>
 </div>
 
 
