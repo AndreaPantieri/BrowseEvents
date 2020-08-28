@@ -34,7 +34,7 @@ if(isset($_GET["o"])){
 }
 
 $sql_e .= " LIMIT $numb_events, 5";
-echo $sql_e;
+
 $result = $DBHandler->select($sql_e);
 
 if($result){
