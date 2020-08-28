@@ -121,6 +121,7 @@
         ?>
         <li id="my_orders" class="clickable clickableSizes" onclick="clickMyOrders()">My orders</li>
         <li id="notifications" class="clickable clickableSizes" onclick="clickNotifications()">Notifications</li>
+        <li id="logout" class="clickable clickableSizes" onclick="clickLogout()">Logout</li>
     </ol>
 </div>
 
@@ -204,6 +205,10 @@
             document.getElementById("dropdown-notifications").innerHTML = html;
             document.getElementById("num_notifications").innerHTML = count;
         });
+    }
+
+    function clickLogout(){
+        
     }
     var tmp = setInterval(checkNotifications, 500);
 </script>
