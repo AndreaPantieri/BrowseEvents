@@ -2,7 +2,7 @@
 	<div id="events-container" class="mt-5 mb-5">
 		<div id="events-display">
 			<?php
-				include_once 'php/getEvents.php';
+			include_once 'php/getEvents.php';
 			?>
 		</div>
 		<?php
@@ -69,14 +69,15 @@
             <div class="form-group">
             	<label class="col-form-label">Order by</label>
 	            <select class="form-control col-sm-8" id="categories">
+	            	<option selected="">Datetime</option>
 					<option>Price</option>
-					<option>Date</option>
 					<option>Name</option>
 				</select>
             </div>
             <div class="form-group">
             	<label class="col-form-label">Category</label>
 	            <select class="form-control col-sm-8" id="categories">
+	            	<option selected="">All</option>
 					<?php
 						require 'php/getCategories.php';
 					?>
