@@ -54,9 +54,10 @@
 		        xhttp.send();
 			}
 			$(document).ready(() =>{
-				includeContent("php/getEvents.php?r=1", (h) => {
+				moreEvents();
+				/*includeContent("php/getEvents.php?r=1", (h) => {
 		            document.getElementById("events-display").innerHTML = h;
-	        	});
+	        	});*/
 			});
 		</script>	
 	</div>

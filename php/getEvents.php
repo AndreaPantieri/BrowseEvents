@@ -24,7 +24,7 @@ if(isset($_GET["s"]) && $_GET["s"] != ""){
 if(isset($_GET["c"]) && $_GET["c"] != "All"){
 	$c = $_GET["c"];
 
-	$sql_e .= "&& Category = '" . $c ."' ";
+	$sql_e .= "&& Category.Name = '" . $c ."' ";
 }
 
 if(isset($_GET["o"])){
@@ -34,7 +34,7 @@ if(isset($_GET["o"])){
 }
 
 $sql_e .= " LIMIT $numb_events, 5";
-
+echo $sql_e;
 $result = $DBHandler->select($sql_e);
 
 if($result){

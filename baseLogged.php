@@ -213,7 +213,8 @@
     }
 
     $(".click_search").click((e) => {
-        console.log("search");
+        var s = $("#searchbar .search_input").val();
+        includeMainContent("events.php?s=" + s);
     });
 
     var tmp = setInterval(checkNotifications, 500);
