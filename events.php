@@ -59,10 +59,8 @@ if(isset($_GET["r"]) && (int)$_GET["r"] == 1){
 		        xhttp.send();
 			}
 			$(document).ready(() =>{
+				$("#events-display").attr("data-o", "Datetime");
 				moreEvents();
-				/*includeContent("php/getEvents.php?r=1", (h) => {
-		            document.getElementById("events-display").innerHTML = h;
-	        	});*/
 			});
 		</script>	
 	</div>
