@@ -50,9 +50,13 @@ function isMobile()
             if (w < sW / 2.0 || h < sH / 2.0 || w <= 320) {
                 $(linkMobileSheet).prop('disabled', false);
                 $(linkDekstopSheet).prop('disabled', true);
+                $("#searchbar-dekstop").addClass("nonVisible");
+                $("#searchbar-mobile").removeClass("nonVisible");
             } else {
                 $(linkDekstopSheet).prop('disabled', false);
                 $(linkMobileSheet).prop('disabled', true);
+                $("#searchbar-mobile").addClass("nonVisible");
+                $("#searchbar-dekstop").removeClass("nonVisible");
             }
 
             var sm = $("#slidemenu"), tp = $("#topbar"), mc = $("#maincontent");
