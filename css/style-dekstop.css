@@ -14,3 +14,13 @@
 	font-size: larger;
 }
 
+#container-fluid{
+	display: flex;
+	flex-direction: row;
+	width: 70%;
+}
+
+#filters{
+	position: fixed;
+	right: 1%;
+}
