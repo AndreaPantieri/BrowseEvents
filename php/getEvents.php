@@ -18,7 +18,7 @@ $sql_e = "SELECT idEvent, `event`.Name, Datetime, Price, Place, `event`.Descript
 
 if(isset($_GET["s"]) && $_GET["s"] != ""){
 	$s = $_GET["s"];
-	$sql_e .= "WHERE (Name LIKE '*" . $s ."*' ||  Place LIKE '*" . $s ."*' || Description LIKE '*" . $s ."*') ";
+	$sql_e .= "WHERE (`event`.Name LIKE '%" . $s ."%' ||  Place LIKE '%" . $s ."%' || `event`.Description LIKE '%" . $s ."%') ";
 }
 
 if(isset($_GET["c"]) && $_GET["c"] != "All"){
@@ -34,7 +34,7 @@ if(isset($_GET["o"])){
 }
 
 $sql_e .= " LIMIT $numb_events, 5";
-echo $sql_e;
+
 $result = $DBHandler->select($sql_e);
 
 if($result){

@@ -1,3 +1,8 @@
+<?php
+if(isset($_GET["r"]) && (int)$_GET["r"] == 1){
+	$_SESSION["numb_events"] = 0;
+}
+?>
 <div id="container-fluid">
 	<div id="events-container" class="mt-5 mb-5">
 		<div id="events-display" 
