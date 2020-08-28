@@ -47,9 +47,7 @@ if($result){
 		if(count($files) > 0){
 			$file = $files[0];
 		}
-		echo $file;
 		$file = substr($file, 3);
-		echo $file;
 		?>
 	<div class="event-container card mb-3 clickable" <?php echo "data-id='" . $var["idEvent"] ."'";?>>
 		<img class="event-image card-img-top img-fluid" <?php echo 'src="' . $file . '"'; ?>/>
