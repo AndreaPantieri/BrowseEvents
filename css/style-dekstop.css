@@ -14,3 +14,7 @@
 	font-size: larger;
 }
 
+#price_details{
+        position: fixed;
+        right: 1%;
+}
