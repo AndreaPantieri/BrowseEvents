@@ -14,7 +14,19 @@
 	font-size: larger;
 }
 
+
 #price_details{
         position: fixed;
         right: 1%;
+
+#container-fluid{
+	display: flex;
+	flex-direction: row;
+	width: 70%;
+}
+
+#filters{
+	position: fixed;
+	right: 1%;
+
 }
