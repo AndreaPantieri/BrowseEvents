@@ -27,14 +27,14 @@ if (isset($_SESSION["userid"])) {
                     $sql = "UPDATE cart SET isAcquired = 1 WHERE cart.User_idUsers = '$userid' AND cart.Event_idEvent = '$actualEvent' AND isAcquired = 'false'";
                     $result = $DBHandler->genericQuery($sql);
 
-                    if ($result) {
+                    if (!$result) {
                         $checkTransactionsResponse->status2 = true;
                     }
 
                     $sql = "UPDATE event SET TicketNumber = '$newTickets' WHERE idEvent = '$actualEvent'";
                     $result = $DBHandler->genericQuery($sql);
 
-                    if ($result) {
+                    if (!$result) {
                         $checkTransactionsResponse->status2 = true;
                     }
                 } else {
