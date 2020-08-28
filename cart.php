@@ -9,7 +9,7 @@
             <div id="cart-elements"></div> <!-- this is where the events are being inserted -->
         </div>
         <!-- This is the column for price details -->
-        <div class="col-md-4 offset-md-1 border rounded mt-5 bg-white h-25">
+        <div id="price_details" class="col-md-4 offset-md-1 border rounded mt-5 bg-white h-25">
             <div class="pt-4">
                 <h6>PRICE DETAILS</h6>
                 <hr>
@@ -18,7 +18,7 @@
                 </div>
                 <div id="total"></div>
                 <div>
-                    <button type="submit" class="btn btn-success mt-2 mb-3" onClick="completeTransaction()">Buy now</button>
+                    <button type="submit" id="buy" class="btn btn-success mt-2 mb-3" onClick="completeTransaction()">Buy now</button>
                 </div>
             </div>
         </div>
@@ -133,6 +133,7 @@
 
     function removeProduct(elem) {
         var product_id = jQuery(elem).parent().parent().parent().attr('id');
+        console.log(product_id);
 
         $.ajax({
             type: "POST",
@@ -154,32 +155,34 @@
                 $.ajax({
                     type: "GET",
                     url: "php/checkTransaction.php"
-
                 }).then(function(data) {
                     tmp = JSON.parse(data);
-                    if (tmp['status'] && tmp['status2']) {
+                    if (!tmp['status'] && !tmp['status2'] && !tmp['status3']) {
                         Swal.fire(
                             'Thanks for puchasing!',
                             'Your purchase has been sent correctly',
                             'success'
-                        );
-                        getCartElements();
-                    } else if (!tmp[status]) {
+                        ).then(getCartElements);
+                    } else if (tmp['status3']) {
+                        Swal.fire(
+                            'Your shopping cart is empty!',
+                            'Add something to your cart first.',
+                            'error'
+                        ).then(getCartElements);
+                    } else if (!tmp['status']) {
                         Swal.fire(
                             'One of the product you are trying to buy is no longer available in that quantity!',
                             'Please check again in your cart. If other products in your cart where available, they have been bought',
                             'error'
-                        );
-                        getCartElements();
-                    } else if (!tmp[status2]) {
+                        ).then(getCartElements);
+                    } else if (tmp['status2']) {
                         Swal.fire(
                             'Something went wrong with your purchase!',
                             'Please try again later',
                             'error'
-                        );
-                    }
+                        ).then(getCartElements);
+                    } 
                 })
-
             }
         })
     }

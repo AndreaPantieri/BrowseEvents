@@ -31,7 +31,7 @@ if (isset($_SESSION["userid"])) {
                 $getCartElementsResponse->HTML .= '
                 <div class="border rounded">
                     <div class="bg-white">
-                        <div class="row px-3">
+                        <div class="product row px-3">
                             <div class="col-md-2 py-3">
                                 <img src="' . $row["Image"] . '" alt="' . $row["Description"] . '" class="img-fluid">
                             </div>
@@ -42,7 +42,7 @@ if (isset($_SESSION["userid"])) {
                                 <h6 class=""><b>Price: </b>' . $row["Price"] . '€</h6>
                             </div>
                             <div class="col-md-3 py-4">
-                            <h5>Partial Price: ' . $row["Price"] * $row["TicketQuantity"] . '€</h5>
+                                <h5>Partial Price: ' . $row["Price"] * $row["TicketQuantity"] . '€</h5>
                                 <div class="px-3" id="' . $row["idEvent"] . '" value="' . $row["TicketNumber"] . '">
                                     <button type="button" class="btn bg-light border rounded-circle" onClick="decreaseQuantity(this)"><i class="fas fa-minus"></i></button>
                                     <input type="text" class="form-control w-25 d-inline" value="' . $row["TicketQuantity"] . '" onChange="updateQuantity(this)">
