@@ -169,7 +169,7 @@
                             'Add something to your cart first.',
                             'error'
                         ).then(getCartElements);
-                    } else if (!tmp['status']) {
+                    } else if (tmp['status']) {
                         Swal.fire(
                             'One of the product you are trying to buy is no longer available in that quantity!',
                             'Please check again in your cart. If other products in your cart where available, they have been bought',
