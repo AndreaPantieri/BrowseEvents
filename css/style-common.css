@@ -122,6 +122,9 @@ body{
 	display: none !important;
 }
 
+#searchbar{
+	width: 16rem;
+}
 .searchbar{
     margin-bottom: auto;
     margin-top: auto;
