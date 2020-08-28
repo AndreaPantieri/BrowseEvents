@@ -1,5 +1,5 @@
 <div id="container-fluid">
-	<div id="events-container">
+	<div id="events-container" class="mt-5 mb-5">
 		<div id="events-display">
 			<?php
 				include_once 'php/getEvents.php';
@@ -8,7 +8,7 @@
 		<?php
 		if(isset($_SESSION["numb_events"]) && $_SESSION["numb_events"] != 0){
 			?>
-		<button id="events-more" onclick="moreEvents()">More</button>
+		<button id="events-more" class="btn btn-success" onclick="moreEvents()">More</button>
 
 		<script type="text/javascript">
 			$(".event-container").click((e) => {
