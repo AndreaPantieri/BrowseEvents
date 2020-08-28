@@ -1,20 +1,30 @@
 <?php
 require_once 'DBHandler.php';
 $DBHandler = new DBHandler();
-$last_id = 0;
+$numb_events = 0;
 
-if(isset($_SESSION["event_last_id"])){
-	$last_id = $_SESSION["event_last_id"];
+if(isset($_SESSION["numb_events"])){
+	$numb_events = $_SESSION["numb_events"];
 }
 
-$sql_e = "SELECT idEvent, Name, Datetime FROM `event` WHERE idEvent > $last_id ORDER BY Datetime DESC LIMIT 5 ";
+$sql_e = "SELECT idEvent, Name, Datetime FROM `event` ORDER BY Datetime DESC LIMIT $numb_events, 5 ";
 $result = $DBHandler->select($sql_e);
 
+if($result){
+	$numb_events += 5;
+	$_SESSION["numb_events"] = $numb_events;
+
+}
 foreach ($result as $var) {
-	$_SESSION["event_last_id"] = $var["idEvent"];
+	$path = './res/img/events/' . $var["idEvent"] .'/';
+	$files = glob($path . "0.{jpg,png,jpeg}",GLOB_BRACE);
+	$file = '';
+	if(count($files) > 0){
+		$file = $files[0];
+	}
 	?>
 <div class="event-container card mb-3 clickable" <?php echo "data-id='" . $var["idEvent"] ."'";?>>
-	<img class="event-image card-img-top img-fluid" <?php echo 'src="./res/img/events/' . $var["idEvent"] .'/0.jpg"'; ?>/>
+	<img class="event-image card-img-top img-fluid" <?php echo 'src="' . $file . '"'; ?>/>
 	<div class="event-text card-body">
 		<div class="event-title card-title"><?php echo $var["Name"];?></div>
 		<div class="event-date card-text"><?php echo $var["Datetime"];?></div>

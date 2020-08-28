@@ -115,7 +115,7 @@ function isMobile()
                     $_SESSION["firstname"] = $result[0]['FirstName'];
                     $_SESSION["lastname"] = $result[0]['LastName'];
                     $_SESSION["lastlogin"] = $result[0]['LastLoginDate'];
-                    $_SESSION["event_last_id"] = 0;
+                    $_SESSION["numb_events"] = 0;
 
                     $type_account = $result[0]['UserType_idUserType']; //MODIFICARLO IN  $_SESSION["idUserType"] = $result[0]['UserType_idUserType'];
                     include 'baseLogged.php';
@@ -135,7 +135,7 @@ function isMobile()
                 $_SESSION["firstname"] = $result[0]['FirstName'];
                 $_SESSION["lastname"] = $result[0]['LastName'];
                 $_SESSION["lastlogin"] = $result[0]['LastLoginDate'];
-                $_SESSION["event_last_id"] = 0;
+                $_SESSION["numb_events"] = 0;
 
                 $type_account = $result[0]['UserType_idUserType']; //MODIFICARLO IN $_SESSION["idUserType"] = $result[0]['UserType_idUserType'];
                 include 'baseLogged.php';

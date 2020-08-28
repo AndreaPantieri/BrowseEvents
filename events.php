@@ -5,7 +5,7 @@
 		?>
 	</div>
 	<?php
-	if(isset($_SESSION["event_last_id"]) && $_SESSION["event_last_id"] != 0){
+	if(isset($_SESSION["numb_events"]) && $_SESSION["numb_events"] != 0){
 		?>
 	<button id="events-more" onclick="moreEvents()">More</button>
 
