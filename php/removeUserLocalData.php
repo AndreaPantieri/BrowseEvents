@@ -17,3 +17,4 @@ if (isset($_COOKIE[$cookie_name])) {
 }
 
 session_destroy();
+
