@@ -49,7 +49,7 @@ if($result){
 		}
 		$file = substr($file, 3);
 		?>
-	<div class="event-container card mb-3 clickable" <?php echo "data-id='" . $var["idEvent"] ."'";?>>
+	<div onclick="openEvent(this)" class="event-container card mb-3 clickable" <?php echo "data-id='" . $var["idEvent"] ."'";?> >
 		<img class="event-image card-img-top img-fluid" <?php echo 'src="' . $file . '"'; ?>/>
 		<div class="event-text card-body">
 			<div class="event-title card-title"><?php echo $var["Name"];?></div>
