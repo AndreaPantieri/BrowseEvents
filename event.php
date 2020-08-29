@@ -14,6 +14,7 @@ if(isset($_GET["event_id"])){
 	if($result){
 		$path = "./res/img/events/" . $result[0]["idEvent"]."/";
 		$images = glob($path . "*.{jpg,png,jpeg}",GLOB_BRACE);
+		sort($images);
 		$numImages = count($images);
 		?>
 <div id="div-event">

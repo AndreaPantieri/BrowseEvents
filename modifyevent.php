@@ -14,8 +14,9 @@ if(isset($_GET["event_id"])){
 
 	if($result){
 		$_SESSION["event_id"] = $event_id;
-		$path = "./res/img/events/" . $result[0]["idEvent"]."/";
+		$path = "res/img/events/" . $result[0]["idEvent"]."/";
 		$images = glob($path . "*.{jpg,png,jpeg}",GLOB_BRACE);
+		sort($images);
 		$numImages = count($images);
 		?>
 <form id="form-modifyevent" action="php/updateEvent.php" method="POST" enctype="multipart/form-data">
@@ -170,7 +171,6 @@ if(isset($_GET["event_id"])){
         	var tmpImgSrc = $("#carousel-item-div-" + i + " img").attr('src');
         	dataToSend.push({name: "Image" + i, value: tmpImgSrc});
         }
-        console.log($.param(dataToSend));
         $.ajax({
             type: "POST",
             url: url,
@@ -279,10 +279,12 @@ if(isset($_GET["event_id"])){
 		$("#form-modifyevent").submit();
 	}
 
-	$(".inputImage").css("width", "30%");
-	$("#form-modifyevent").css("width", "70%");
+	$(document).ready(() => {
+		$(".inputImage").css("width", "30%");
+		$("#form-modifyevent").css("width", "70%");
 
-	document.getElementById("selectImage").addEventListener('change', updateImageDisplay);
+		document.getElementById("selectImage").addEventListener('change', updateImageDisplay);
+	});
 </script>
 
 		<?php
