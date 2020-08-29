@@ -7,15 +7,15 @@ $status = false;
 if (isset($_POST["newUsername"]) && isset($_SESSION["userid"]) && isset($_SESSION["username"])) {
     $username = $_POST["newUsername"];
     $userid = $_SESSION["userid"];
-    
-    $sql = "SELECT Username FROM user WHERE Username = $username";
+
+    $sql = "SELECT Username FROM user WHERE Username = '$username'";
     $result = $DBHandler->select($sql);
     $counts = array_map('count', $result);
 
     if (count($counts) > 0) {
         $status = true;
     } else {
-        $sql = "UPDATE user SET Username = $username WHERE idUsers = $userid";
+        $sql = "UPDATE user SET Username = '$username' WHERE idUsers = '$userid'";
         $result = $DBHandler->genericQuery($sql);
 
         if ($result) {
@@ -23,4 +23,4 @@ if (isset($_POST["newUsername"]) && isset($_SESSION["userid"]) && isset($_SESSIO
         }
     }
 }
-echo json_encode($status);
+echo $status;

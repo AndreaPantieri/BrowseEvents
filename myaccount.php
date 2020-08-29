@@ -22,6 +22,8 @@
     <input type="password" class="form-control mb-1" id="oldPwd" placeholder="Insert your old password" required />
     <input type="password" class="form-control mb-2" id="newPwd" placeholder="Insert your new password" required />
     <button type="button" class="btn btn-primary" id="changePassword" onclick="changePassword()">Save changes</button>
+    <div id="passwordWarning" class="text-danger"></div>
+    <div id="passwordWarning2" class="text-danger"></div>
 </div>
 
 <script>
@@ -29,7 +31,7 @@
         var USERMINLENGTH = 5;
 
         if ($("#username").val() != "" && Number($("#username").val().length) >= USERMINLENGTH) {
-            var newUsername = $(username).val();
+            var newUsername = $("#username").val();
             $("#usernameWarning").html("");
 
             $.ajax({
@@ -39,10 +41,7 @@
                     newUsername: newUsername
                 }
             }).then(function(data) {
-                console.log(data);
-                var tmp = JSON.parse(data);
-                
-                if (tmp["status"]) {
+                if (data) {
                     $("#usernameWarning2").html("This username already exists!");
                 } else {
                     $("#usernameWarning2").html("");
@@ -58,11 +57,59 @@
         } else {
             $("#usernameWarning").html("Username must be at least " + USERMINLENGTH + " characters long!");
         }
-
-
     }
 
     function changePassword() {
+        var PASSMINLENGTH = 8;
 
+        if ($("#oldPwd").val() != "" && $("#newPwd").val() != "" && Number($("#oldPwd").val().length) >= PASSMINLENGTH && Number($("#newPwd").val().length) >= PASSMINLENGTH) {
+            var oldPwd = $("#oldPwd").val();
+            var newPwd = $("#newPwd").val();
+            $("#passwordWarning").html("");
+
+            $.ajax({
+                type: "POST",
+                url: "php/updatePassword.php",
+                data: {
+                    oldPwd,
+                    newPwd
+                }
+            }).then(function(data) {
+                if (data) {
+                    $("#passwordWarning2").html("The old password is wrong!");
+                } else {
+                    $("#passwordWarning2").html("");
+
+                    let timerInterval
+                    Swal.fire({
+                        position: 'top-end',
+                        title: 'Your password has been updated!',
+                        icon: 'success',
+                        html: 'You will be redirected to login page in <b></b> milliseconds.',
+                        timer: 5000,
+                        timerProgressBar: true,
+                        onBeforeOpen: () => {
+                            Swal.showLoading()
+                            timerInterval = setInterval(() => {
+                                const content = Swal.getContent()
+                                if (content) {
+                                    const b = content.querySelector('b')
+                                    if (b) {
+                                        b.textContent = Swal.getTimerLeft()
+                                    }
+                                }
+                            }, 100)
+                        },
+                        onClose: () => {
+                            clearInterval(timerInterval)
+                        }
+                    }).then((result) => {
+                        includeMainContent("logout.php");
+                    })
+                }
+            })
+        } else {
+            $("#passwordWarning").html("Password must be at least " + PASSMINLENGTH + " characters long!");
+        }
     }
 </script>
