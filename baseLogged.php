@@ -11,7 +11,7 @@ require_once './php/DBHandler.php';
     </div>
 
     <div>
-        <h1 id="title" class="clickable" onclick="location.reload()">Browse Events</h1>
+        <h1 id="title" class="clickable" onclick='includeMainContent("events.php?&r=1")'>Browse Events</h1>
         <?php
         if (!isMobile()) {
             echo "<p id='secondtitle' style=\"text-align:center;\">Browse all events nearby you!</p>";
@@ -96,9 +96,6 @@ require_once './php/DBHandler.php';
 
 <!-- Main content -->
 <div id="maincontent">
-    <?php
-    include 'events.php';
-    ?>
 </div>
 
 
@@ -218,5 +215,9 @@ require_once './php/DBHandler.php';
         includeMainContent("events.php?s=" + s + "&r=1");
     });
 
-    var tmp = setInterval(checkNotifications, 500);
+    
+    $(document).ready(() => {
+        includeMainContent("events.php?r=1");
+        var tmp = setInterval(checkNotifications, 500);
+    })
 </script>
