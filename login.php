@@ -94,7 +94,7 @@
 </div>
 
 <!-- login/registration scripts -->
-<script type="application/javascript">
+<script type="application/javascript ">
     const USERMINLENGTH = 5;
     const PASSMINLENGTH = 8;
 
@@ -202,6 +202,7 @@
 
     /* this function asks for the email verification code, works both before login (if user never inserted it before) and/or after registration. 
     field "username" is used to know where to take the username from for the query (from which textbox, depending if you are trying to login or register).
+    EDIT: this function has been included in "js/checkVerificationCode.js" to also use it in myaccount.php
     */
     function checkVerificationCode(username) {
         Swal.fire({
