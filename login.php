@@ -244,7 +244,7 @@
 
     function checkUsername() {
         if (Number($("#username").val().length) < USERMINLENGTH) {
-            document.getElementById("usernameWarning").innerHTML = "Username must be at least 5 characters long!";
+            $("#usernameWarning").html("Username must be at least " + USERMINLENGTH + " characters long!");
         } else {
             document.getElementById("usernameWarning").innerHTML = "";
         }
@@ -252,15 +252,15 @@
 
     function checkPassword() {
         if (Number($("#password").val().length) < PASSMINLENGTH) {
-            document.getElementById("passwordWarning1").innerHTML = "Password must be at least 8 characters long!";
+            $("#passwordWarning1").html("Password must be at least " + PASSMINLENGTH + " characters long!");
         } else {
-            document.getElementById("passwordWarning1").innerHTML = "";
+            $("#passwordWarning1").html("");
         }
 
         if ($("#password").val() != $("#passwordrepeat").val()) {
-            document.getElementById("passwordWarning2").innerHTML = "Passwords don't match!";
+            $("#passwordWarning2").html("Passwords don't match!");
         } else {
-            document.getElementById("passwordWarning2").innerHTML = "";
+            $("#passwordWarning2").html("");
         }
     }
 
