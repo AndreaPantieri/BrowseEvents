@@ -108,9 +108,9 @@
         <li class="subslidemenu">
             <h4>Categories</h4>
             <ol>
-                <li id="concerts" class="clickable clickableSizes">Concerts</li>
-                <li id="exhibitions" class="clickable clickableSizes">Exhibitions</li>
-                <li id="festivals" class="clickable clickableSizes">Festivals</li>
+                <li id="concerts" class="clickable clickableSizes" onclick='includeMainContent("events.php?c=Concerts&r=1")'>Concerts</li>
+                <li id="exhibitions" class="clickable clickableSizes" onclick='includeMainContent("events.php?c=Exhibitions&r=1")'>Exhibitions</li>
+                <li id="festivals" class="clickable clickableSizes" onclick='includeMainContent("events.php?c=Festivals&r=1")'>Festivals</li>
             </ol>
         </li>
         <li id="my_account" class="clickable clickableSizes" onclick="clickMyAccount()">My account</li>

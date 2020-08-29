@@ -10,6 +10,12 @@ if(isset($_GET["r"]) && (int)$_GET["r"] == 1){
 		if(isset($_GET["s"])){
 			echo "data-s='" . $_GET["s"] . "' ";
 		}
+		if(isset($_GET["o"])){
+			echo "data-o='" . $_GET["o"] . "' ";
+		}
+		if(isset($_GET["c"])){
+			echo "data-c='" . $_GET["c"] . "' ";
+		}
 		?>>
 		</div>
 		<button id="events-more" class="btn btn-success" onclick="moreEvents()">More</button>
@@ -119,6 +125,17 @@ if(isset($_GET["r"]) && (int)$_GET["r"] == 1){
 	            }
         	});
     	}
+    	$(document).ready(() => {
+    		var ed = $("#events-display");
+			var o = ed.attr("data-o");
+			var c = ed.attr("data-c");
+			if(typeof o != "undefined"){
+				$("#orderby").val(o);
+			}
+			if(typeof c != "undefined"){
+				$("#categories").val(c);
+			}
+    	});
     </script>
 </div>
 
