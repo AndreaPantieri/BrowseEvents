@@ -13,7 +13,7 @@ $DBHandler = new DBHandler();
 if (isset($_SESSION["userid"])) {
     $userid = $_SESSION["userid"];
 
-    $sql = "SELECT cart.TicketQuantity, event.idEvent, event.Name, event.Price, event.TicketNumber, event.Image, user.Username, image.Description FROM cart 
+    $sql = "SELECT cart.idCart, cart.TicketQuantity, event.idEvent, event.Name, event.Price, event.TicketNumber, event.Image, user.Username, image.Description FROM cart 
     INNER JOIN event ON cart.Event_idEvent = event.idEvent 
     INNER JOIN user ON cart.User_idUsers = user.idUsers 
     INNER JOIN image ON image.Event_idEvent = event.idEvent 
@@ -43,13 +43,13 @@ if (isset($_SESSION["userid"])) {
                             </div>
                             <div class="col-md-3 py-4">
                                 <h5>Partial Price: ' . $row["Price"] * $row["TicketQuantity"] . '€</h5>
-                                <div class="px-3" id="' . $row["idEvent"] . '" value="' . $row["TicketNumber"] . '">
-                                    <button type="button" class="btn bg-light border rounded-circle" onClick="decreaseQuantity(this)"><i class="fas fa-minus"></i></button>
-                                    <input type="text" class="form-control w-25 d-inline" value="' . $row["TicketQuantity"] . '" onChange="updateQuantity(this)">
-                                    <button type="button" class="btn bg-light border rounded-circle" onClick="increaseQuantity(this)"><i class="fas fa-plus"></i></button>
+                                <div class="px-3">
+                                    <button type="button" class="btn bg-light border rounded-circle" onClick="decreaseQuantity(this)" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '"><i class="fas fa-minus"></i></button>
+                                    <input type="text" class="form-control w-25 d-inline" value="' . $row["TicketQuantity"] . '" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '"" onChange="updateQuantity(this)">
+                                    <button type="button" class="btn bg-light border rounded-circle" onClick="increaseQuantity(this)" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '"><i class="fas fa-plus"></i></button>
                                     <div class="py-2">
                                         <div class="px-4">
-                                            <button type="submit" class="btn btn-danger mx-2" name="remove" onClick="removeProduct(this)">Remove</button>
+                                            <button type="submit" class="btn btn-danger mx-2" name="remove" onClick="removeProduct(this)" data-idCart="' . $row["idCart"] . '" data-idProduct="' . $row["idEvent"] . '">Remove</button>
                                         </div>
                                     </div>
                                 </div>
