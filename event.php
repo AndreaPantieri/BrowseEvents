@@ -115,9 +115,21 @@ if(isset($_GET["event_id"])){
 			echo $result[0]["Description"];
 			?>
 	    </p>
-  </div>
+  	</div>
+  	<div class="row">
+	    <label class="col-sm-2 col-form-label">Buy tickets</label>
+	    <input id="event-tickets" class="form-control" type="number" name="event-tickets" placeholder="Type the number of tickets to add to cart">
+	    <button class="btn btn-primary" onclick="addToCart(this)" data-id="<?php echo $result[0]['idEvent']; ?>">Add to cart</button>
+  	</div>
+  <?php
+		if($result[0]["User_idUsers"] == $_SESSION["userid"]){
+			?>
+			<button class="btn btn-primary" onclick="includeMainContent(<?php echo "'modifyEvent.php?event_id=" . $result[0]['idEvent']."'"; ?>)">Modify</button>
+			<?php
+		}
+		?>
 </div>
-		<?php
+	<?php
 	}
 }
 ?>
