@@ -169,3 +169,9 @@ body{
     text-decoration:none;
 }
 
+.flex-col-c{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
