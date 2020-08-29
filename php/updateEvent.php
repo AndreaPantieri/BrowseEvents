@@ -54,7 +54,7 @@ isset($_POST["imagesPresents"])){
 			}
 
 			$pathForImages = "../res/img/events/" . $event_id . "/";
-
+			$mainImage = "res/img/events/" . $event_id . "/";
 
 			$files = glob($pathForImages . "*"); // get all file names
 			foreach($files as $file){ // iterate files
@@ -69,6 +69,10 @@ isset($_POST["imagesPresents"])){
 			for($i = 0; $i < $imagesPresents; $i++){
 				$type = mime_content_type($images[$i]);
 				$extType = substr($type, 6);
+
+				if($i == 0){
+					$mainImage .= "0." . $extType;
+				}
 				$path = $pathForImages . $i . "." . $extType;
 				if(!file_exists($path)){
 					$data = $images[$i];
@@ -76,6 +80,12 @@ isset($_POST["imagesPresents"])){
 					list(, $data)      = explode(',', $data);
 					$data = base64_decode($data);
 					file_put_contents($path, $data);
+				}
+			}
+			if($imagesPresents > 0){
+				$sql_i = "UPDATE browseeventsdb.event SET Image = '$mainImage' WHERE idEvent = $event_id";
+				if($DBHandler->genericQuery($sql_i)){
+					$Response->result = true;
 				}
 			}
 		}

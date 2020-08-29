@@ -3,7 +3,6 @@ require_once 'DBHandler.php';
 
 class Response{
 	public $result = false;
-	public $tmp = -1;
 }
 
 $Response = new Response();
@@ -68,6 +67,16 @@ isset($_POST["imagesPresents"])){
 				list(, $data)      = explode(',', $data);
 				$data = base64_decode($data);
 				file_put_contents($path, $data);
+			}
+		}
+
+		if($imagesPresents > 0){
+			$type = mime_content_type($images[0]);
+			$extType = substr($type, 6);
+			$mainImage = "res/img/events/" . $event_id . "/0." .  $extType;
+			$sql_i = "UPDATE browseeventsdb.event SET Image = '$mainImage' WHERE idEvent = $event_id";
+			if($DBHandler->genericQuery($sql_i)){
+				$Response->result = true;
 			}
 		}
 	}

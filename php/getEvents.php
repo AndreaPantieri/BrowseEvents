@@ -14,7 +14,7 @@ else{
 	$_SESSION["numb_events"] = 0;
 }
 
-$sql_e = "SELECT idEvent, `event`.Name, Datetime, Price, Place, `event`.Description, Category.Name AS Category FROM `event` INNER JOIN category_has_event ON  `event`.idEvent = category_has_event.Event_idEvent INNER JOIN Category ON Category.idCategory = category_has_event.Category_idCategory ";
+$sql_e = "SELECT idEvent, `event`.Name, Datetime, Price, Place, `event`.Description, Image, Category.Name AS Category FROM `event` INNER JOIN category_has_event ON  `event`.idEvent = category_has_event.Event_idEvent INNER JOIN Category ON Category.idCategory = category_has_event.Category_idCategory ";
 
 if(isset($_GET["s"]) && $_GET["s"] != ""){
 	$s = $_GET["s"];
@@ -41,13 +41,18 @@ if($result){
 	$numb_events += 5;
 	$_SESSION["numb_events"] = $numb_events;
 	foreach ($result as $var) {
-		$path = '../res/img/events/' . $var["idEvent"] .'/';
-		$files = glob($path . "0.{jpg,png,jpeg}",GLOB_BRACE);
 		$file = '';
-		if(count($files) > 0){
-			$file = $files[0];
+		if(!is_dir("../" . $var["Image"]) && count(glob("../" . $var["Image"])) == 1){
+			$file = $var["Image"];
+		} else{
+			$path = '../res/img/events/' . $var["idEvent"] .'/';
+			$files = glob($path . "0.{jpg,png,jpeg}",GLOB_BRACE);
+			if(count($files) > 0){
+				$file = $files[0];
+			}
+			$file = substr($file, 3);
 		}
-		$file = substr($file, 3);
+		
 		?>
 	<div onclick="openEvent(this)" class="event-container card mb-3 clickable" <?php echo "data-id='" . $var["idEvent"] ."'";?> >
 		<img class="event-image card-img-top img-fluid" <?php echo 'src="' . $file . '"'; ?>/>
