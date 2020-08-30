@@ -15,8 +15,7 @@ if(isset($_SESSION["userid"])){
 	"SELECT Notification.idNotification, Notification.Title, Notification.Description, Notification.Date, user_has_notification.isRead
 	FROM Notification INNER JOIN user_has_notification ON Notification.idNotification = user_has_notification.Notification_idNotification
 	WHERE user_has_notification.User_idUsers = $user_id AND user_has_notification.isRead = 0
-	ORDER BY Notification.Date DESC
-	";
+	ORDER BY Notification.Date DESC";
 	$result = $DBHandler->select($sql_n);
 
 	if($result){
