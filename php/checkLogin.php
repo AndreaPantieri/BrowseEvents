@@ -16,7 +16,7 @@ if (isset($_POST['user']) && isset($_POST['pwd'])) {
 	$password = md5($_POST['pwd']);
 	$reminder = isset($_POST['reminder']);
 
-	$sql = "SELECT idUsers, Username, Password, UserType_idUserType FROM user WHERE Username = '$username' AND Password = '$password' AND isApproved = 1 OR UserType_idUserType = 1";
+	$sql = "SELECT idUsers, Username, Password, UserType_idUserType FROM user WHERE Username = '$username' AND Password = '$password' AND isApproved = 1";
 	$result = $DBHandler->select($sql);
 	$counts = array_map('count', $result);
 
@@ -48,7 +48,7 @@ if (isset($_POST['user']) && isset($_POST['pwd'])) {
 			}
 		}
 	} else {
-		$sql = "SELECT idUsers, Username, Password, UserType_idUserType FROM user WHERE Username = '$username' AND Password = '$password' AND isApproved = 0 AND UserType_idUserType != 1";
+		$sql = "SELECT idUsers, Username, Password, UserType_idUserType FROM user WHERE Username = '$username' AND Password = '$password' AND isApproved = 0";
 		$result = $DBHandler->select($sql);
 		$counts = array_map('count', $result);
 

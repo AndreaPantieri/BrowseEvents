@@ -10,4 +10,3 @@ if (isset($_POST["userid"])) {
     $result = $DBHandler->genericQuery($sql);
 }
 echo $result;
-
