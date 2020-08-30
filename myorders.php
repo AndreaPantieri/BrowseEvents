@@ -2,7 +2,7 @@
     <!-- This is the row for all the acquired events loaded dinamically -->
     <div class="row px-5">
         <div class="col-md-7">
-            <div class="mycart">
+            <div class="myorders mt-3">
                 <h6>My Orders</h6>
             </div>
             <hr>
