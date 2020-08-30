@@ -42,14 +42,24 @@
 						</ol>
 						<div class="carousel-inner">
 							<?php
-							for ($i = 0; $i < $numImages; $i++) {
+							$sql_ia = "SELECT Description FROM Image WHERE Event_idEvent = $event_id";
+							$res = $DBHandler->select($sql_ia);
+
+							for($i = 0; $i < $numImages; $i++) {
 								$tmpHTML = '<div class="carousel-item ';
 
-								if ($i == 0) {
+								if($i == 0){
 									$tmpHTML .=  'active';
 								}
-								$tmpHTML .= '" id="carousel-item-div-' . $i . '">';
-								$tmpHTML .= '<img class="inputImage d-block" alt="' . $i . '° slide" src="' . $images[$i] . '""></div>';
+								$tmpHTML .= '" id="carousel-item-div-' . $i .'">';
+								if($res){
+									$tmpHTML .= '<img class="inputImage d-block" alt="'. $res[$i]["Description"] .'" src="' . $images[$i] . '"">
+									</div>';
+								} else{
+									$tmpHTML .= '<img class="inputImage d-block" alt="'. $i .'° slide" src="' . $images[$i] . '"">
+									</div>';
+								}
+								
 								echo $tmpHTML;
 							}
 							?>

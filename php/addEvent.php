@@ -18,10 +18,14 @@ isset($_POST["event-description"]) &&
 isset($_POST["imagesPresents"])){
 	$imagesPresents = (int)$_POST["imagesPresents"];
 	$images = array();
+	$imagesAlt = array();
 	
 	for($i = 0; $i < $imagesPresents; $i++){
 		if(isset($_POST["Image" . $i])){
 			$images[$i] = $_POST["Image" . $i];
+		}
+		if(isset($_POST["ImageAlt" . $i])){
+			$imagesAlt[$i] = $_POST["ImageAlt" . $i];
 		}
 	}
 
@@ -69,6 +73,10 @@ isset($_POST["imagesPresents"])){
 				$data = base64_decode($data);
 				file_put_contents($path, $data);
 			}
+			$sql_i = "INSERT INTO Image (Image, Description, Event_idEvent) VALUES('" . substr($path, 3) . "', '" . $imagesAlt[$i] ."'" . ", $event_id)";
+			if($DBHandler->genericQuery($sql_i)){
+				$Response->result = true;
+			}
 		}
 
 		if($imagesPresents > 0){
@@ -76,6 +84,7 @@ isset($_POST["imagesPresents"])){
 			$extType = substr($type, 6);
 			$mainImage = "res/img/events/" . $event_id . "/0." .  $extType;
 			$sql_i = "UPDATE browseeventsdb.event SET Image = '$mainImage' WHERE idEvent = $event_id";
+
 			if($DBHandler->genericQuery($sql_i)){
 				$Response->result = true;
 			}

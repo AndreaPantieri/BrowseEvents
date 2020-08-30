@@ -19,59 +19,68 @@ if(isset($_GET["event_id"])){
 		sort($images);
 		$numImages = count($images);
 		?>
-<form id="form-modifyevent" action="php/updateEvent.php" method="POST" enctype="multipart/form-data">
-	<h1 id="title-modifyevent">MOdify Event</h1>
-	<svg id="emptyEventImage" viewBox="0 0 16 16" <?php if($numImages > 0){
-		echo 'class="bi bi-card-image inputImage d-block nonVisible"';
-	} else{
-		echo 'class="bi bi-card-image inputImage d-block"';
-	} ?> fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-	  <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-	  <path d="M10.648 7.646a.5.5 0 0 1 .577-.093L15.002 9.5V13h-14v-1l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z"/>
-	  <path fill-rule="evenodd" d="M4.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-	</svg>
+		<form id="form-modifyevent" action="php/updateEvent.php" method="POST" enctype="multipart/form-data">
+			<h1 id="title-modifyevent">Modify Event</h1>
+			<svg id="emptyEventImage" viewBox="0 0 16 16" <?php if($numImages > 0){
+				echo 'class="bi bi-card-image inputImage d-block nonVisible"';
+			} else{
+				echo 'class="bi bi-card-image inputImage d-block"';
+			} ?> fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			<path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+			<path d="M10.648 7.646a.5.5 0 0 1 .577-.093L15.002 9.5V13h-14v-1l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z"/>
+			<path fill-rule="evenodd" d="M4.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+		</svg>
 
-	<div id="carousel" <?php if($numImages == 0){
-		echo 'class="carousel slide nonVisible"';
-	} else{
-		echo 'class="carousel slide"';
-	} ?> class="carousel slide nonVisible" data-ride="carousel">
-	  <ol class="carousel-indicators">
-	  	<?php
-		for($i = 0; $i < $numImages; $i++) {
-			$tmpHTML = '<li id="carousel-li-' . $i .'" data-target="#carousel" data-slide-to="' . $i . '"';
+		<div id="carousel" <?php if($numImages == 0){
+			echo 'class="carousel slide nonVisible"';
+		} else{
+			echo 'class="carousel slide"';
+		} ?> class="carousel slide nonVisible" data-ride="carousel">
+		<ol class="carousel-indicators">
+			<?php
+			for($i = 0; $i < $numImages; $i++) {
+				$tmpHTML = '<li id="carousel-li-' . $i .'" data-target="#carousel" data-slide-to="' . $i . '"';
 
-			if($i == 0){
-				$tmpHTML .=  'class="active"';
+				if($i == 0){
+					$tmpHTML .=  'class="active"';
+				}
+				$tmpHTML .= '></li>';
+				echo $tmpHTML;
 			}
-			$tmpHTML .= '></li>';
-			echo $tmpHTML;
-		}
-		?>
-	  </ol>
-	  <div class="carousel-inner">
-	  	<?php
-		for($i = 0; $i < $numImages; $i++) {
-			$tmpHTML = '<div class="carousel-item ';
+			?>
+		</ol>
+		<div class="carousel-inner">
+			<?php
+			$sql_ia = "SELECT Description FROM Image WHERE Event_idEvent = $event_id";
+			$res = $DBHandler->select($sql_ia);
 
-			if($i == 0){
-				$tmpHTML .=  'active';
+			for($i = 0; $i < $numImages; $i++) {
+				$tmpHTML = '<div class="carousel-item ';
+
+				if($i == 0){
+					$tmpHTML .=  'active';
+				}
+				$tmpHTML .= '" id="carousel-item-div-' . $i .'">';
+				if($res){
+					$tmpHTML .= '<img class="inputImage d-block" alt="'. $res[$i]["Description"] .'" src="' . $images[$i] . '"">
+					</div>';
+				} else{
+					$tmpHTML .= '<img class="inputImage d-block" alt="'. $i .'° slide" src="' . $images[$i] . '"">
+					</div>';
+				}
+				
+				echo $tmpHTML;
 			}
-			$tmpHTML .= '" id="carousel-item-div-' . $i .'">';
-			$tmpHTML .= '<img class="inputImage d-block" alt="'. $i .'° slide" src="' . $images[$i] . '"">
-		</div>';
-			echo $tmpHTML;
-		}
-		?>
-	  </div>
-	  <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-	    <span class="sr-only">Previous</span>
-	  </a>
-	  <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-	    <span class="sr-only">Next</span>
-	  </a>
+			?>
+		</div>
+		<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
 	</div>
 	<div class="form-group" style="margin: auto;">
 		<input type="file" id="selectImage" style="display: none;" accept=".jpg, .jpeg, .png">
@@ -126,32 +135,32 @@ if(isset($_GET["event_id"])){
 		<label for="event-category" class="col-sm-2 col-form-label">Category</label>
 		<select class="form-control col-sm-10" id="event-category" name="event-category" >
 			<?php
-				$sql_c = "SELECT Name FROM category";
-				$result_C = $DBHandler->select($sql_c);
+			$sql_c = "SELECT Name FROM category";
+			$result_C = $DBHandler->select($sql_c);
 
-				$tmpHTML3 = "";
-				foreach ($result_C as $var) {
-					if($var["Name"] === $result[0]["Category"]){
-						$tmpHTML3 .= "<option selected>" . $var["Name"] . "</option>";
-					} else{
-						$tmpHTML3 .= "<option>" . $var["Name"] . "</option>";
-					}
-					
+			$tmpHTML3 = "";
+			foreach ($result_C as $var) {
+				if($var["Name"] === $result[0]["Category"]){
+					$tmpHTML3 .= "<option selected>" . $var["Name"] . "</option>";
+				} else{
+					$tmpHTML3 .= "<option>" . $var["Name"] . "</option>";
 				}
-				echo $tmpHTML3;
+
+			}
+			echo $tmpHTML3;
 			?>
 		</select>
 	</div>
 
 	<div class="form-group">
-	    <label for="event-description">Description</label>
-	    <textarea class="form-control" id="event-description" name="event-description" rows="5" placeholder="Type the description of the event">
-	    	<?php
+		<label for="event-description">Description</label>
+		<textarea class="form-control" id="event-description" name="event-description" rows="5" placeholder="Type the description of the event">
+			<?php
 			echo $result[0]["Description"];
 			?>
-	    </textarea>
-  </div>
-  <button id="event-modify" type="button" class="btn btn-primary" onclick="checkEvent()">Modify</button>
+		</textarea>
+	</div>
+	<button id="event-modify" type="button" class="btn btn-primary" onclick="checkEvent()">Modify</button>
 </form>
 
 <script type="text/javascript">
@@ -162,38 +171,42 @@ if(isset($_GET["event_id"])){
 		var imagesPresents = $("#carousel .carousel-indicators li").length;
 
 		var form = $(this);
-        var url = form.attr('action');
-        var dataToSend = form.serializeArray();
-        dataToSend.push({name: "imagesPresents", value: imagesPresents});
+		var url = form.attr('action');
+		var dataToSend = form.serializeArray();
+		dataToSend.push({name: "imagesPresents", value: imagesPresents});
 
-        var i;
-        for(i = 0; i < imagesPresents; i++){
-        	var tmpImgSrc = $("#carousel-item-div-" + i + " img").attr('src');
-        	dataToSend.push({name: "Image" + i, value: tmpImgSrc});
-        }
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: $.param(dataToSend),
-            success: function(data){
-            	console.log(data);
-                if(JSON.parse(data)["result"]){
-                    
-                }
-                else{
-                    Swal.fire({
-                        title: "Data error!",
-                        icon: "error"
-                    });
-                }
-            },
-            error: function(data){
-                Swal.fire({
-                    title: "Error!",
-                    icon: "error"
-                });
-            }
-        });
+		var i;
+		for(i = 0; i < imagesPresents; i++){
+			var tmpImgSrc = $("#carousel-item-div-" + i + " img").attr('src');
+			var tmpImgAlt = $("#carousel-item-div-" + i + " img").attr('alt');
+			dataToSend.push({name: "Image" + i, value: tmpImgSrc});
+			dataToSend.push({name: "ImageAlt" + i, value: tmpImgAlt});
+		}
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: $.param(dataToSend),
+			success: function(data){
+				if(JSON.parse(data)["result"]){
+					Swal.fire({
+						title: "Event modified successfully!",
+						icon: "success"
+					}).then(() => location.reload());
+				}
+				else{
+					Swal.fire({
+						title: "Data error!",
+						icon: "error"
+					});
+				}
+			},
+			error: function(data){
+				Swal.fire({
+					title: "Error!",
+					icon: "error"
+				});
+			}
+		});
 	});
 
 	function updateImageDisplay(event){
@@ -216,18 +229,28 @@ if(isset($_GET["event_id"])){
 
 		if (FileReader && files && files.length) {
 			
-	        var fr = new FileReader();
-	        fr.onload = function (e) {
-	            img.prop("src", e.target.result);
-	        };
-	        fr.readAsDataURL(files[0]);
-	        div.append(img);
-	        $("#carousel .carousel-inner").append(div);
-	    	$("#carousel-item-div-0").addClass("active");
-	    }
-	    $("#carousel").removeClass("nonVisible");
-	    $("#emptyEventImage").addClass("nonVisible");
-	    $("#emptyEventImage").removeClass("d-block");
+			var fr = new FileReader();
+			fr.onload = function (e) {
+				img.prop("src", e.target.result);
+			};
+			fr.readAsDataURL(files[0]);
+			div.append(img);
+			$("#carousel .carousel-inner").append(div);
+			$("#carousel-item-div-0").addClass("active");
+		}
+		$("#carousel").removeClass("nonVisible");
+		$("#emptyEventImage").addClass("nonVisible");
+		$("#emptyEventImage").removeClass("d-block");
+
+		Swal.fire({
+			title: "Insert description for the image",
+			showCloseButton: true,
+			input: "text"
+		}).then((result)=>{
+			if(typeof result != "undefined" && result !== ""){
+				img.prop("alt", result.value);
+			}
+		});
 	}
 
 	function removeImage(){
@@ -251,8 +274,8 @@ if(isset($_GET["event_id"])){
 
 			if(imgSrc.length == 0){
 				$("#carousel").addClass("nonVisible");
-			    $("#emptyEventImage").removeClass("nonVisible");
-			    $("#emptyEventImage").addClass("d-block");
+				$("#emptyEventImage").removeClass("nonVisible");
+				$("#emptyEventImage").addClass("d-block");
 			} else {
 				for(i = 0; i < imgSrc.length; i++){
 					indicators.append('<li id="carousel-li-'+ i + '" data-target="#carousel" data-slide-to="' + i + '"></li>');
@@ -307,7 +330,7 @@ if(isset($_GET["event_id"])){
 	});
 </script>
 
-		<?php
-	}
+<?php
+}
 }
 ?>

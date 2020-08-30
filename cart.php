@@ -33,6 +33,7 @@
             type: "GET",
             url: "php/getCartElements.php"
         }).then(function(data) {
+            console.log(data);
             var tmp = JSON.parse(data);
             document.getElementById("cart-elements").innerHTML = tmp["HTML"];
             document.getElementById("total").innerHTML = "Total: " + tmp["total"] + "€";

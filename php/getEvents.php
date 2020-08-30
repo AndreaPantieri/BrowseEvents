@@ -14,7 +14,7 @@ else{
 	$_SESSION["numb_events"] = 0;
 }
 
-$sql_e = "SELECT idEvent, `event`.Name, Datetime, Price, Place, `event`.Description, Image, Category.Name AS Category FROM `event` INNER JOIN category_has_event ON  `event`.idEvent = category_has_event.Event_idEvent INNER JOIN Category ON Category.idCategory = category_has_event.Category_idCategory ";
+$sql_e = "SELECT idEvent, `event`.Name, Datetime, Price, Place, `event`.Description AS Description, `event`.Image, Image.Description AS ImageDescription,Category.Name AS Category FROM `event` INNER JOIN category_has_event ON  `event`.idEvent = category_has_event.Event_idEvent INNER JOIN Category ON Category.idCategory = category_has_event.Category_idCategory INNER JOIN Image ON `event`.Image = Image.Image ";
 
 if(isset($_GET["s"]) && $_GET["s"] != ""){
 	$s = $_GET["s"];
@@ -55,7 +55,7 @@ if($result){
 		
 		?>
 	<div onclick="openEvent(this)" class="event-container card mb-3 clickable" <?php echo "data-id='" . $var["idEvent"] ."'";?> >
-		<img class="event-image card-img-top img-fluid" <?php echo 'src="' . $file . '"'; ?>/>
+		<img class="event-image card-img-top img-fluid" <?php echo 'src="' . $file . '"'; ?> alt="<?php echo $var['ImageDescription']; ?>"/>
 		<div class="event-text card-body">
 			<div class="event-title card-title"><?php echo $var["Name"];?></div>
 			<div class="event-date card-text"><?php echo $var["Datetime"];?></div>

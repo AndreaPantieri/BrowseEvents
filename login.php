@@ -94,7 +94,7 @@
 </div>
 
 <!-- login/registration scripts -->
-<script type="application/javascript ">
+<script type="application/javascript">
     const USERMINLENGTH = 5;
     const PASSMINLENGTH = 8;
 

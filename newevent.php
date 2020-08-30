@@ -81,17 +81,21 @@
 		var i;
 		for(i = 0; i < imagesPresents; i++){
 			var tmpImgSrc = $("#carousel-item-div-" + i + " img").attr('src');
+			var tmpImgAlt = $("#carousel-item-div-" + i + " img").attr('alt');
 			dataToSend.push({name: "Image" + i, value: tmpImgSrc});
+			dataToSend.push({name: "ImageAlt" + i, value: tmpImgAlt});
 		}
-		console.log($.param(dataToSend));
+
 		$.ajax({
 			type: "POST",
 			url: url,
 			data: $.param(dataToSend),
 			success: function(data){
-				console.log(data);
 				if(JSON.parse(data)["result"]){
-
+					Swal.fire({
+						title: "Event created successfully!",
+						icon: "success"
+					}).then(() => location.reload());
 				}
 				else{
 					Swal.fire({
@@ -141,6 +145,16 @@
 		$("#carousel").removeClass("nonVisible");
 		$("#emptyEventImage").addClass("nonVisible");
 		$("#emptyEventImage").removeClass("d-block");
+
+		Swal.fire({
+			title: "Insert description for the image",
+			showCloseButton: true,
+            input: "text"
+		}).then((result)=>{
+			if(typeof result != "undefined" && result !== ""){
+				img.prop("alt", result.value);
+			}
+		});
 	}
 
 	function removeImage(){
