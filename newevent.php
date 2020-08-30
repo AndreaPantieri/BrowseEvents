@@ -1,23 +1,23 @@
 <form id="form-newevent" action="php/addEvent.php" method="POST" enctype="multipart/form-data">
 	<h1 id="title-newevent">New Event</h1>
 	<svg id="emptyEventImage" viewBox="0 0 16 16" class="bi bi-card-image inputImage d-block" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-		  <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-		  <path d="M10.648 7.646a.5.5 0 0 1 .577-.093L15.002 9.5V13h-14v-1l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z"/>
-		  <path fill-rule="evenodd" d="M4.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-		</svg>
+		<path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+		<path d="M10.648 7.646a.5.5 0 0 1 .577-.093L15.002 9.5V13h-14v-1l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z"/>
+		<path fill-rule="evenodd" d="M4.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+	</svg>
 	<div id="carousel" class="carousel slide nonVisible" data-ride="carousel">
-	  <ol class="carousel-indicators">
-	  </ol>
-	  <div class="carousel-inner">
-	  </div>
-	  <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-	    <span class="sr-only">Previous</span>
-	  </a>
-	  <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-	    <span class="sr-only">Next</span>
-	  </a>
+		<ol class="carousel-indicators">
+		</ol>
+		<div class="carousel-inner">
+		</div>
+		<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
 	</div>
 
 	<div class="form-group" style="margin: auto;">
@@ -55,15 +55,15 @@
 		<label for="event-category" class="col-sm-2 col-form-label">Category</label>
 		<select class="form-control col-sm-10" id="event-category" name="event-category" >
 			<?php
-				require 'php/getCategories.php';
+			require 'php/getCategories.php';
 			?>
 		</select>
 	</div>
 	<div class="form-group">
-	    <label for="event-description">Description</label>
-	    <textarea class="form-control" id="event-description" name="event-description" rows="5" placeholder="Type the description of the event"></textarea>
-  </div>
-  <button id="event-publish" type="button" class="btn btn-primary" onclick="checkEvent()">Publish</button>
+		<label for="event-description">Description</label>
+		<textarea class="form-control" id="event-description" name="event-description" rows="5" placeholder="Type the description of the event"></textarea>
+	</div>
+	<button id="event-publish" type="button" class="btn btn-primary" onclick="checkEvent()">Publish</button>
 </form>
 
 <script type="text/javascript">
@@ -74,39 +74,39 @@
 		var imagesPresents = $("#carousel .carousel-indicators li").length;
 
 		var form = $(this);
-        var url = form.attr('action');
-        var dataToSend = form.serializeArray();
-        dataToSend.push({name: "imagesPresents", value: imagesPresents});
+		var url = form.attr('action');
+		var dataToSend = form.serializeArray();
+		dataToSend.push({name: "imagesPresents", value: imagesPresents});
 
-        var i;
-        for(i = 0; i < imagesPresents; i++){
-        	var tmpImgSrc = $("#carousel-item-div-" + i + " img").attr('src');
-        	dataToSend.push({name: "Image" + i, value: tmpImgSrc});
-        }
-        console.log($.param(dataToSend));
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: $.param(dataToSend),
-            success: function(data){
-            	console.log(data);
-                if(JSON.parse(data)["result"]){
-                    
-                }
-                else{
-                    Swal.fire({
-                        title: "Data error!",
-                        icon: "error"
-                    });
-                }
-            },
-            error: function(data){
-                Swal.fire({
-                    title: "Error!",
-                    icon: "error"
-                });
-            }
-        });
+		var i;
+		for(i = 0; i < imagesPresents; i++){
+			var tmpImgSrc = $("#carousel-item-div-" + i + " img").attr('src');
+			dataToSend.push({name: "Image" + i, value: tmpImgSrc});
+		}
+		console.log($.param(dataToSend));
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: $.param(dataToSend),
+			success: function(data){
+				console.log(data);
+				if(JSON.parse(data)["result"]){
+
+				}
+				else{
+					Swal.fire({
+						title: "Data error!",
+						icon: "error"
+					});
+				}
+			},
+			error: function(data){
+				Swal.fire({
+					title: "Error!",
+					icon: "error"
+				});
+			}
+		});
 	});
 
 	function updateImageDisplay(event){
@@ -129,18 +129,18 @@
 
 		if (FileReader && files && files.length) {
 			
-	        var fr = new FileReader();
-	        fr.onload = function (e) {
-	            img.prop("src", e.target.result);
-	        };
-	        fr.readAsDataURL(files[0]);
-	        div.append(img);
-	        $("#carousel .carousel-inner").append(div);
-	    	$("#carousel-item-div-0").addClass("active");
-	    }
-	    $("#carousel").removeClass("nonVisible");
-	    $("#emptyEventImage").addClass("nonVisible");
-	    $("#emptyEventImage").removeClass("d-block");
+			var fr = new FileReader();
+			fr.onload = function (e) {
+				img.prop("src", e.target.result);
+			};
+			fr.readAsDataURL(files[0]);
+			div.append(img);
+			$("#carousel .carousel-inner").append(div);
+			$("#carousel-item-div-0").addClass("active");
+		}
+		$("#carousel").removeClass("nonVisible");
+		$("#emptyEventImage").addClass("nonVisible");
+		$("#emptyEventImage").removeClass("d-block");
 	}
 
 	function removeImage(){
@@ -164,8 +164,8 @@
 
 			if(imgSrc.length == 0){
 				$("#carousel").addClass("nonVisible");
-			    $("#emptyEventImage").removeClass("nonVisible");
-			    $("#emptyEventImage").addClass("d-block");
+				$("#emptyEventImage").removeClass("nonVisible");
+				$("#emptyEventImage").addClass("d-block");
 			} else {
 				for(i = 0; i < imgSrc.length; i++){
 					indicators.append('<li id="carousel-li-'+ i + '" data-target="#carousel" data-slide-to="' + i + '"></li>');
@@ -188,9 +188,30 @@
 	}
 
 	function checkEvent(){
+		var name = $("#name-event").val();
+		var date = $("#event-date").val();
+		var place = $("#event-place").val();
+		var price = $("#event-price").val();
+		var maxtickets = $("#event-maxtickets").val();
+		var category = $("#event-category").val();
+		var description = $("#event-description").val();
+		var imagesPresents = $("#carousel .carousel-indicators li").length;
 
-		$("#form-newevent").submit();
+		function verify(tmp, val){
+			return typeof tmp != "undefined" && tmp !== val;
+		}
+
+		if(verify(name, "") && verify(date, "") && Date.parse(date) && verify(place, "") && verify(price, "") && verify(maxtickets, "") && maxtickets >= 0 && verify(category, "") && verify(description, "") && verify(imagesPresents, 0) && imagesPresents > 0){
+			$("#form-newevent").submit();
+		}
+		else{
+			Swal.fire({
+				title: "Data error or missing!",
+				icon: "error"
+			});
+		}
 	}
+
 
 	$(".inputImage").css("width", "30%");
 	$("#form-newevent").css("width", "70%");
