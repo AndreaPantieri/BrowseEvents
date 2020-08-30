@@ -21,11 +21,11 @@ if(isset($_SESSION["userid"])){
 
 	if($result){
 		$Response->count = count(array_map('count', $result));
-		$Response->HTML = "<span id='num_notifications'>" . $count > 99 ? "99+" : $count . "</span>";
+		$Response->HTML = "<span id='num_notifications'>" . $Response->count > 99 ? "99+" : $Response->count . "</span>";
 		foreach ($result as $row) {
-			$HTML .= '<div class="dropdown-item" role="button">
-		<h4>$row["Notification.Title"]</h4>
-		<p>$row["Notification.Description"]</p>
+			$Response->HTML .= '<div class="dropdown-item" role="button">
+		<h4>' . $row["Title"] . '</h4>
+		<p>' . $row["Description"] . '</p>
 	</div>';
 		}
 	}

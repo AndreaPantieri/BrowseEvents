@@ -1,6 +1,6 @@
 CREATE DEFINER = CURRENT_USER TRIGGER `BrowseEventsDB`.`Cart_AFTER_INSERT` AFTER INSERT ON `Cart` FOR EACH ROW
 BEGIN
-	DECLARE nameEvent VARCHAR(255);
+DECLARE nameEvent VARCHAR(255);
 	DECLARE nameUser VARCHAR(255);
 	DECLARE emailUser VARCHAR(255);
 	DECLARE idNotification INT;
@@ -16,7 +16,9 @@ BEGIN
 		INSERT INTO Notification (Title, Description) VALUE("Tickets bought ", CONCAT(nameUser, " (email: ", emailUser, ") has bought ", NEW.TicketQuantity, " tickets for the event ", nameEvent, " on ", NEW.Date));
 		SET idNotification = (SELECT LAST_INSERT_ID() FROM Notification);
 
-		INSERT INTO user_has_notification (User_idUsers, Notification_idNotification) VALUE(idOrganizer, idNotification);
-		INSERT INTO user_has_notification (User_idUsers, Notification_idNotification) VALUE(NEW.User_idUsers, idNotification);
+		IF idOrganizer != NEW.User_idUsers THEN
+			INSERT INTO user_has_notification (User_idUsers, Notification_idNotification) VALUES(idOrganizer, idNotification);
+        END IF;
+		INSERT INTO user_has_notification (User_idUsers, Notification_idNotification) VALUES(NEW.User_idUsers, idNotification);
 	END IF;
 END

@@ -6,8 +6,6 @@ BEGIN
 	DECLARE idNotification INT;
 	DECLARE idOrganizer INT;
 	IF NEW.isAcquired = 1 THEN
-		
-
 		SET nameEvent = (SELECT Name FROM `event` WHERE idEvent = NEW.Event_idEvent);
 		SET nameUser = (SELECT Username FROM User WHERE idUsers = NEW.User_idUsers);
 		SET emailUser = (SELECT Email FROM User WHERE idUsers = NEW.User_idUsers);
@@ -16,7 +14,10 @@ BEGIN
 		INSERT INTO Notification (Title, Description) VALUE("Tickets bought ", CONCAT(nameUser, " (email: ", emailUser, ") has bought ", NEW.TicketQuantity, " tickets for the event ", nameEvent, " on ", NEW.Date));
 		SET idNotification = (SELECT LAST_INSERT_ID() FROM Notification);
 
-		INSERT INTO user_has_notification (User_idUsers, Notification_idNotification) VALUE(idOrganizer, idNotification);
-		INSERT INTO user_has_notification (User_idUsers, Notification_idNotification) VALUE(NEW.User_idUsers, idNotification);
+		
+        IF idOrganizer != NEW.User_idUsers THEN
+			INSERT INTO user_has_notification (User_idUsers, Notification_idNotification) VALUES(idOrganizer, idNotification);
+        END IF;
+		INSERT INTO user_has_notification (User_idUsers, Notification_idNotification) VALUES(NEW.User_idUsers, idNotification);
 	END IF;
 END
