@@ -10,9 +10,14 @@
                         echo $_SESSION["username"];
                     } ?>!</h2>
     </div>
-
+    <!-- Admin approve organizer requests -->
+    <div id="approveorganizerlabel"></div>
+    <div class="form-inline mb-2 ">
+        <div id="adminrequests" data-usertype="<?php echo $_SESSION["idUserType"]; ?>"></div>
+        <div id="acceptrequestbutton"></div>
+    </div>
     <!-- change username -->
-    <label for="user"><b>Change Username:</b></label>
+    <label><b>Change Username:</b></label>
     <div class="form-inline mb-2">
         <input type="text" class="form-control mr-2" id="username" placeholder="Insert your new username" required />
         <button type="button" class="btn btn-primary" onclick="changeUsername()">Save changes</button>
@@ -20,7 +25,7 @@
     <div id="usernameWarning" class="text-danger"></div>
     <div id="usernameWarning2" class="text-danger"></div>
     <!-- change email address -->
-    <label for="user"><b>Change e-mail address:</b></label>
+    <label><b>Change e-mail address:</b></label>
     <div class="form-inline mb-2">
         <input type="email" class="form-control mr-2" id="email" placeholder="Insert your new email address" required />
         <button type="button" class="btn btn-primary" onclick="changeEmailAddress()">Save changes</button>
@@ -36,6 +41,23 @@
 </div>
 
 <script>
+    if ($("#adminrequests").attr('data-usertype') == 1) {
+        $(document).ready(getOrganizerRequests);
+    }
+
+    function getOrganizerRequests() {
+        $("#adminrequests").append('<select id="requests" class="form-control"></select>');
+        $("#adminrequests").append('<button type="button" class="btn btn-primary ml-2" onclick="approveSelectedUser()">Approve</button>');
+        $("#approveorganizerlabel").append('<label><b>Approve organizer requests:</b></label>');
+        
+        $.ajax({
+            type: "GET",
+            url: "php/getOrganizerRequests.php"
+        }).then(function(data) {
+            $("#requests").append(data);
+        });
+    }
+
     function changeUsername() {
         var USERMINLENGTH = 5;
 
@@ -209,6 +231,31 @@
                     });
                 }
             });
+        });
+    }
+
+    function approveSelectedUser() {
+        var combobox = document.getElementById("requests");
+        var userid = combobox.options[combobox.selectedIndex].getAttribute('data-userid');
+
+        $.ajax({
+            type: "POST",
+            url: "php/updateSelectedUserApproval.php",
+            data: {
+                userid: userid
+            }
+        }).then(function(data) {
+            if (data) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Selected user has been approved!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                getOrganizerRequests();
+                combobox.parentNode.removeChild(combobox);
+            }
         });
     }
 </script>
