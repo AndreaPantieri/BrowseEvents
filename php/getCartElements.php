@@ -45,7 +45,7 @@ if (isset($_SESSION["userid"])) {
                                 <h5>Partial Price: ' . $row["Price"] * $row["TicketQuantity"] . '€</h5>
                                 <div class="px-3">
                                     <button type="button" class="btn bg-light border rounded-circle" onClick="decreaseQuantity(this)" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '"><i class="fas fa-minus"></i></button>
-                                    <input type="text" class="form-control w-25 d-inline" value="' . $row["TicketQuantity"] . '" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '"" onChange="updateQuantity(this)">
+                                    <input type="text" class="form-control w-25 d-inline" value="' . $row["TicketQuantity"] . '" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '" onChange="updateQuantity(this)">
                                     <button type="button" class="btn bg-light border rounded-circle" onClick="increaseQuantity(this)" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '"><i class="fas fa-plus"></i></button>
                                     <div class="py-2">
                                         <div class="px-4">
