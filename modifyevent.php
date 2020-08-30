@@ -275,8 +275,28 @@ if(isset($_GET["event_id"])){
 	}
 
 	function checkEvent(){
+		var name = $("#name-event").val();
+		var date = $("#event-date").val();
+		var place = $("#event-place").val();
+		var price = $("#event-price").val();
+		var maxtickets = $("#event-maxtickets").val();
+		var category = $("#event-category").val();
+		var description = $("#event-description").val();
+		var imagesPresents = $("#carousel .carousel-indicators li").length;
 
-		$("#form-modifyevent").submit();
+		function verify(tmp, val){
+			return typeof tmp != "undefined" && tmp !== val;
+		}
+
+		if(verify(name, "") && verify(date, "") && Date.parse(date) && verify(place, "") && verify(price, "") && verify(maxtickets, "") && maxtickets >= 0 && verify(category, "") && verify(description, "") && verify(imagesPresents, 0) && imagesPresents > 0){
+			$("#form-newevent").submit();
+		}
+		else{
+			Swal.fire({
+				title: "Data error or missing!",
+				icon: "error"
+			});
+		}
 	}
 
 	$(document).ready(() => {
