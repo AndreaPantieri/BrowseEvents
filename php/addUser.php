@@ -26,6 +26,8 @@ if (
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $organizer = isset($_POST['organizer']) ? 2 : 3;
+    $isApproved = $organizer == 2? false : true;
+    
 
     $addUserResponse->username = $username;
     $addUserResponse->email = $email;
@@ -60,8 +62,8 @@ if (
         mail($email, 'Confirm your registration to BrowseEvents.com', 'Thanks for signing to BrowseEvents! Here\'s your code: ' . $verificationCode, 'From: infobrowseevents@gmail.com');
         $verificationCode = md5($verificationCode); //..and hashes it before saving it in DB
 
-        $sql = "INSERT INTO user (Username, Password, Email, FirstName, LastName, UserType_idUserType, VerificationCode)"
-            . "VALUES ('$username', '$password', '$email', '$firstname', '$lastname', '$organizer', '$verificationCode')";
+        $sql = "INSERT INTO user (Username, Password, Email, FirstName, LastName, UserType_idUserType, VerificationCode, isApproved)"
+            . "VALUES ('$username', '$password', '$email', '$firstname', '$lastname', '$organizer', '$verificationCode', '$isApproved')";
         $result = $DBHandler->genericQuery($sql);
 
         if ($result) {

@@ -110,21 +110,23 @@
             url: url,
             data: form.serialize(),
             success: function(data) {
-                if (JSON.parse(data)["result"]) {
+                var tmp = JSON.parse(data);
+
+                if (tmp["result"]) {
                     location.reload(); //if credentials where correct cookies have been set so reloads the page and automatically logs into system
-                } else {
+                } else if (tmp["result2"]) {
+                    Swal.fire({
+                        title: "Your request to become an organizer is currently pending!",
+                        text: "Wait or contact an administrator to approve your registration as an organizer.",
+                        icon: "info"
+                    });
+                } else if (!tmp["result"]) {
                     Swal.fire({
                         title: "Credentials don't match!",
                         text: "Make sure to type your credentials correctly",
                         icon: "error"
                     });
                 }
-            },
-            error: function(data) {
-                Swal.fire({
-                    title: "Error!",
-                    icon: "Something went wrong when comunicating with our server"
-                });
             }
         });
     });
@@ -202,7 +204,6 @@
 
     /* this function asks for the email verification code, works both before login (if user never inserted it before) and/or after registration. 
     field "username" is used to know where to take the username from for the query (from which textbox, depending if you are trying to login or register).
-    EDIT: this function has been included in "js/checkVerificationCode.js" to also use it in myaccount.php
     */
     function checkVerificationCode(username) {
         Swal.fire({
