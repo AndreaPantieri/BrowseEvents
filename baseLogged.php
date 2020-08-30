@@ -124,7 +124,8 @@ require_once './php/DBHandler.php';
 </div>
 
 <script type="text/javascript">
-    var tmp = setInterval(checkNotifications, 500);
+    var t = 100;
+    var tmp = setInterval(checkNotifications, t);
 
     function includeContent(filePHP, f) {
         var xhttp = new XMLHttpRequest();
@@ -242,7 +243,7 @@ require_once './php/DBHandler.php';
                 });
             }
         } else{
-            tmp = setInterval(checkNotifications, 500);
+            tmp = setInterval(checkNotifications, t);
         }
     });
 
