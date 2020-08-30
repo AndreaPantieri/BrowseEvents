@@ -121,7 +121,7 @@
 				</div>
 				<div class="row">
 					<label class="col-sm-2 col-form-label">Buy tickets</label>
-					<input id="event-tickets" class="form-control" type="number" name="event-tickets" placeholder="Type the number of tickets to add to cart" value="1" min="1" oninput="checkQuantity(this)" data-maxquantity="<?php echo $result[0]['TicketNumber']; ?>" max="<?php echo $result[0]['TicketNumber']; ?>">
+					<input id="event-tickets" class="form-control" type="number" name="event-tickets" placeholder="Type the number of tickets to add to cart" value="1" min="1" oninput="checkQuantity(this)" data-maxquantity="<?php echo $result[0]['TicketNumber']; ?>" max="99">
 					<button class="btn btn-primary" onclick="addToCart(this)" data-eventid="<?php echo $result[0]['idEvent']; ?>" data-userid="<?php if (isset($_SESSION["userid"])) { echo $_SESSION["userid"];} ?>" data-maxquantity="<?php echo $result[0]['TicketNumber']; ?>">Add to cart</button>
 				</div>
 				<?php
@@ -161,8 +161,13 @@
 					title: 'Tickets have been added to your cart!',
 					showConfirmButton: false,
 					timer: 1500
-				})
+				});
 			})
+		}else if (maxQuantity == 0) {
+			Swal.fire({
+				title: "Tickets for this event are finished!",
+				icon: "error"
+			});
 		} else {
 			Swal.fire({
 				title: "You can't buy more than the available quantity!",
@@ -179,6 +184,12 @@
 		if (ticket_quantity > maxQuantity) {
 			Swal.fire({
 				title: "You can't buy more than the available quantity!",
+				icon: "error"
+			});
+		}
+		if (ticket_quantity > 99) {
+			Swal.fire({
+				title: "You can't buy more than 99 of the same product!",
 				icon: "error"
 			});
 		}
