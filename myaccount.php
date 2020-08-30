@@ -42,14 +42,14 @@
 
 <script>
     if ($("#adminrequests").attr('data-usertype') == 1) {
-        $(document).ready(getOrganizerRequests);
+        getOrganizerRequests();
     }
 
     function getOrganizerRequests() {
         $("#adminrequests").append('<select id="requests" class="form-control"></select>');
         $("#adminrequests").append('<button type="button" class="btn btn-primary ml-2" onclick="approveSelectedUser()">Approve</button>');
         $("#approveorganizerlabel").append('<label><b>Approve organizer requests:</b></label>');
-        
+
         $.ajax({
             type: "GET",
             url: "php/getOrganizerRequests.php"
@@ -235,27 +235,38 @@
     }
 
     function approveSelectedUser() {
+        var label = document.getElementById("approveorganizerlabel");
         var combobox = document.getElementById("requests");
+        var button = document.getElementById("acceptrequestbutton");
         var userid = combobox.options[combobox.selectedIndex].getAttribute('data-userid');
 
-        $.ajax({
-            type: "POST",
-            url: "php/updateSelectedUserApproval.php",
-            data: {
-                userid: userid
-            }
-        }).then(function(data) {
-            if (data) {
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Selected user has been approved!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                getOrganizerRequests();
-                combobox.parentNode.removeChild(combobox);
-            }
-        });
+        if ($("#requests").has('option').length > 0 && $("#requests").val() != "No requests to show") {
+            $.ajax({
+                type: "POST",
+                url: "php/updateSelectedUserApproval.php",
+                data: {
+                    userid: userid
+                }
+            }).then(function(data) {
+                if (data) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Selected user has been approved!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    label.removeChild(label);
+                    combobox.parentNode.removeChild(combobox);
+                    button.parentNode.removeChild(button);
+                    getOrganizerRequests();
+                }
+            });
+        } /*else {
+            Swal.fire({
+                        title: "There is nothing to approve!",
+                        icon: "error"
+                    });
+        }*/
     }
 </script>
