@@ -187,6 +187,7 @@ if(isset($_GET["event_id"])){
 			url: url,
 			data: $.param(dataToSend),
 			success: function(data){
+				console.log(data);
 				if(JSON.parse(data)["result"]){
 					Swal.fire({
 						title: "Event modified successfully!",
@@ -312,7 +313,7 @@ if(isset($_GET["event_id"])){
 		}
 
 		if(verify(name, "") && verify(date, "") && Date.parse(date) && verify(place, "") && verify(price, "") && verify(maxtickets, "") && maxtickets >= 0 && verify(category, "") && verify(description, "") && verify(imagesPresents, 0) && imagesPresents > 0){
-			$("#form-newevent").submit();
+			$("#form-modifyevent").submit();
 		}
 		else{
 			Swal.fire({
