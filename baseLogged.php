@@ -44,19 +44,19 @@ require_once './php/DBHandler.php';
         <?php
         if ($type_account == 1 || $type_account == 2) {
             echo '<!-- Create new event-->
-        <div id="icon_newevent" class=\'flexColumnCenter\'>
+            <div id="icon_newevent" class=\'flexColumnCenter\'>
             <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill clickable" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="clickNewEvent()">
-              <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"/>
+            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"/>
             </svg>
-        </div>
+            </div>
 
-        <!-- Manage events-->
-        <div id="icon_manageevents" class=\'flexColumnCenter\'>
+            <!-- Manage events-->
+            <div id="icon_manageevents" class=\'flexColumnCenter\'>
             <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-pencil-square clickable" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="clickManageEvents()">
-              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
             </svg>
-        </div>';
+            </div>';
         }
         ?>
 
@@ -114,7 +114,7 @@ require_once './php/DBHandler.php';
         <?php
         if ($type_account == 1 || $type_account == 2) {
             echo '<li id="new_event" class="clickable clickableSizes" onclick="clickNewEvent()">Create new event</li>
-                <li id="manage_events" class="clickable clickableSizes" onclick="clickManageEvents()">Manage events</li>';
+            <li id="manage_events" class="clickable clickableSizes" onclick="clickManageEvents()">Manage events</li>';
         }
         ?>
         <li id="my_orders" class="clickable clickableSizes" onclick="clickMyOrders()">My orders</li>
@@ -124,6 +124,8 @@ require_once './php/DBHandler.php';
 </div>
 
 <script type="text/javascript">
+    var tmp = setInterval(checkNotifications, 500);
+
     function includeContent(filePHP, f) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -141,8 +143,8 @@ require_once './php/DBHandler.php';
             var s = document.getElementById("maincontent").getElementsByTagName('script');
             for (var i = 0; i < s.length; i++) {
                 var node = s[i],
-                    parent = node.parentElement,
-                    d = document.createElement('script');
+                parent = node.parentElement,
+                d = document.createElement('script');
                 d.async = node.async;
                 d.textContent = node.textContent;
                 d.setAttribute('type', 'text/javascript');
@@ -160,12 +162,12 @@ require_once './php/DBHandler.php';
     <?php
     if ($type_account == 1 || $type_account == 2) {
         echo 'function clickNewEvent(){
-                includeMainContent("newevent.php");
-            }
+            includeMainContent("newevent.php");
+        }
 
-            function clickManageEvents(){
-                includeMainContent("myevents.php");
-            }';
+        function clickManageEvents(){
+            includeMainContent("myevents.php");
+        }';
     }
     ?>
 
@@ -202,7 +204,7 @@ require_once './php/DBHandler.php';
                 document.getElementById("num_notifications").style.visibility = 'visible';
             }
             document.getElementById("dropdown-notifications").innerHTML = html;
-            document.getElementById("num_notifications").innerHTML = count;
+            document.getElementById("num_notifications").innerHTML = count > 99 ? "99+" : count;
         });
     }
 
@@ -215,9 +217,37 @@ require_once './php/DBHandler.php';
         includeMainContent("events.php?s=" + s + "&r=1");
     });
 
-    
+    $("#dropdownMenu2").click((e) => {
+        var isOpen = !$("#dropdown-notifications").hasClass("show");
+        if(isOpen){
+            clearInterval(tmp);
+            var els = document.getElementsByClassName("dropdown-item-notications")
+            var i;
+
+            for(i = 0; i < els.length; i++){
+                var idNotification = els[i].getAttribute("data-id");
+
+                $.ajax({
+                    type: "POST",
+                    url: "php/readNotification.php",
+                    data:{
+                        id: idNotification
+                    },
+                    error: function(data){
+                        Swal.fire({
+                            title: "Error",
+                            icon: "error"
+                        });
+                    }
+                });
+            }
+        } else{
+            tmp = setInterval(checkNotifications, 500);
+        }
+    });
+
     $(document).ready(() => {
         includeMainContent("events.php?r=1");
-        var tmp = setInterval(checkNotifications, 500);
+        
     })
 </script>

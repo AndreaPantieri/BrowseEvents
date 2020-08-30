@@ -20,9 +20,9 @@ if(isset($_SESSION["userid"])){
 
 	if($result){
 		$Response->count = count(array_map('count', $result));
-		$Response->HTML = "<span id='num_notifications'>" . $Response->count > 99 ? "99+" : $Response->count . "</span>";
+		$Response->HTML = "";
 		foreach ($result as $row) {
-			$Response->HTML .= '<div class="dropdown-item" role="button">
+			$Response->HTML .= '<div class="dropdown-item dropdown-item-notications" data-id="' . $row["idNotification"] .'">
 		<h4>' . $row["Title"] . '</h4>
 		<p>' . $row["Description"] . '</p>
 	</div>';

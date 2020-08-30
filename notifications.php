@@ -21,7 +21,7 @@
 			$description = $var["Description"];
 			$isRead = $var["isRead"];
 			?>
-			<div class="border rounded mt-5 mb-5 clickable" data-id='<?php echo $idNotification; ?>' data-isRead='<?php echo $isRead; ?>' onclick="readNotification(this)">
+			<div class="border rounded mt-5 mb-5 <?php echo $isRead == 0 ? 'clickable' : ''; ?>" data-id='<?php echo $idNotification; ?>' data-isRead='<?php echo $isRead; ?>' onclick="readNotification(this)">
 				<div class="bg-white">
 					<div class="row px-3" style="position: relative;">
 						<div class="col-md-7 py-3">
@@ -57,18 +57,19 @@
 						id: idNotification
 					},
 					success: function(data){
-						console.log(data);
 						if(JSON.parse(data)["result"]){
 							Swal.fire({
 								title: "Notification read",
-								type: "success"
+								icon: "success"
 							});
+							event.setAttribute("data-isRead", 1);
+							event.classList.remove("clickable");
 						}
 					},
 					error: function(data){
 						Swal.fire({
 							title: "Error",
-							type: "error"
+							icon: "error"
 						});
 					}
 				});
