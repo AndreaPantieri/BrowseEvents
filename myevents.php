@@ -55,7 +55,6 @@
 	<script type="text/javascript">
 		function manageEvent(event){
 			var idEvent = event.getAttribute("data-id");
-			console.log(idEvent);
 
 			includeMainContent("modifyevent.php?event_id=" + idEvent);
 		}
