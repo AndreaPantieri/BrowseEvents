@@ -3,7 +3,6 @@ require_once 'DBHandler.php';
 
 class Response{
 	public $result = false;
-	public $tmp = -1; 
 }
 
 $Response = new Response();
@@ -46,7 +45,6 @@ if(isset($_SESSION["event_id"]) &&
 
 		$DBHandler = new DBHandler();
 		$sql_e = "UPDATE browseeventsdb.event SET Name='$name',Datetime='$date',Price=$price,Place='$place',TicketNumber=$maxtickets,Description='$description',User_idUsers=$user_id,LastModifyDate='" . date("Y-m-d H:i:s") ."' WHERE idEvent =  $event_id;";
-		$Response->tmp = $sql_e;
 		if($DBHandler->genericQuery($sql_e)){
 			$sql_ci = "SELECT idCategory FROM category WHERE Name = '$category'";
 			$res = $DBHandler->select($sql_ci);
@@ -64,29 +62,9 @@ if(isset($_SESSION["event_id"]) &&
 
 			$types = array();
 			$datas = array();
-			for($i = 0; $i < $imagesPresents; $i++){
-				if(strcmp($pathForImages, "../" . substr($images[$i],0, 15). $event_id . "/") == 0){
-					$types[$i] = mime_content_type("../" . $images[$i]);
-					$datas[$i] = base64_encode("../" . $images[$i]);
-				}
-				else{
-					$types[$i] = mime_content_type($images[$i]);
-					$data = $images[$i];
-					list($type, $data) = explode(';', $data);
-					list(, $data)      = explode(',', $data);
-					$datas[$i] = $data;
-				}
+			$oldFilesPosition  = array();
+			$posOldarray = 0;
 
-			}
-			
-
-			$files = glob($pathForImages . "*"); // get all file names
-			foreach($files as $file)
-			{ // iterate files
-				if(is_file($file))
-			    	unlink($file); // delete file
-			}
-			
 			$sql_di = "DELETE FROM Image WHERE idEvent = $event_id";
 			$DBHandler->genericQuery($sql_di);
 
@@ -95,15 +73,37 @@ if(isset($_SESSION["event_id"]) &&
 			}
 
 			for($i = 0; $i < $imagesPresents; $i++){
-				$type = $types[$i];
-				$extType = substr($type, 6);
+				if(strcmp($pathForImages, "../" . substr($images[$i],0, 15). $event_id . "/") == 0){
+					$types[$i] = mime_content_type("../" . $images[$i]);
+					$extType = substr($types[$i], 6);
+					$oldFilesPosition[$posOldarray] = $i;
+					rename("../" . $images[$i], $pathForImages . "n" . $posOldarray . "." . $extType);
+					$posOldarray++;
+				}else{
+					$types[$i] = mime_content_type($images[$i]);
+				}
+			}
+
+			for($i = 0; $i < $imagesPresents; $i++){
+				$found = array_search($i, $oldFilesPosition);
+				$extType = substr($types[$i], 6);
 
 				if($i == 0){
 					$mainImage .= "0." . $extType;
 				}
+
 				$path = $pathForImages . $i . "." . $extType;
-				if(!file_exists($path)){
-					$data = $datas[$i];
+				if(file_exists($path)){
+					unlink($path);
+				}
+				if($found !== false){
+
+					rename($pathForImages . "n" . $found . "." . $extType, $path);
+				}
+				else{
+					$data = $images[$i];
+					list($type, $data) = explode(';', $data);
+					list(, $data)      = explode(',', $data);
 					$data = base64_decode($data);
 					file_put_contents($path, $data);
 				}
@@ -112,12 +112,13 @@ if(isset($_SESSION["event_id"]) &&
 					$Response->result = true;
 				}
 			}
+			
 			if($imagesPresents > 0){
 				$sql_i = "UPDATE browseeventsdb.event SET Image = '$mainImage' WHERE idEvent = $event_id";
 				if($DBHandler->genericQuery($sql_i)){
 					$Response->result = true;
 				}
-			}*/
+			}
 		}		
 	}
 }
