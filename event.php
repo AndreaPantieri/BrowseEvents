@@ -19,13 +19,13 @@
 			$images = glob($path . "*.{jpg,png,jpeg}", GLOB_BRACE);
 			sort($images);
 			$numImages = count($images);
-	?>
+			?>
 			<div id="div-event" class="w-75">
 				<h1 id="title-showevent">Event</h1>
 
 				<?php
 				if ($numImages > 0) {
-				?>
+					?>
 					<div id="carousel" class="carousel slide row w-100" data-ride="carousel">
 						<ol class="carousel-indicators">
 							<?php
@@ -49,8 +49,7 @@
 									$tmpHTML .=  'active';
 								}
 								$tmpHTML .= '" id="carousel-item-div-' . $i . '">';
-								$tmpHTML .= '<img class="inputImage d-block" alt="' . $i . '° slide" src="' . $images[$i] . '"">
-				</div>';
+								$tmpHTML .= '<img class="inputImage d-block" alt="' . $i . '° slide" src="' . $images[$i] . '""></div>';
 								echo $tmpHTML;
 							}
 							?>
@@ -64,7 +63,7 @@
 							<span class="sr-only">Next</span>
 						</a>
 					</div>
-				<?php
+					<?php
 				}
 
 				?>
@@ -122,31 +121,22 @@
 				</div>
 				<div class="row">
 					<label class="col-sm-2 col-form-label">Buy tickets</label>
-					<input id="event-tickets" class="form-control" type="number" name="event-tickets" placeholder="Type the number of tickets to add to cart" value="1" min="1" oninput="checkQuantity(this)" data-maxquantity="<?php
-																																																								echo $result[0]['TicketNumber'];
-																																																								?>" max="<?php
-																																																											echo $result[0]['TicketNumber'];
-																																																											?>">
-					<button class="btn btn-primary" onclick="addToCart(this)" data-eventid="<?php echo $result[0]['idEvent']; ?>" data-userid="<?php if (isset($_SESSION["userid"])) {
-																																					echo $_SESSION["userid"];
-																																				} ?>" data-maxquantity="<?php
-																																										echo $result[0]['TicketNumber'];
-																																										?>">Add to cart</button>
+					<input id="event-tickets" class="form-control" type="number" name="event-tickets" placeholder="Type the number of tickets to add to cart" value="1" min="1" oninput="checkQuantity(this)" data-maxquantity="<?php echo $result[0]['TicketNumber']; ?>" max="<?php echo $result[0]['TicketNumber']; ?>">
+					<button class="btn btn-primary" onclick="addToCart(this)" data-eventid="<?php echo $result[0]['idEvent']; ?>" data-userid="<?php if (isset($_SESSION["userid"])) { echo $_SESSION["userid"];} ?>" data-maxquantity="<?php echo $result[0]['TicketNumber']; ?>">Add to cart</button>
 				</div>
 				<?php
 				if ($result[0]["User_idUsers"] == $_SESSION["userid"]) {
-				?>
+					?>
 					<button class="btn btn-primary" onclick="includeMainContent(<?php echo "'modifyEvent.php?event_id=" . $result[0]['idEvent'] . "'"; ?>)">Modify</button>
-				<?php
+					<?php
 				}
 				?>
 			</div>
-	<?php
+			<?php
 		}
 	}
 	?>
 </div>
-<!-- ^^^^^^^^ FARNE SI DISSOCIA DA QUESTE INDENTAZIONI SOPRA ^^^^^ -->
 
 <script>
 	function addToCart(elem) {
