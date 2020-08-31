@@ -124,7 +124,7 @@ require_once './php/DBHandler.php';
 </div>
 
 <script type="text/javascript">
-    var t = 100;
+    var t = 300;
     var tmp = setInterval(checkNotifications, t);
 
     function includeContent(filePHP, f) {
@@ -219,9 +219,9 @@ require_once './php/DBHandler.php';
     });
 
     $("#dropdownMenu2").click((e) => {
+        clearInterval(tmp);
         var isOpen = !$("#dropdown-notifications").hasClass("show");
         if(isOpen){
-            clearInterval(tmp);
             var els = document.getElementsByClassName("dropdown-item-notications")
             var i;
 
