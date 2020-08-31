@@ -49,3 +49,39 @@
     width: 50%;
     padding-left: 120px;
 }
+
+.input-group-prepend span {
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border: 0 !important;
+}
+
+#logincard {
+    height: 370px;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+#logincard h1 {
+    color: white;
+    font-size: 32px;
+}
+
+#logincard label {
+    color: white;
+}
+
+#logincard button {
+    background-color: #FFC312;
+    color: black;
+    float: right;
+    width: 100px;
+}
+
+#logincard button:hover {
+    color: black;
+    background-color: white;
+}

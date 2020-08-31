@@ -1,17 +1,17 @@
-<img id="loginlogo" src="res\img\logo.png" alt="BrowseEvents logo">
+<img id="loginlogo" src="res\img\logo nightmode.png" alt="BrowseEvents logo">
 <!-- login -->
 <div>
     <form id="loginForm" action="php/checkLogin.php" method="POST" enctype="multipart/form-data">
         <div class="container mt-5">
             <div class="row">
-                <div class="col-sm-5">
-                    <div>
+                <div id="logincard" class="col-sm-5">
+                    <div class ="mt-3">
                         <h1>Login</h1>
                     </div>
                     <hr class="mb-3">
 
                     <!-- username -->
-                    <label for="user"><b>Username:</b></label>
+                    <label for="user">Username:</label>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -19,7 +19,7 @@
                         <input type="text" class="form-control" id="user" name="user" placeholder="Username" required />
                     </div>
                     <!-- password -->
-                    <label for="password"><b>Password:</b></label>
+                    <label for="password">Password:</label>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>

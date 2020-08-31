@@ -2,15 +2,14 @@ html {
     margin: 0px;
 }
 
-
-/*html,
+html,
 body {
-    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    background-image: url('../res/img/loginwallpaper.png');
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
     font-family: 'Numans', sans-serif;
-}*/
+}
 
 body {
     margin: 0px;
