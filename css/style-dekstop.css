@@ -1,32 +1,51 @@
-#icon_myaccount{
-	color:red;
+#icon_myaccount {
+    color: red;
 }
 
-#num_notifications{
-	position: absolute;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	width: 1.5em;
-	height: 1.5em;
-	background-color: red;
-	border-radius: 50%;
-	font-size: larger;
+#num_notifications {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 1.5em;
+    height: 1.5em;
+    background-color: red;
+    border-radius: 50%;
+    font-size: larger;
 }
 
-#price_details{
+#price_details {
     position: fixed;
     right: 1%;
 }
 
-#container-fluid{
-	display: flex;
-	flex-direction: row;
-	width: 70%;
+#container-fluid {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
 }
 
-#filters{
-	position: fixed;
-	right: 1%;
+#filters {
+    position: fixed;
+    right: 1%;
+}
 
+
+/* Login Page */
+
+#loginlogo {
+    max-width: 50%;
+    height: auto;
+}
+
+#loginForm {
+    float: right;
+    width: 50%;
+    padding-left: 100px;
+}
+
+#signupForm {
+    float: left;
+    width: 50%;
+    padding-left: 120px;
 }
