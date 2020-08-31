@@ -111,7 +111,6 @@
             data: form.serialize(),
             success: function(data) {
                 var tmp = JSON.parse(data);
-
                 if (tmp["result"]) {
                     location.reload(); //if credentials where correct cookies have been set so reloads the page and automatically logs into system
                 } else if (tmp["result2"]) {

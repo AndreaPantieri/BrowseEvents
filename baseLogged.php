@@ -125,7 +125,7 @@ require_once './php/DBHandler.php';
 
 <script type="text/javascript">
     var t = 300;
-    var tmp = setInterval(checkNotifications, t);
+    var tmp;
 
     function includeContent(filePHP, f) {
         var xhttp = new XMLHttpRequest();
@@ -207,6 +207,7 @@ require_once './php/DBHandler.php';
             document.getElementById("dropdown-notifications").innerHTML = html;
             document.getElementById("num_notifications").innerHTML = count > 99 ? "99+" : count;
         });
+        tmp = setTimeout(checkNotifications, t);
     }
 
     function clickLogout() {
@@ -219,36 +220,39 @@ require_once './php/DBHandler.php';
     });
 
     $("#dropdownMenu2").click((e) => {
-        clearInterval(tmp);
-        var isOpen = !$("#dropdown-notifications").hasClass("show");
-        if(isOpen){
-            var els = document.getElementsByClassName("dropdown-item-notications")
-            var i;
+        e.preventDefault();
 
+        
+        var isOpen = !$("#dropdown-notifications").hasClass("show");
+        if(!isOpen){
+            var els = document.getElementsByClassName("dropdown-item-notications");
+
+            var i;
+            var dataToPush = [];
+            dataToPush.push({name : "numEls", value : els.length});
             for(i = 0; i < els.length; i++){
                 var idNotification = els[i].getAttribute("data-id");
-
-                $.ajax({
-                    type: "POST",
-                    url: "php/readNotification.php",
-                    data:{
-                        id: idNotification
-                    },
-                    error: function(data){
-                        Swal.fire({
-                            title: "Error",
-                            icon: "error"
-                        });
+                dataToPush.push({name: "id"+i, value: idNotification});
+                
+            } 
+            
+            $.ajax({
+                type: "POST",
+                url: "php/readNotification.php",
+                data:$.param(dataToPush),
+                success:function(data){
+                    if(JSON.parse(data)["result"]){
+                        tmp = setTimeout(checkNotifications, t); 
                     }
-                });
-            }
-        } else{
-            tmp = setInterval(checkNotifications, t);
+                }
+            });
+        } else {
+            clearTimeout(tmp);
         }
     });
 
     $(document).ready(() => {
         includeMainContent("events.php?r=1");
-        
+        tmp = setTimeout(checkNotifications, t); 
     })
 </script>

@@ -24,7 +24,6 @@ if (isset($_POST['user']) && isset($_POST['pwd'])) {
 		$_SESSION["userid"] = $result[0]['idUsers'];
 
 		$checkLoginResponse->result = true;
-
 		if ($reminder) {
 			$session_id = $_SESSION["sessionId"];
 			$token = bin2hex(random_bytes(256));
