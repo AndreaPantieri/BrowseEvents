@@ -47,7 +47,7 @@
     <form id="signupForm" action="php/addUser.php" method="POST" enctype="multipart/form-data">
         <div class="container mt-5">
             <div class="row">
-                <div class="col-sm-5">
+                <div id="registrationcard" class="col-sm-5">
                     <div>
                         <h1>Create an account</h1>
                     </div>

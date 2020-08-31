@@ -58,6 +58,7 @@
 }
 
 #logincard {
+    min-width: 20rem;
     height: 370px;
     margin-top: auto;
     margin-bottom: auto;
@@ -84,4 +85,8 @@
 #logincard button:hover {
     color: black;
     background-color: white;
+}
+
+#registrationcard{
+    min-width: 20rem;
 }
