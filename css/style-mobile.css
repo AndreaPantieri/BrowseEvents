@@ -1,3 +1,8 @@
-#icon_myaccount, #icon_newevent, #icon_manageevents, #icon_notifications, #secondtitle, #filters{
-	display: none !important;
+#icon_myaccount,
+#icon_newevent,
+#icon_manageevents,
+#icon_notifications,
+#secondtitle,
+#filters {
+    display: none !important;
 }

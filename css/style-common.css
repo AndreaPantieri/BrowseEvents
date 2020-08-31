@@ -5,6 +5,7 @@ html {
 html,
 body {
     background-image: url('../res/img/loginwallpaper.png');
+    background-color: #4da0e9;
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
