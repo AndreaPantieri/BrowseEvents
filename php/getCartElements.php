@@ -14,7 +14,9 @@ $DBHandler = new DBHandler();
 if (isset($_SESSION["userid"])) {
     $userid = $_SESSION["userid"];
 
-    $sql = "SELECT cart.idCart, cart.TicketQuantity, `event`.idEvent, `event`.Name, `event`.Price, `event`.TicketNumber, `event`.Image, user.Username, image.Description FROM cart INNER JOIN `event` ON cart.Event_idEvent = `event`.idEvent INNER JOIN user ON cart.User_idUsers = user.idUsers INNER JOIN image ON image.Event_idEvent = `event`.idEvent WHERE cart.User_idUsers = $userid AND isAcquired = 0";
+    $sql = "SELECT cart.idCart, cart.TicketQuantity, `event`.idEvent, `event`.Name, `event`.Price, `event`.TicketNumber, `event`.Image, user.Username, image.Description FROM cart 
+    INNER JOIN `event` ON cart.Event_idEvent = `event`.idEvent INNER JOIN user ON cart.User_idUsers = user.idUsers 
+    INNER JOIN image ON image.Image = `event`.Image WHERE cart.User_idUsers = $userid AND isAcquired = 0";
     $result = $DBHandler->select($sql);
     $getCartElementsResponse->tmp = $sql;
 

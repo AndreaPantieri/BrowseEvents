@@ -263,6 +263,7 @@
                 }
             }).then(function(data) {
                 if (data) {
+                    //combobox.empty().append("<option>No requests to show</option>");
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -278,11 +279,11 @@
             });
         }
         /*else {
-                   Swal.fire({
-                               title: "There is nothing to approve!",
-                               icon: "error"
-                           });
-               }*/
+            Swal.fire({
+                title: "There is nothing to approve!",
+                icon: "error"
+            });
+        }*/
     }
 
     function sendOrganizerRequest() {
