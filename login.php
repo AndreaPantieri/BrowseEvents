@@ -1,7 +1,8 @@
+<img id="loginlogo" src="res\img\logo.png" alt="BrowseEvents logo">
 <!-- login -->
 <div>
     <form id="loginForm" action="php/checkLogin.php" method="POST" enctype="multipart/form-data">
-        <div class="container">
+        <div class="container mt-5">
             <div class="row">
                 <div class="col-sm-3">
                     <div>
@@ -11,17 +12,25 @@
 
                     <!-- username -->
                     <label for="user"><b>Username:</b></label>
-                    <input type="text" class="form-control" id="user" name="user" placeholder="Username" required />
-
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="user" name="user" placeholder="Username" required />
+                    </div>
                     <!-- password -->
                     <label for="password"><b>Password:</b></label>
-                    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password" required />
-
-                    <!-- reminder check-->
-                    <input type="checkbox" id="reminder" name="reminder">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password" required />
+                    </div>
+                    <!-- remindme check-->
+                    <input type="checkbox" id="reminder" class="mt-0" name="reminder">
                     <label for="reminder">Keep me signed in</label>
 
-                    <hr class="mb-3">
+                    <hr class="mt-2">
                     <button type="button" class="btn btn-primary" id="login" onclick="checkLogin()">Login</button>
                 </div>
             </div>
@@ -29,14 +38,14 @@
     </form>
 </div>
 
-<div class="container">
+<!-- <div class="container">
     <p>Don't have an account yet?</p>
-</div>
+</div> -->
 
 <!-- registration -->
 <div>
     <form id="signupForm" action="php/addUser.php" method="POST" enctype="multipart/form-data">
-        <div class="container">
+        <div class="container mt-5">
             <div class="row">
                 <div class="col-sm-5">
                     <div>
@@ -69,8 +78,8 @@
                     <input type="password" class="form-control" id="passwordrepeat" name="passwordrepeat" placeholder="Password" value="" onkeyup='checkPassword();' required />
 
                     <!-- organizer check -->
-                    <input type="checkbox" id="organizer" name="organizer">
-                    <label for="organizer">I'm an organizer</label>
+                    <input type="checkbox" id="organizer" class="mt-3" name="organizer">
+                    <label for="organizer" class="mt-3">I'm an organizer</label>
 
                     <!-- warnings definition -->
                     <div id="errorMessage" class="text-danger"></div>
@@ -85,8 +94,8 @@
 
                     <div id="mailAlreadyTaken" class="text-danger"></div>
 
-                    <hr class="mb-3">
-                    <button type="button" class="btn btn-primary" id="register" onclick="checkRegistration();">Register</button>
+                    <hr class="mt-2">
+                    <button type="button" class="btn btn-primary mb-2" id="register" onclick="checkRegistration();">Register</button>
                 </div>
             </div>
         </div>
