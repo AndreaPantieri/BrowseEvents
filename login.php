@@ -4,7 +4,7 @@
     <form id="loginForm" action="php/checkLogin.php" method="POST" enctype="multipart/form-data">
         <div class="container mt-5">
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-5">
                     <div>
                         <h1>Login</h1>
                     </div>
