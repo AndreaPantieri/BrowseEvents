@@ -187,7 +187,6 @@ if(isset($_GET["event_id"])){
 			url: url,
 			data: $.param(dataToSend),
 			success: function(data){
-				console.log(data);
 				if(JSON.parse(data)["result"]){
 					Swal.fire({
 						title: "Event modified successfully!",
