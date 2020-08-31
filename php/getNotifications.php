@@ -25,7 +25,7 @@ if(isset($_SESSION["userid"])){
 			$Response->HTML .= '<div class="dropdown-item dropdown-item-notications" data-id="' . $row["idNotification"] .'">
 		<h4>' . $row["Title"] . '</h4>
 		<p>' . $row["Description"] . '</p>
-	</div>';
+	</div><hr>';
 		}
 	}
 }
