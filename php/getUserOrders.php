@@ -15,7 +15,7 @@ if (isset($_SESSION["userid"])) {
     $sql = "SELECT cart.TicketQuantity, cart.Date, event.idEvent, event.Name, event.Price, event.Image, user.Username, image.Description FROM cart 
     INNER JOIN event ON cart.Event_idEvent = event.idEvent 
     INNER JOIN user ON cart.User_idUsers = user.idUsers 
-    INNER JOIN image ON image.Event_idEvent = event.idEvent 
+    INNER JOIN image ON image.Image = event.Image 
     WHERE cart.User_idUsers = '$userid' AND isAcquired = 1";
     $result = $DBHandler->select($sql);
 
