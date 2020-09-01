@@ -96,7 +96,7 @@
                     <div id="mailAlreadyTaken" class="text-danger"></div>
 
                     <hr class="mt-2">
-                    <button type="button" class="btn btn-primary mb-2" id="register" onclick="checkRegistration();">Register</button>
+                    <button type="button" class="btn btn-primary mb-3" id="register" onclick="checkRegistration();">Register</button>
                 </div>
             </div>
         </div>
