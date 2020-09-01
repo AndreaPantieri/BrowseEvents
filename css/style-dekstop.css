@@ -40,7 +40,7 @@
 #browseeventstext {
     max-width: 50%;
     padding-left: 15%;
-    padding-right: 13%;
+    padding-right: 14%;
     padding-top: 4%;
     font-size: 24px;
     color: white;
@@ -85,15 +85,8 @@
 }
 
 #logincard button {
-    background-color: #FFC312;
-    color: black;
     float: right;
     width: 100px;
-}
-
-#logincard button:hover {
-    color: black;
-    background-color: white;
 }
 
 #registrationcard {
@@ -101,12 +94,5 @@
 }
 
 #registrationcard button {
-    background-color: #FFC312;
-    color: black;
     width: 100px;
-}
-
-#registrationcard button:hover {
-    color: black;
-    background-color: white;
 }

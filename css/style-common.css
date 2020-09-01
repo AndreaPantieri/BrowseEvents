@@ -196,13 +196,11 @@ body {
 }
 
 .back-yc{
-    background-color: #FFC312 !important;
+    background-color: #FFC312;
+    color: black;
 }
 
-.cw{
-    color: white !important;
-}
-
-.cn{
-    color: black !important;
+.back-wc:hover{
+    color: black;
+    background-color: white;
 }
