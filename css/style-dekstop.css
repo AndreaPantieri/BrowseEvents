@@ -39,23 +39,26 @@
 }
 
 #browseeventstext {
+    max-width: 50%;
+    padding-left: 15%;
     padding-right: 15%;
-    padding-top: 6%;
+    padding-top: 4%;
     font-size: 24px;
     color: white;
     float: right;
+    text-align: center;
 }
 
 #loginForm {
     float: right;
-    width: 50%;
+    width: 51%;
     padding-left: 17%;
     padding-top: 5%;
 }
 
 #signupForm {
     float: left;
-    width: 50%;
+    width: 49%;
     padding-left: 5%;
 }
 
