@@ -46,7 +46,7 @@
 <!-- registration -->
 <div>
     <form id="signupForm" action="php/addUser.php" method="POST" enctype="multipart/form-data">
-        <div class="container mt-5">
+        <div class="container mt-4">
             <div class="row">
                 <div id="registrationcard" class="col-sm-5">
                     <div>
@@ -107,16 +107,12 @@
 <script type="application/javascript">
     const USERMINLENGTH = 5;
     const PASSMINLENGTH = 8;
-
-    $("#browseeventstext").hide().fadeIn(3000);
+    
     //Callbacks simple demo
-    /*$("#signupForm").hide();
-    $("#loginForm").hide();
-    $("#browseeventstext").hide().fadeIn(1000, function() {
-        $("#signupForm").fadeIn(1000, function(){
-            $("#loginForm").fadeIn(1000);
-        });
-    });*/
+    $("#browseeventstext").hide();
+    $("#loginlogo").hide().fadeIn(1000, function() {
+        $("#browseeventstext").hide().fadeIn(3000);
+    })
 
     //when the login form gets submitted..
     $("#loginForm").submit(function(e) {
