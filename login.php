@@ -112,7 +112,7 @@
     $("#browseeventstext").hide();
     $("#loginlogo").hide().fadeIn(1000, function() {
         $("#browseeventstext").hide().fadeIn(3000);
-    })
+    });
 
     //when the login form gets submitted..
     $("#loginForm").submit(function(e) {

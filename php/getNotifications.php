@@ -2,7 +2,7 @@
 require_once 'DBHandler.php';
 
 class Response{
-	public $HTML = "<div class='dropdown-item'>No notifications</div>";
+	public $HTML = "<div class='dropdown-item'>No new notifications</div>";
 	public $count = 0;
 }
 

@@ -73,7 +73,7 @@ if(isset($_GET["r"]) && (int)$_GET["r"] == 1){
 	<div id="filters" class="col-md-4 offset-md-1 rounded mt-5 transparent-layout">
         <div class="pt-4">
             <h6>Filters</h6>
-            <hr>
+            <hr class="hr-w">
             <div class="form-group">
             	<label class="col-form-label">Order by</label>
 	            <select class="form-control col-sm-8" id="orderby">
@@ -135,6 +135,14 @@ if(isset($_GET["r"]) && (int)$_GET["r"] == 1){
 			if(typeof c != "undefined"){
 				$("#categories").val(c);
 			}
+
+			
+			
+			//Callbacks simple demo
+			$("#events-container").hide();
+		    $("#filters").hide().fadeIn(1000, function(){
+		    	$("#events-container").hide().fadeIn(1000);
+		    });
     	});
     </script>
 </div>

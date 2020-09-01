@@ -102,7 +102,7 @@ require_once './php/DBHandler.php';
 <!-- Slide Menu -->
 <div id="slidemenu" style="display: none;">
     <ol>
-        <li class="subslidemenu">
+        <li id="subslidemenu">
             <h4>Categories</h4>
             <ol>
                 <li id="concerts" class="clickable clickableSizes" onclick='includeMainContent("events.php?c=Concerts&r=1")'>Concerts</li>
@@ -110,6 +110,7 @@ require_once './php/DBHandler.php';
                 <li id="festivals" class="clickable clickableSizes" onclick='includeMainContent("events.php?c=Festivals&r=1")'>Festivals</li>
             </ol>
         </li>
+        <hr class="hr-w">
         <li id="my_account" class="clickable clickableSizes" onclick="clickMyAccount()">My account</li>
         <?php
         if ($type_account == 1 || $type_account == 2) {

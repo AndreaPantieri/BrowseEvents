@@ -18,14 +18,6 @@ body {
     background-color: whitesmoke;
 }
 
-#slidemenu ol,
-#subslidemenu ol {
-    list-style-type: none;
-    width: inherit;
-    height: inherit;
-    background-color: inherit;
-}
-
 .clickable {
     cursor: pointer;
 }
@@ -41,7 +33,7 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    background-color: #111;
+    background-color: rgba(34,27,27,0.99);
     color: white;
     position: fixed;
     z-index: 2;
@@ -75,13 +67,25 @@ body {
 
 #slidemenu {
     height: 100%;
-    background-color: red;
-    opacity: 0.7;
-    color: black;
+    background-color: rgba(34, 27, 27, 0.6);
+    color: white;
     position: fixed;
-    padding-right: 1.5em;
     z-index: 2;
 }
+
+#subslidemenu{
+    padding-top: 2em;
+}
+
+#slidemenu ol,
+#subslidemenu ol {
+    list-style-type: none;
+    width: inherit;
+    height: inherit;
+    background-color: inherit;
+    padding-right: 1.5em;
+}
+
 
 .flexColumnCenter {
     display: flex;
@@ -204,4 +208,8 @@ body {
 .back-wc:hover{
     color: black;
     background-color: white;
+}
+
+.hr-w{
+    border-top-color: white;
 }
