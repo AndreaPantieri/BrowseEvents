@@ -107,7 +107,7 @@
 <script type="application/javascript">
     const USERMINLENGTH = 5;
     const PASSMINLENGTH = 8;
-    
+
     //Callbacks simple demo
     $("#browseeventstext").hide();
     $("#loginlogo").hide().fadeIn(1000, function() {
@@ -128,7 +128,20 @@
             success: function(data) {
                 var tmp = JSON.parse(data);
                 if (tmp["result"]) {
-                    location.reload(); //if credentials where correct cookies have been set so reloads the page and automatically logs into system
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: true,
+                    })
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Signed in successfully'
+                    }).then((result) => {
+                        location.reload(); //if credentials where correct cookies have been set so reloads the page and automatically logs into system
+                    })
                 } else if (tmp["result2"]) {
                     Swal.fire({
                         title: "Your request to become an organizer is currently pending!",
