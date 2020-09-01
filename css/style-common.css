@@ -193,3 +193,15 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 5px;
 }
+
+.back-yc{
+    background-color: #FFC312 !important;
+}
+
+.cw{
+    color: white !important;
+}
+
+.cn{
+    color: black !important;
+}

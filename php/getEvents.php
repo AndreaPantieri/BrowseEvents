@@ -54,7 +54,7 @@ if($result){
 		}
 		
 		?>
-	<div onclick="openEvent(this)" class="event-container card mb-3 clickable" <?php echo "data-id='" . $var["idEvent"] ."'";?> >
+	<div onclick="openEvent(this)" class="event-container card mb-3 clickable transparent-layout cw" <?php echo "data-id='" . $var["idEvent"] ."'";?> >
 		<img class="event-image card-img-top img-fluid" <?php echo 'src="' . $file . '"'; ?> alt="<?php echo $var['ImageDescription']; ?>"/>
 		<div class="event-text card-body">
 			<div class="event-title card-title"><?php echo $var["Name"];?></div>
