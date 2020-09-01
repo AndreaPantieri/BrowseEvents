@@ -18,7 +18,7 @@ if(isset($_GET["r"]) && (int)$_GET["r"] == 1){
 		}
 		?>>
 		</div>
-		<button id="events-more" class="btn back-yc cn" onclick="moreEvents()">More</button>
+		<button id="events-more" class="btn back-yc back-wc" onclick="moreEvents()">More</button>
 
 		<script type="text/javascript">
 			function moreEvents(){
@@ -70,7 +70,7 @@ if(isset($_GET["r"]) && (int)$_GET["r"] == 1){
 			});
 		</script>	
 	</div>
-	<div id="filters" class="col-md-4 offset-md-1 rounded mt-5 transparent-layout cw">
+	<div id="filters" class="col-md-4 offset-md-1 rounded mt-5 transparent-layout">
         <div class="pt-4">
             <h6>Filters</h6>
             <hr>
@@ -93,7 +93,7 @@ if(isset($_GET["r"]) && (int)$_GET["r"] == 1){
             </div>
             
             <div>
-                <button type="submit" class="btn back-yc cn mt-2 mb-3" onClick="apply()">Apply</button>
+                <button type="submit" class="btn back-yc back-wc mt-2 mb-3" onClick="apply()">Apply</button>
             </div>
         </div>
     </div>
