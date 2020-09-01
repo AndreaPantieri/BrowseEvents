@@ -19,13 +19,13 @@
 			$images = glob($path . "*.{jpg,png,jpeg}", GLOB_BRACE);
 			sort($images);
 			$numImages = count($images);
-			?>
+	?>
 			<div id="div-event" class="w-75">
 				<h1 id="title-showevent">Event</h1>
 
 				<?php
 				if ($numImages > 0) {
-					?>
+				?>
 					<div id="carousel" class="carousel slide row w-100" data-ride="carousel">
 						<ol class="carousel-indicators">
 							<?php
@@ -45,21 +45,21 @@
 							$sql_ia = "SELECT Description FROM Image WHERE Event_idEvent = $event_id";
 							$res = $DBHandler->select($sql_ia);
 
-							for($i = 0; $i < $numImages; $i++) {
+							for ($i = 0; $i < $numImages; $i++) {
 								$tmpHTML = '<div class="carousel-item ';
 
-								if($i == 0){
+								if ($i == 0) {
 									$tmpHTML .=  'active';
 								}
-								$tmpHTML .= '" id="carousel-item-div-' . $i .'">';
-								if($res){
-									$tmpHTML .= '<img class="inputImage d-block" alt="'. $res[$i]["Description"] .'" src="' . $images[$i] . '"">
+								$tmpHTML .= '" id="carousel-item-div-' . $i . '">';
+								if ($res) {
+									$tmpHTML .= '<img class="inputImage d-block" alt="' . $res[$i]["Description"] . '" src="' . $images[$i] . '"">
 									</div>';
-								} else{
-									$tmpHTML .= '<img class="inputImage d-block" alt="'. $i .'° slide" src="' . $images[$i] . '"">
+								} else {
+									$tmpHTML .= '<img class="inputImage d-block" alt="' . $i . '° slide" src="' . $images[$i] . '"">
 									</div>';
 								}
-								
+
 								echo $tmpHTML;
 							}
 							?>
@@ -73,7 +73,7 @@
 							<span class="sr-only">Next</span>
 						</a>
 					</div>
-					<?php
+				<?php
 				}
 
 				?>
@@ -132,17 +132,19 @@
 				<div class="row">
 					<label class="col-sm-2 col-form-label">Buy tickets</label>
 					<input id="event-tickets" class="form-control" type="number" name="event-tickets" placeholder="Type the number of tickets to add to cart" value="1" min="1" oninput="checkQuantity(this)" data-maxquantity="<?php echo $result[0]['TicketNumber']; ?>" max="99">
-					<button class="btn btn-primary" onclick="addToCart(this)" data-eventid="<?php echo $result[0]['idEvent']; ?>" data-userid="<?php if (isset($_SESSION["userid"])) { echo $_SESSION["userid"];} ?>" data-maxquantity="<?php echo $result[0]['TicketNumber']; ?>">Add to cart</button>
+					<button class="btn btn-primary" onclick="addToCart(this)" data-eventid="<?php echo $result[0]['idEvent']; ?>" data-userid="<?php if (isset($_SESSION["userid"])) {
+																																					echo $_SESSION["userid"];
+																																				} ?>" data-maxquantity="<?php echo $result[0]['TicketNumber']; ?>">Add to cart</button>
 				</div>
 				<?php
 				if ($result[0]["User_idUsers"] == $_SESSION["userid"]) {
-					?>
+				?>
 					<button class="btn btn-primary" onclick="includeMainContent(<?php echo "'modifyEvent.php?event_id=" . $result[0]['idEvent'] . "'"; ?>)">Modify</button>
-					<?php
+				<?php
 				}
 				?>
 			</div>
-			<?php
+	<?php
 		}
 	}
 	?>
@@ -155,36 +157,51 @@
 		var ticket_quantity = parseInt($("#event-tickets").val());
 		var maxQuantity = jQuery(elem).attr('data-maxquantity');
 
-		if (ticket_quantity <= maxQuantity) {
-			$.ajax({
-				type: "POST",
-				url: "php/addProductToCart.php",
-				data: {
-					event_id: event_id,
-					user_id: user_id,
-					ticket_quantity: ticket_quantity
-				}
-			}).then(function(data) {
+		$.ajax({
+			type: "POST",
+			url: "php/checkProductsInCart.php",
+			data: {
+				event_id: event_id,
+				user_id: user_id
+			}
+		}).then(function(data) {
+			if (data) {
 				Swal.fire({
-					position: 'top-end',
-					icon: 'success',
-					title: 'Tickets have been added to your cart!',
-					showConfirmButton: false,
-					timer: 1500
+					title: "This product is already in your cart!",
+					icon: "error"
 				});
-			})
-		}else if (maxQuantity == 0) {
-			Swal.fire({
-				title: "Tickets for this event are finished!",
-				icon: "error"
-			});
-		} else {
-			Swal.fire({
-				title: "You can't buy more than the available quantity!",
-				icon: "error"
-			});
-		}
-
+			} else {
+				if (ticket_quantity <= maxQuantity) {
+					$.ajax({
+						type: "POST",
+						url: "php/addProductToCart.php",
+						data: {
+							event_id: event_id,
+							user_id: user_id,
+							ticket_quantity: ticket_quantity
+						}
+					}).then(function(data) {
+						Swal.fire({
+							position: 'top-end',
+							icon: 'success',
+							title: 'Tickets have been added to your cart!',
+							showConfirmButton: false,
+							timer: 1500
+						});
+					})
+				} else if (maxQuantity == 0) {
+					Swal.fire({
+						title: "Tickets for this event are finished!",
+						icon: "error"
+					});
+				} else {
+					Swal.fire({
+						title: "You can't buy more than the available quantity!",
+						icon: "error"
+					});
+				}
+			}
+		})
 	}
 
 	function checkQuantity(elem) {
