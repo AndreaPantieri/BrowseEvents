@@ -32,7 +32,7 @@
                     <label for="reminder">Keep me signed in</label>
 
                     <hr class="mt-2">
-                    <button type="button" class="btn btn-primary" id="login" onclick="checkLogin()">Login</button>
+                    <button type="button" class="btn btn-primary back-yc back-wc" id="login" onclick="checkLogin()">Login</button>
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
                     <div id="mailAlreadyTaken" class="text-danger"></div>
 
                     <hr class="mt-2">
-                    <button type="button" class="btn btn-primary mb-3" id="register" onclick="checkRegistration();">Register</button>
+                    <button type="button" class="btn btn-primary back-yc back-wc mb-3" id="register" onclick="checkRegistration();">Register</button>
                 </div>
             </div>
         </div>
