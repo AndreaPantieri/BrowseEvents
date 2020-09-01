@@ -1,11 +1,12 @@
 <img id="loginlogo" src="res\img\logo nightmode.png" alt="BrowseEvents logo">
+<h2 id="browseeventstext">Browse all the events nearby you</h2>
 <!-- login -->
 <div>
     <form id="loginForm" action="php/checkLogin.php" method="POST" enctype="multipart/form-data">
         <div class="container mt-5">
             <div class="row">
                 <div id="logincard" class="col-sm-5">
-                    <div class ="mt-3">
+                    <div class="mt-3">
                         <h1>Login</h1>
                     </div>
                     <hr class="mb-3">
@@ -106,6 +107,8 @@
 <script type="application/javascript">
     const USERMINLENGTH = 5;
     const PASSMINLENGTH = 8;
+
+    $("#browseeventstext").hide().fadeIn(3000);
 
     //when the login form gets submitted..
     $("#loginForm").submit(function(e) {
