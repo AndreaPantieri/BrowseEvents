@@ -108,7 +108,14 @@
     const USERMINLENGTH = 5;
     const PASSMINLENGTH = 8;
 
-    $("#browseeventstext").hide().fadeIn(3000);
+    $("#signupForm").hide();
+    $("#loginForm").hide();
+
+    $("#browseeventstext").hide().fadeIn(1000, function() {
+        $("#signupForm").fadeIn(1000, function(){
+            $("#loginForm").fadeIn(1000);
+        });
+    });
 
     //when the login form gets submitted..
     $("#loginForm").submit(function(e) {
