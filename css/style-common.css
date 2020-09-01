@@ -188,6 +188,10 @@ body {
     text-decoration: none;
 }
 
+#showevent-info{
+    background-color: rgba(255,255,255,0.5);
+}
+
 .flex-col-c {
     display: flex;
     flex-direction: row;
