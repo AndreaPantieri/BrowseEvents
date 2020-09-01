@@ -8,6 +8,7 @@ body {
     background-color: #4da0e9;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     height: 100%;
     font-family: 'Numans', sans-serif;
 }
