@@ -47,7 +47,7 @@
 #signupForm {
     float: left;
     width: 50%;
-    padding-left: 120px;
+    padding-left: 100px;
 }
 
 .input-group-prepend span {
@@ -87,6 +87,17 @@
     background-color: white;
 }
 
-#registrationcard{
+#registrationcard {
     min-width: 20rem;
+}
+
+#registrationcard button {
+    background-color: #FFC312;
+    color: black;
+    width: 100px;
+}
+
+#registrationcard button:hover {
+    color: black;
+    background-color: white;
 }

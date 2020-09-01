@@ -58,23 +58,23 @@
                     <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name" value="" required />
 
                     <!-- last name -->
-                    <label><b>Last name:</b></label>
+                    <label class="mt-1"><b>Last name:</b></label>
                     <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name" value="" required />
 
                     <!-- username -->
-                    <label><b>Username:</b></label>
+                    <label class="mt-1"><b>Username:</b></label>
                     <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="" onkeyup='checkUsername();' required />
 
                     <!-- email -->
-                    <label><b>Email address:</b></label>
+                    <label class="mt-1"><b>Email address:</b></label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Email address" value="" required />
 
                     <!-- password -->
-                    <label><b>Password:</b></label>
+                    <label class="mt-1"><b>Password:</b></label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="" onkeyup='checkPassword();' required />
 
                     <!-- password confirmation -->
-                    <label><b>Repeat your password:</b></label>
+                    <label class="mt-1"><b>Repeat your password:</b></label>
                     <input type="password" class="form-control" id="passwordrepeat" name="passwordrepeat" placeholder="Password" value="" onkeyup='checkPassword();' required />
 
                     <!-- organizer check -->
