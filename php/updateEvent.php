@@ -3,6 +3,7 @@ require_once 'DBHandler.php';
 
 class Response{
 	public $result = false;
+	public $tmp;
 }
 
 $Response = new Response();
@@ -58,6 +59,7 @@ if(isset($_SESSION["event_id"]) &&
 			}
 
 			$pathForImages = "../res/img/events/" . $event_id . "/";
+			$pathForImagesTmp = "../res/img/events/tmp" . $event_id . "/";
 			$mainImage = "res/img/events/" . $event_id . "/";
 
 			$types = array();
@@ -65,11 +67,16 @@ if(isset($_SESSION["event_id"]) &&
 			$oldFilesPosition  = array();
 			$posOldarray = 0;
 
-			$sql_di = "DELETE FROM Image WHERE idEvent = $event_id";
+			$sql_di = "DELETE FROM Image WHERE Event_idEvent = $event_id";
 			$DBHandler->genericQuery($sql_di);
+			$Response->tmp = $sql_di;
 
 			if(!file_exists($pathForImages)){
 				mkdir($pathForImages, 0777, true);
+			}
+
+			if(!file_exists($pathForImagesTmp)){
+				mkdir($pathForImagesTmp, 0777, true);
 			}
 
 			for($i = 0; $i < $imagesPresents; $i++){
@@ -77,10 +84,16 @@ if(isset($_SESSION["event_id"]) &&
 					$types[$i] = mime_content_type("../" . $images[$i]);
 					$extType = substr($types[$i], 6);
 					$oldFilesPosition[$posOldarray] = $i;
-					rename("../" . $images[$i], $pathForImages . "n" . $posOldarray . "." . $extType);
+					rename("../" . $images[$i], $pathForImagesTmp . "n" . $posOldarray . "." . $extType);
 					$posOldarray++;
 				}else{
 					$types[$i] = mime_content_type($images[$i]);
+				}
+			}
+			$oldFiles = glob($pathForImages . "*",GLOB_BRACE);
+			foreach ($oldFiles as $file) {
+				if(is_file($file)){
+					unlink($file);
 				}
 			}
 
@@ -98,7 +111,7 @@ if(isset($_SESSION["event_id"]) &&
 				}
 				if($found !== false){
 
-					rename($pathForImages . "n" . $found . "." . $extType, $path);
+					rename($pathForImagesTmp . "n" . $found . "." . $extType, $path);
 				}
 				else{
 					$data = $images[$i];
@@ -113,6 +126,14 @@ if(isset($_SESSION["event_id"]) &&
 				}
 			}
 			
+			$oldFiles = glob($pathForImagesTmp . "*",GLOB_BRACE);
+			foreach ($oldFiles as $file) {
+				if(is_file($file)){
+					unlink($file);
+				}
+			}
+			rmdir($pathForImagesTmp);
+
 			if($imagesPresents > 0){
 				$sql_i = "UPDATE browseeventsdb.event SET Image = '$mainImage' WHERE idEvent = $event_id";
 				if($DBHandler->genericQuery($sql_i)){
