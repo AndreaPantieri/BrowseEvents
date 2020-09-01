@@ -5,7 +5,7 @@
     <form id="loginForm" action="php/checkLogin.php" method="POST" enctype="multipart/form-data">
         <div class="container mt-5">
             <div class="row">
-                <div id="logincard" class="col-sm-5">
+                <div id="logincard" class="col-sm-5 transparent-layout">
                     <div class="mt-3">
                         <h1>Login</h1>
                     </div>

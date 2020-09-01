@@ -188,3 +188,8 @@ body {
     flex-direction: row;
     justify-content: center;
 }
+
+.transparent-layout {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
