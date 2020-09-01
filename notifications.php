@@ -45,7 +45,7 @@
 			}
 			else{
 				?>
-				<div><h1>There are no norification!</h1></div>
+				<div><h1>There are no notifications!</h1></div>
 				<?php
 			}
 			?>
