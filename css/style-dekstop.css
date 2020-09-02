@@ -57,18 +57,18 @@
     padding-left: 5%;
 }
 
-.input-group-prepend span {
-    width: 50px;
-    background-color: #FFC312;
-    color: black;
-    border: 0 !important;
-}
-
 #logincard {
     min-width: 20rem;
     height: 370px;
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.input-group-prepend span {
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border: 0 !important;
 }
 
 #logincard h1 {

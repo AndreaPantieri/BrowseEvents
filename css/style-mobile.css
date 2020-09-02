@@ -12,3 +12,56 @@
 	flex-direction: row;
 	justify-content: center;
 }
+
+/* Login Page */
+#loginlogo {
+    max-width: 90%;
+    height: auto;
+}
+
+#browseeventstext {
+    max-width: 100%;
+    font-size: 18px;
+    color: white;
+    float: center;
+    text-align: center;
+}
+
+#loginForm {
+    width: 90%;
+    height: 90%;
+    float: center;
+    padding-left: 10%;
+    padding-top: 3%;
+    padding-bottom: 5%;
+}
+
+#logincard{
+    padding-bottom: 4%;    
+}
+
+.input-group-prepend span {
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border: 0 !important;
+}
+
+#logincard button {
+    float: right;
+    width: 100px;
+}
+
+#signupForm {
+    width: 90%;
+    height: 90%;
+    float: center;
+    padding-left: 10%;
+    padding-top: 3%;
+    padding-bottom: 5%;
+}
+
+#registrationcard button {
+    float: left;
+    width: 100px;
+}
