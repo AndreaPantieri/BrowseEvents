@@ -83,17 +83,17 @@
                     <label for="organizer" class="mt-3">I'm an organizer</label>
 
                     <!-- warnings definition -->
-                    <div id="errorMessage" class="text-danger"></div>
+                    <div id="errorMessage" class="text-danger transparent-layout mb-1"></div>
 
-                    <div id="usernameWarning" class="text-danger"></div>
+                    <div id="usernameWarning" class="text-danger transparent-layout mb-1"></div>
 
-                    <div id="passwordWarning1" class="text-danger"></div>
+                    <div id="passwordWarning1" class="text-danger transparent-layout mb-1"></div>
 
-                    <div id="passwordWarning2" class="text-danger"></div>
+                    <div id="passwordWarning2" class="text-danger transparent-layout mb-1"></div>
 
-                    <div id="userAlreadyTaken" class="text-danger"></div>
+                    <div id="userAlreadyTaken" class="text-danger transparent-layout mb-1"></div>
 
-                    <div id="mailAlreadyTaken" class="text-danger"></div>
+                    <div id="mailAlreadyTaken" class="text-danger transparent-layout mb-1"></div>
 
                     <hr class="mt-2">
                     <button type="button" class="btn btn-primary back-yc back-wc mb-3" id="register" onclick="checkRegistration();">Register</button>
