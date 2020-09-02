@@ -88,8 +88,8 @@ if(isset($_GET["event_id"])){
 		<button type="button" class="btn btn-primary mb-2" onclick="removeImage()">Remove selected</button>
 	</div>
 	
-	<div class="form-group row">
-		<label for="name-event" class="col-sm-2 col-form-label">Event name</label>
+	<div class="form-group">
+		<label for="name-event" class="col-sm-2 col-form-label"><b>Event name</b></label>
 		<div class="col-sm-10">
 			<input id="name-event" class="form-control" type="text" name="event-name" placeholder="Type event name" 
 			<?php
@@ -98,15 +98,17 @@ if(isset($_GET["event_id"])){
 		</div>
 	</div>
 
-	<div class="form-group row">
-		<label for="event-date" class="col-sm-2 col-form-label">Date/Hour</label>
+	<div class="form-group">
+		<label for="event-date" class="col-sm-2 col-form-label"><b>Date</b></label>
 		<div class="col-sm-10">
 			<input id="event-date" class="form-control" type="date" name="event-date" 
 			<?php
 			echo 'value="' . $result[0]["Datetime"] . '"';
 			?>>
 		</div>
-		<label for="event-place" class="col-sm-2 col-form-label">Place</label>
+	</div>
+	<div class="form-group">
+		<label for="event-place" class="col-sm-2 col-form-label"><b>Place</b></label>
 		<div class="col-sm-10">
 			<input id="event-place" class="form-control" type="text" name="event-place" placeholder="Type the place" 
 			<?php
@@ -114,16 +116,17 @@ if(isset($_GET["event_id"])){
 			?>>
 		</div>
 	</div>
-
-	<div class="form-group row">
-		<label for="event-price" class="col-sm-2 col-form-label">Price per ticket</label>
+	<div class="form-group">
+		<label for="event-price" class="col-sm-2 col-form-label"><b>Price per ticket</b></label>
 		<div class="col-sm-10">
 			<input id="event-price" class="form-control" type="number" name="event-price" placeholder="Type the price per ticket"
 			<?php
 			echo 'value="' . $result[0]["Price"] . '"';
 			?>>
 		</div>
-		<label for="event-maxtickets" class="col-sm-2 col-form-label">Max num. tickets</label>
+	</div>
+	<div class="form-group">
+		<label for="event-maxtickets" class="col-sm-2 col-form-label"><b>Max num. tickets</b></label>
 		<div class="col-sm-10">
 			<input id="event-maxtickets" class="form-control" type="number" name="event-maxtickets" placeholder="Type the max number of tickets to sell"
 			<?php
@@ -131,8 +134,8 @@ if(isset($_GET["event_id"])){
 			?>>
 		</div>
 	</div>
-	<div class="form-group row">
-		<label for="event-category" class="col-sm-2 col-form-label">Category</label>
+	<div class="form-group">
+		<label for="event-category" class="col-sm-2 col-form-label"><b>Category</b></label>
 		<select class="form-control col-sm-10" id="event-category" name="event-category" >
 			<?php
 			$sql_c = "SELECT Name FROM category";
@@ -153,7 +156,7 @@ if(isset($_GET["event_id"])){
 	</div>
 
 	<div class="form-group">
-		<label for="event-description">Description</label>
+		<label for="event-description"><b>Description</b></label>
 		<textarea class="form-control" id="event-description" name="event-description" rows="5" placeholder="Type the description of the event"><?php print trim($result[0]["Description"]); ?></textarea>
 	</div>
 	<button id="event-modify" type="button" class="btn btn-primary" onclick="checkEvent()">Modify</button>
