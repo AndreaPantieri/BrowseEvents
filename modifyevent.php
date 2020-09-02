@@ -161,6 +161,7 @@ if(isset($_GET["event_id"])){
 		</textarea>
 	</div>
 	<button id="event-modify" type="button" class="btn btn-primary" onclick="checkEvent()">Modify</button>
+	<button id="event-modify" type="button" class="btn btn-primary" onclick="deleteEvent()">Delete</button>
 </form>
 
 <script type="text/javascript">
@@ -320,6 +321,39 @@ if(isset($_GET["event_id"])){
 				icon: "error"
 			});
 		}
+	}
+
+	function deleteEvent(){
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You will not be able to recover this event!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "Yes, archive it!",
+			cancelButtonText: "No, cancel please!",
+		}).then(function(res) {
+			if (res.isConfirmed) {
+				$.ajax({
+					type: "POST",
+					url: "php/deleteEvent.php",
+					success:function(data){
+						if(JSON.parse(data)["result"]){
+							Swal.fire({
+								title: "Event deleted successfully!",
+								icon: "success"
+							}).then(() => location.reload());
+						}
+					}
+				});
+			} else {
+				Swal.fire({
+					title: "Cancelled",
+					text: "Event not deleted!"
+				});
+			}
+		});
+		
 	}
 
 	$(document).ready(() => {

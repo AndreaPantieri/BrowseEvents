@@ -57,7 +57,6 @@ isset($_POST["imagesPresents"])){
 
 		$pathForImages = "../res/img/events/" . $event_id . "/";
 
-		$Response->tmp = $pathForImages;
 		if(!file_exists($pathForImages)){
 			mkdir($pathForImages, 0777, true);
 		}
