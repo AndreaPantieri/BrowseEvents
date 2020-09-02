@@ -47,7 +47,7 @@ function isMobile()
             var sH = window.screen.height;
 
 
-            if (w < sW / 2.0 || h < sH / 2.0 || w <= 320) {
+            if (w < sW / 2.0 || h < sH / 2.0 || sW <= 479) {
                 $(linkMobileSheet).prop('disabled', false);
                 $(linkDekstopSheet).prop('disabled', true);
             } else {
