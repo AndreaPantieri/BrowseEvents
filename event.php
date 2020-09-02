@@ -104,7 +104,7 @@
 						<div class="col-sm-2 col-form-label">Price per ticket</div>
 						<div id="showevent-price" class="col-sm-10 col-form-label">
 							<?php
-							echo $result[0]["Price"];
+							echo $result[0]["Price"] . "€";
 							?>
 						</div>
 						<div class="col-sm-2 col-form-label">Max num. tickets</div>
