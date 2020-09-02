@@ -140,9 +140,8 @@ if(isset($_GET["r"]) && (int)$_GET["r"] == 1){
 			
 			//Callbacks simple demo
 			$("#events-container").hide();
-		    $("#filters").hide().fadeIn(1000, function(){
-		    	$("#events-container").hide().fadeIn(1000);
-		    });
+		    $("#filters").hide().fadeIn(1000);
+		    $("#events-container").hide().fadeIn(1000);
     	});
     </script>
 </div>

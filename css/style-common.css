@@ -219,6 +219,10 @@ body {
     border-top-color: white;
 }
 
+.w-mc{
+    width: min-content;
+}
+
 .carousel-inner{
     height: 50vh;
 }

@@ -78,70 +78,72 @@
 
 				?>
 				<div id="showevent-info" class="rounded border mt-5 mb-5 px-5 py-5">
-					<div class="row">
-						<div class="col-sm-2 col-form-label">Event name</div>
-						<div id="showevent-name" class="col-sm-10 col-form-label">
+					<div>
+						<div class="col-form-label"><b>Event name</b></div>
+						<div id="showevent-name" class="col-form-label">
 							<?php
 							echo $result[0]["Name"];
 							?>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-sm-2 col-form-label">Date/Hour</div>
-						<div id="showevent-date" class="col-sm-10 col-form-label">
+					<div>
+						<div class="col-form-label"><b>Date</b></div>
+						<div id="showevent-date" class="col-form-label">
 							<?php
 							echo $result[0]["Datetime"];
 							?>
 						</div>
-						<div class="col-sm-2 col-form-label">Place</div>
-						<div id="showevent-place" class="col-sm-10 col-form-label">
+						<div class="col-form-label"><b>Place</b></div>
+						<div id="showevent-place" class="col-form-label">
 							<?php
 							echo $result[0]["Place"];
 							?>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-sm-2 col-form-label">Price per ticket</div>
-						<div id="showevent-price" class="col-sm-10 col-form-label">
+					<div>
+						<div class="col-form-label"><b>Price per ticket</b></div>
+						<div id="showevent-price" class="col-form-label">
 							<?php
 							echo $result[0]["Price"] . "€";
 							?>
 						</div>
-						<div class="col-sm-2 col-form-label">Max num. tickets</div>
-						<div id="showevent-maxtickets" class="col-sm-10 col-form-label">
+						<div class="col-form-label"><b>Max num. tickets</b></div>
+						<div id="showevent-maxtickets" class="col-form-label">
 							<?php
 							echo $result[0]["TicketNumber"];
 							?>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-sm-2 col-form-label">Category</div>
-						<div class="col-sm-10 col-form-label" id="showevent-category">
+					<div>
+						<div class="col-form-label"><b>Category</b></div>
+						<div class="col-form-label" id="showevent-category">
 							<?php
 							echo $result[0]["Category"];
 							?>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-sm-2 col-form-label">Description</div>
-						<div class="col-sm-10 col-form-label" id="showevent-description">
+					<div>
+						<div class="col-form-label"><b>Description</b></div>
+						<div class="col-form-label" id="showevent-description">
 							<?php
 							echo $result[0]["Description"];
 							?>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-sm-2 col-form-label">Buy tickets</div>
-						<input id="event-tickets" class="form-control col-sm-7 mr-3" type="number" name="event-tickets" placeholder="Type the number of tickets to add to cart" value="1" min="1" oninput="checkQuantity(this)" data-maxquantity="<?php echo $result[0]['TicketNumber']; ?>" max="99">
-						<button class="btn btn-primary" onclick="addToCart(this)" data-eventid="<?php echo $result[0]['idEvent']; ?>" data-userid="<?php if (isset($_SESSION["userid"])) { echo $_SESSION["userid"];} ?>" data-maxquantity="<?php echo $result[0]['TicketNumber']; ?>">Add to cart</button>
+					<div>
+						<div class="col-form-label"><b>Buy tickets</b></div>
+						<input id="event-tickets" class="form-control mr-3 mb-3" type="number" name="event-tickets" placeholder="Type the number of tickets to add to cart" value="1" min="1" oninput="checkQuantity(this)" data-maxquantity="<?php echo $result[0]['TicketNumber']; ?>" max="99">
 					</div>
-					<?php
-					if ($result[0]["User_idUsers"] == $_SESSION["userid"]) {
-						?>
-						<button class="btn btn-primary" onclick="includeMainContent(<?php echo "'modifyEvent.php?event_id=" . $result[0]['idEvent'] . "'"; ?>)">Modify</button>
+					<div class="w-mc">
+						<button id="btn-addcart" class="btn btn-primary" onclick="addToCart(this)" data-eventid="<?php echo $result[0]['idEvent']; ?>" data-userid="<?php if (isset($_SESSION["userid"])) { echo $_SESSION["userid"];} ?>" data-maxquantity="<?php echo $result[0]['TicketNumber']; ?>">Add to cart</button>
 						<?php
-					}
-					?>
+						if ($result[0]["User_idUsers"] == $_SESSION["userid"]) {
+							?>
+							<button id="btn-modify" class="btn btn-primary mt-1" onclick="includeMainContent(<?php echo "'modifyEvent.php?event_id=" . $result[0]['idEvent'] . "'"; ?>)">Modify</button>
+							<?php
+						}
+						?>
+					</div>
 				</div>
 			</div>
 			<?php

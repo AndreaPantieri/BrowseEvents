@@ -154,11 +154,7 @@ if(isset($_GET["event_id"])){
 
 	<div class="form-group">
 		<label for="event-description">Description</label>
-		<textarea class="form-control" id="event-description" name="event-description" rows="5" placeholder="Type the description of the event">
-			<?php
-			echo $result[0]["Description"];
-			?>
-		</textarea>
+		<textarea class="form-control" id="event-description" name="event-description" rows="5" placeholder="Type the description of the event"><?php print trim($result[0]["Description"]); ?></textarea>
 	</div>
 	<button id="event-modify" type="button" class="btn btn-primary" onclick="checkEvent()">Modify</button>
 	<button id="event-modify" type="button" class="btn btn-primary" onclick="deleteEvent()">Delete</button>
