@@ -33,7 +33,7 @@ require_once './php/DBHandler.php';
 
     <div id="rightIconMenu">
         <!-- My account-->
-        <div id="icon_myaccount" class='flexColumnCenter'>
+        <div id="icon_myaccount" class='flexColumnCenter' onmouseover="highlightButton(this)" onmouseout="dehighlightButton(this)" onclick="changeButtonColor(this)">
             <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-person-circle clickable" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="clickMyAccount()">
                 <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
                 <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
@@ -44,14 +44,14 @@ require_once './php/DBHandler.php';
         <?php
         if ($type_account == 1 || $type_account == 2) {
             echo '<!-- Create new event-->
-            <div id="icon_newevent" class=\'flexColumnCenter\'>
+            <div id="icon_newevent" class=\'flexColumnCenter\' onmouseover="highlightButton(this)" onmouseout="dehighlightButton(this)" onclick="changeButtonColor(this)">
             <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill clickable" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="clickNewEvent()">
             <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"/>
             </svg>
             </div>
 
             <!-- Manage events-->
-            <div id="icon_manageevents" class=\'flexColumnCenter\'>
+            <div id="icon_manageevents" class=\'flexColumnCenter\' onmouseover="highlightButton(this)" onmouseout="dehighlightButton(this)" onclick="changeButtonColor(this)">
             <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-pencil-square clickable" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="clickManageEvents()">
             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -63,7 +63,7 @@ require_once './php/DBHandler.php';
         <!-- Notifications -->
         <div class="btn-group" id="notifications" style="background-color: inherit; color: inherit;">
 
-            <div id="icon_notifications" class='flexColumnCenter'>
+            <div id="icon_notifications" class='flexColumnCenter' onmouseover="highlightButton(this)" onmouseout="dehighlightButton(this)">
                 <span id="num_notifications" style="visibility: hidden;"></span>
                 <button style="background-color: inherit; color: inherit; border:0;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-bell clickable" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -82,7 +82,7 @@ require_once './php/DBHandler.php';
 
 
         <!-- Cart -->
-        <div id="icon_cart" class="flexColumnCenter">
+        <div id="icon_cart" class="flexColumnCenter" onmouseover="highlightButton(this)" onmouseout="dehighlightButton(this)" onclick="changeButtonColor(this)">
             <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-cart4 clickable" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="clickCart()">
                 <path fill-rule="evenodd" d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
             </svg>
@@ -145,8 +145,8 @@ require_once './php/DBHandler.php';
             var s = document.getElementById("maincontent").getElementsByTagName('script');
             for (var i = 0; i < s.length; i++) {
                 var node = s[i],
-                parent = node.parentElement,
-                d = document.createElement('script');
+                    parent = node.parentElement,
+                    d = document.createElement('script');
                 d.async = node.async;
                 d.textContent = node.textContent;
                 d.setAttribute('type', 'text/javascript');
@@ -223,27 +223,33 @@ require_once './php/DBHandler.php';
     $("#dropdownMenu2").click((e) => {
         e.preventDefault();
 
-        
+
         var isOpen = !$("#dropdown-notifications").hasClass("show");
-        if(!isOpen){
+        if (!isOpen) {
             var els = document.getElementsByClassName("dropdown-item-notications");
 
             var i;
             var dataToPush = [];
-            dataToPush.push({name : "numEls", value : els.length});
-            for(i = 0; i < els.length; i++){
+            dataToPush.push({
+                name: "numEls",
+                value: els.length
+            });
+            for (i = 0; i < els.length; i++) {
                 var idNotification = els[i].getAttribute("data-id");
-                dataToPush.push({name: "id"+i, value: idNotification});
-                
-            } 
-            
+                dataToPush.push({
+                    name: "id" + i,
+                    value: idNotification
+                });
+
+            }
+
             $.ajax({
                 type: "POST",
                 url: "php/readNotification.php",
-                data:$.param(dataToPush),
-                success:function(data){
-                    if(JSON.parse(data)["result"]){
-                        tmp = setTimeout(checkNotifications, t); 
+                data: $.param(dataToPush),
+                success: function(data) {
+                    if (JSON.parse(data)["result"]) {
+                        tmp = setTimeout(checkNotifications, t);
                     }
                 }
             });
@@ -254,6 +260,32 @@ require_once './php/DBHandler.php';
 
     $(document).ready(() => {
         includeMainContent("events.php?r=1");
-        tmp = setTimeout(checkNotifications, t); 
+        tmp = setTimeout(checkNotifications, t);
     })
+
+    function highlightButton(data) {
+        document.getElementById($(data).attr('id')).classList.add('bc');
+    }
+
+    function dehighlightButton(data) {
+        document.getElementById($(data).attr('id')).classList.remove('bc');
+    }
+
+    function changeButtonColor(data) {
+        id = $(data).attr('id');
+
+        if (<?php echo "{$_SESSION['idUserType']}"?> == 1 || <?php echo "{$_SESSION['idUserType']}"?> == 2) {
+            document.getElementById("icon_myaccount").classList.remove('yc');
+            document.getElementById("icon_newevent").classList.remove('yc');
+            document.getElementById("icon_manageevents").classList.remove('yc');
+            document.getElementById("icon_cart").classList.remove('yc');
+
+            document.getElementById(id).classList.add('yc');
+        } else if (<?php echo "{$_SESSION['idUserType']}"?> == 3) {
+            document.getElementById("icon_myaccount").classList.remove('yc');
+            document.getElementById("icon_cart").classList.remove('yc');
+
+            document.getElementById(id).classList.add('yc');
+        }
+    }
 </script>
