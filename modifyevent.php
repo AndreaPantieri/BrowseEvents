@@ -83,15 +83,15 @@
 				<span class="sr-only">Next</span>
 			</a>
 		</div>
-		<div class="form-group" style="margin: auto;">
+		<div class="form-group fj-sa" style="margin: auto;">
 			<input type="file" id="selectImage" style="display: none;" accept=".jpg, .jpeg, .png">
-			<input type="button" class="btn btn-primary mb-2" value="Load a new photo" onclick="document.getElementById('selectImage').click();" />
-			<button type="button" class="btn btn-primary mb-2" onclick="removeImage()">Remove selected</button>
+			<input type="button" class="btn btn-primary m-1 w-mc" value="Load a new photo" onclick="document.getElementById('selectImage').click();" />
+			<button type="button" class="btn btn-primary m-1 w-mc" onclick="removeImage()">Remove selected</button>
 		</div>
-		<div id="modifyevent-info" class="rounded border mt-5 mb-5 px-5 py-5">
+		<div id="modifyevent-info" class="transparent-layout-white rounded border mt-5 mb-5 px-5 py-5">
 			<div class="form-group">
-				<label for="name-event" class="col-sm-2 col-form-label"><b>Event name</b></label>
-				<div class="col-sm-10">
+				<label for="name-event" class="col-form-label"><b>Event name</b></label>
+				<div class="col-form-label">
 					<input id="name-event" class="form-control" type="text" name="event-name" placeholder="Type event name" 
 					<?php
 					echo 'value="' . $result[0]["Name"] . '"';
@@ -100,8 +100,8 @@
 			</div>
 
 			<div class="form-group">
-				<label for="event-date" class="col-sm-2 col-form-label"><b>Date</b></label>
-				<div class="col-sm-10">
+				<label for="event-date" class="col-form-label"><b>Date</b></label>
+				<div class="col-form-label">
 					<input id="event-date" class="form-control" type="date" name="event-date" 
 					<?php
 					echo 'value="' . $result[0]["Datetime"] . '"';
@@ -109,8 +109,8 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="event-place" class="col-sm-2 col-form-label"><b>Place</b></label>
-				<div class="col-sm-10">
+				<label for="event-place" class="col-form-label"><b>Place</b></label>
+				<div class="col-form-label">
 					<input id="event-place" class="form-control" type="text" name="event-place" placeholder="Type the place" 
 					<?php
 					echo 'value="' . $result[0]["Place"] . '"';
@@ -118,8 +118,8 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="event-price" class="col-sm-2 col-form-label"><b>Price per ticket</b></label>
-				<div class="col-sm-10">
+				<label for="event-price" class="col-form-label"><b>Price per ticket</b></label>
+				<div class="col-form-label">
 					<input id="event-price" class="form-control" type="number" name="event-price" placeholder="Type the price per ticket"
 					<?php
 					echo 'value="' . $result[0]["Price"] . '"';
@@ -127,8 +127,8 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="event-maxtickets" class="col-sm-2 col-form-label"><b>Max num. tickets</b></label>
-				<div class="col-sm-10">
+				<label for="event-maxtickets" class="col-form-label"><b>Max num. tickets</b></label>
+				<div class="col-form-label">
 					<input id="event-maxtickets" class="form-control" type="number" name="event-maxtickets" placeholder="Type the max number of tickets to sell"
 					<?php
 					echo 'value="' . $result[0]["TicketNumber"] . '"';
@@ -136,8 +136,8 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="event-category" class="col-sm-2 col-form-label"><b>Category</b></label>
-				<select class="form-control col-sm-10" id="event-category" name="event-category" >
+				<label for="event-category" class="col-form-label"><b>Category</b></label>
+				<select class="form-control col-form-label" id="event-category" name="event-category" >
 					<?php
 					$sql_c = "SELECT Name FROM category";
 					$result_C = $DBHandler->select($sql_c);
@@ -157,11 +157,14 @@
 			</div>
 
 			<div class="form-group">
-				<label for="event-description"><b>Description</b></label>
-				<textarea class="form-control" id="event-description" name="event-description" rows="5" placeholder="Type the description of the event"><?php print trim($result[0]["Description"]); ?></textarea>
+				<label for="event-description" class="col-form-label"><b>Description</b></label>
+				<textarea class="form-control col-form-label" id="event-description" name="event-description" rows="5" placeholder="Type the description of the event"><?php print trim($result[0]["Description"]); ?></textarea>
 			</div>
-			<button id="event-modify" type="button" class="btn btn-primary" onclick="checkEvent()">Save changes</button>
-			<button id="event-delete" type="button" class="btn btn-danger" onclick="deleteEvent()">Delete</button>
+			<div class="w-mc">
+				<button id="event-modify" type="button" class="btn btn-primary" onclick="checkEvent()">Save changes</button>
+				<button id="event-delete" type="button" class="btn btn-danger mt-1" onclick="deleteEvent()">Delete</button>
+			</div>
+			
 		</div>
 		
 	</form>

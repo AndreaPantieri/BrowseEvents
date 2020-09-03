@@ -232,6 +232,11 @@ body {
     justify-content: center;
 }
 
+.fj-sa{
+    display: flex;
+    justify-content: space-around;
+}
+
 .nonVisible {
     display: none !important;
 }
