@@ -66,10 +66,10 @@
     width: 100px;
 }
 
-/* cart */
-
-
-#div-event{
+/* Event */
+#div-event,
+#form-modifyevent,
+#form-newevent{
 	width: 100% !important;
 }
 
