@@ -100,3 +100,8 @@
     color: black;
     border: 0 !important;
 }
+
+/* Empyt Image for new and modify event */
+#emptyEventImage{
+    width: 50% !important;
+}

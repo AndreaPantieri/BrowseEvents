@@ -68,7 +68,8 @@
 
 /* Event */
 #div-event,
-#form-modifyevent{
+#form-modifyevent,
+#form-newevent{
 	width: 100% !important;
 }
 

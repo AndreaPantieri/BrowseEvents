@@ -23,9 +23,9 @@
 			<form id="form-modifyevent" class="w-75" action="php/updateEvent.php" method="POST" enctype="multipart/form-data">
 				<h1 id="title-modifyevent" class="mt-4 mb-2">Modify Event</h1>
 				<svg id="emptyEventImage" viewBox="0 0 16 16" <?php if($numImages > 0){
-					echo 'class="bi bi-card-image inputImage d-block nonVisible"';
+					echo 'class="bi bi-card-image inputImage d-block px-5 nonVisible"';
 				} else{
-					echo 'class="bi bi-card-image inputImage d-block"';
+					echo 'class="bi bi-card-image inputImage d-block px-5"';
 				} ?> fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 				<path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
 				<path d="M10.648 7.646a.5.5 0 0 1 .577-.093L15.002 9.5V13h-14v-1l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z"/>
