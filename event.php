@@ -139,7 +139,7 @@
 						<?php
 						if ($result[0]["User_idUsers"] == $_SESSION["userid"]) {
 							?>
-							<button id="btn-modify" class="btn btn-primary mt-1" onclick="includeMainContent(<?php echo "'modifyEvent.php?event_id=" . $result[0]['idEvent'] . "'"; ?>)">Modify</button>
+							<button id="btn-modify" class="btn btn-warning mt-1" onclick="includeMainContent(<?php echo "'modifyEvent.php?event_id=" . $result[0]['idEvent'] . "'"; ?>)">Modify</button>
 							<?php
 						}
 						?>

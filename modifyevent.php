@@ -85,8 +85,8 @@
 		</div>
 		<div class="form-group fj-sa" style="margin: auto;">
 			<input type="file" id="selectImage" style="display: none;" accept=".jpg, .jpeg, .png">
-			<input type="button" class="btn btn-primary m-1 w-mc" value="Load a new photo" onclick="document.getElementById('selectImage').click();" />
-			<button type="button" class="btn btn-primary m-1 w-mc" onclick="removeImage()">Remove selected</button>
+			<input type="button" class="btn btn-success m-1 w-mc" value="Load a new photo" onclick="document.getElementById('selectImage').click();" />
+			<button type="button" class="btn btn-danger m-1 w-mc" onclick="removeImage()">Remove selected</button>
 		</div>
 		<div id="modifyevent-info" class="transparent-layout-white rounded border mt-5 mb-5 px-5 py-5">
 			<div class="form-group">
