@@ -173,7 +173,19 @@ body {
     text-decoration: none;
 }
 
+<<<<<<< HEAD
 /* layouts */
+=======
+#showevent-info, #modifyevent-info{
+    background-color: rgba(255,255,255,0.5);
+}
+
+.flex-col-c {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+>>>>>>> 8e853c47740b7a522f0fd928e0314f840ae5eab8
 
 .transparent-layout {
     background-color: rgba(0, 0, 0, 0.5);

@@ -1,167 +1,172 @@
-<?php
-require_once 'php/DBHandler.php';
-$DBHandler = new DBHandler();
+<div class="flex-col-c w-75">
+	<?php
+	require_once 'php/DBHandler.php';
+	$DBHandler = new DBHandler();
 
-if(isset($_GET["event_id"])){
-	$event_id = $_GET["event_id"];
+	if(isset($_GET["event_id"])){
+		$event_id = $_GET["event_id"];
 
-	$sql = "SELECT browseeventsdb.event.*, category.Name AS Category 
-	FROM browseeventsdb.event INNER JOIN category_has_event ON category_has_event.Event_idEvent = browseeventsdb.event.idEvent
-	INNER JOIN category ON category_has_event.Category_idCategory = category.idCategory
-	WHERE browseeventsdb.event.idEvent = $event_id";
+		$sql = "SELECT browseeventsdb.event.*, category.Name AS Category 
+		FROM browseeventsdb.event INNER JOIN category_has_event ON category_has_event.Event_idEvent = browseeventsdb.event.idEvent
+		INNER JOIN category ON category_has_event.Category_idCategory = category.idCategory
+		WHERE browseeventsdb.event.idEvent = $event_id";
 
-	$result = $DBHandler->select($sql);
+		$result = $DBHandler->select($sql);
 
-	if($result){
-		$_SESSION["event_id"] = $event_id;
-		$path = "res/img/events/" . $result[0]["idEvent"]."/";
-		$images = glob($path . "*.{jpg,png,jpeg}",GLOB_BRACE);
-		sort($images);
-		$numImages = count($images);
-		?>
-		<form id="form-modifyevent" action="php/updateEvent.php" method="POST" enctype="multipart/form-data">
-			<h1 id="title-modifyevent">Modify Event</h1>
-			<svg id="emptyEventImage" viewBox="0 0 16 16" <?php if($numImages > 0){
-				echo 'class="bi bi-card-image inputImage d-block nonVisible"';
+		if($result){
+			$_SESSION["event_id"] = $event_id;
+			$path = "res/img/events/" . $result[0]["idEvent"]."/";
+			$images = glob($path . "*.{jpg,png,jpeg}",GLOB_BRACE);
+			sort($images);
+			$numImages = count($images);
+			?>
+			<form id="form-modifyevent" class="w-75" action="php/updateEvent.php" method="POST" enctype="multipart/form-data">
+				<h1 id="title-modifyevent">Modify Event</h1>
+				<svg id="emptyEventImage" viewBox="0 0 16 16" <?php if($numImages > 0){
+					echo 'class="bi bi-card-image inputImage d-block nonVisible"';
+				} else{
+					echo 'class="bi bi-card-image inputImage d-block"';
+				} ?> fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+				<path d="M10.648 7.646a.5.5 0 0 1 .577-.093L15.002 9.5V13h-14v-1l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z"/>
+				<path fill-rule="evenodd" d="M4.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+			</svg>
+
+			<div id="carousel" <?php if($numImages == 0){
+				echo 'class="carousel slide px-5 nonVisible"';
 			} else{
-				echo 'class="bi bi-card-image inputImage d-block"';
-			} ?> fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-			<path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-			<path d="M10.648 7.646a.5.5 0 0 1 .577-.093L15.002 9.5V13h-14v-1l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z"/>
-			<path fill-rule="evenodd" d="M4.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-		</svg>
+				echo 'class="carousel slide px-5"';
+			} ?> data-ride="carousel">
+			<ol class="carousel-indicators">
+				<?php
+				for($i = 0; $i < $numImages; $i++) {
+					$tmpHTML = '<li id="carousel-li-' . $i .'" data-target="#carousel" data-slide-to="' . $i . '"';
 
-		<div id="carousel" <?php if($numImages == 0){
-			echo 'class="carousel slide nonVisible"';
-		} else{
-			echo 'class="carousel slide"';
-		} ?> class="carousel slide nonVisible" data-ride="carousel">
-		<ol class="carousel-indicators">
-			<?php
-			for($i = 0; $i < $numImages; $i++) {
-				$tmpHTML = '<li id="carousel-li-' . $i .'" data-target="#carousel" data-slide-to="' . $i . '"';
-
-				if($i == 0){
-					$tmpHTML .=  'class="active"';
+					if($i == 0){
+						$tmpHTML .=  'class="active"';
+					}
+					$tmpHTML .= '></li>';
+					echo $tmpHTML;
 				}
-				$tmpHTML .= '></li>';
-				echo $tmpHTML;
-			}
-			?>
-		</ol>
-		<div class="carousel-inner">
-			<?php
-			$sql_ia = "SELECT Description FROM Image WHERE Event_idEvent = $event_id";
-			$res = $DBHandler->select($sql_ia);
+				?>
+			</ol>
+			<div class="carousel-inner">
+				<?php
+				$sql_ia = "SELECT Description FROM Image WHERE Event_idEvent = $event_id";
+				$res = $DBHandler->select($sql_ia);
 
-			for($i = 0; $i < $numImages; $i++) {
-				$tmpHTML = '<div class="carousel-item ';
+				for($i = 0; $i < $numImages; $i++) {
+					$tmpHTML = '<div class="carousel-item ';
 
-				if($i == 0){
-					$tmpHTML .=  'active';
+					if($i == 0){
+						$tmpHTML .=  'active';
+					}
+					$tmpHTML .= '" id="carousel-item-div-' . $i .'">';
+					if($res){
+						$tmpHTML .= '<img class="inputImage d-block" alt="'. $res[$i]["Description"] .'" src="' . $images[$i] . '"">
+						</div>';
+					} else{
+						$tmpHTML .= '<img class="inputImage d-block" alt="'. $i .'° slide" src="' . $images[$i] . '"">
+						</div>';
+					}
+
+					echo $tmpHTML;
 				}
-				$tmpHTML .= '" id="carousel-item-div-' . $i .'">';
-				if($res){
-					$tmpHTML .= '<img class="inputImage d-block" alt="'. $res[$i]["Description"] .'" src="' . $images[$i] . '"">
-					</div>';
-				} else{
-					$tmpHTML .= '<img class="inputImage d-block" alt="'. $i .'° slide" src="' . $images[$i] . '"">
-					</div>';
-				}
-				
-				echo $tmpHTML;
-			}
-			?>
+				?>
+			</div>
+			<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
 		</div>
-		<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-		</a>
-		<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
-	</div>
-	<div class="form-group" style="margin: auto;">
-		<input type="file" id="selectImage" style="display: none;" accept=".jpg, .jpeg, .png">
-		<input type="button" class="btn btn-primary mb-2" value="Load a new photo" onclick="document.getElementById('selectImage').click();" />
-		<button type="button" class="btn btn-primary mb-2" onclick="removeImage()">Remove selected</button>
-	</div>
-	
-	<div class="form-group">
-		<label for="name-event" class="col-sm-2 col-form-label"><b>Event name</b></label>
-		<div class="col-sm-10">
-			<input id="name-event" class="form-control" type="text" name="event-name" placeholder="Type event name" 
-			<?php
-			echo 'value="' . $result[0]["Name"] . '"';
-			?>>
+		<div class="form-group" style="margin: auto;">
+			<input type="file" id="selectImage" style="display: none;" accept=".jpg, .jpeg, .png">
+			<input type="button" class="btn btn-primary mb-2" value="Load a new photo" onclick="document.getElementById('selectImage').click();" />
+			<button type="button" class="btn btn-primary mb-2" onclick="removeImage()">Remove selected</button>
 		</div>
-	</div>
+		<div id="modifyevent-info" class="rounded border mt-5 mb-5 px-5 py-5">
+			<div class="form-group">
+				<label for="name-event" class="col-sm-2 col-form-label"><b>Event name</b></label>
+				<div class="col-sm-10">
+					<input id="name-event" class="form-control" type="text" name="event-name" placeholder="Type event name" 
+					<?php
+					echo 'value="' . $result[0]["Name"] . '"';
+					?>>
+				</div>
+			</div>
 
-	<div class="form-group">
-		<label for="event-date" class="col-sm-2 col-form-label"><b>Date</b></label>
-		<div class="col-sm-10">
-			<input id="event-date" class="form-control" type="date" name="event-date" 
-			<?php
-			echo 'value="' . $result[0]["Datetime"] . '"';
-			?>>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="event-place" class="col-sm-2 col-form-label"><b>Place</b></label>
-		<div class="col-sm-10">
-			<input id="event-place" class="form-control" type="text" name="event-place" placeholder="Type the place" 
-			<?php
-			echo 'value="' . $result[0]["Place"] . '"';
-			?>>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="event-price" class="col-sm-2 col-form-label"><b>Price per ticket</b></label>
-		<div class="col-sm-10">
-			<input id="event-price" class="form-control" type="number" name="event-price" placeholder="Type the price per ticket"
-			<?php
-			echo 'value="' . $result[0]["Price"] . '"';
-			?>>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="event-maxtickets" class="col-sm-2 col-form-label"><b>Max num. tickets</b></label>
-		<div class="col-sm-10">
-			<input id="event-maxtickets" class="form-control" type="number" name="event-maxtickets" placeholder="Type the max number of tickets to sell"
-			<?php
-			echo 'value="' . $result[0]["TicketNumber"] . '"';
-			?>>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="event-category" class="col-sm-2 col-form-label"><b>Category</b></label>
-		<select class="form-control col-sm-10" id="event-category" name="event-category" >
-			<?php
-			$sql_c = "SELECT Name FROM category";
-			$result_C = $DBHandler->select($sql_c);
+			<div class="form-group">
+				<label for="event-date" class="col-sm-2 col-form-label"><b>Date</b></label>
+				<div class="col-sm-10">
+					<input id="event-date" class="form-control" type="date" name="event-date" 
+					<?php
+					echo 'value="' . $result[0]["Datetime"] . '"';
+					?>>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="event-place" class="col-sm-2 col-form-label"><b>Place</b></label>
+				<div class="col-sm-10">
+					<input id="event-place" class="form-control" type="text" name="event-place" placeholder="Type the place" 
+					<?php
+					echo 'value="' . $result[0]["Place"] . '"';
+					?>>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="event-price" class="col-sm-2 col-form-label"><b>Price per ticket</b></label>
+				<div class="col-sm-10">
+					<input id="event-price" class="form-control" type="number" name="event-price" placeholder="Type the price per ticket"
+					<?php
+					echo 'value="' . $result[0]["Price"] . '"';
+					?>>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="event-maxtickets" class="col-sm-2 col-form-label"><b>Max num. tickets</b></label>
+				<div class="col-sm-10">
+					<input id="event-maxtickets" class="form-control" type="number" name="event-maxtickets" placeholder="Type the max number of tickets to sell"
+					<?php
+					echo 'value="' . $result[0]["TicketNumber"] . '"';
+					?>>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="event-category" class="col-sm-2 col-form-label"><b>Category</b></label>
+				<select class="form-control col-sm-10" id="event-category" name="event-category" >
+					<?php
+					$sql_c = "SELECT Name FROM category";
+					$result_C = $DBHandler->select($sql_c);
 
-			$tmpHTML3 = "";
-			foreach ($result_C as $var) {
-				if($var["Name"] === $result[0]["Category"]){
-					$tmpHTML3 .= "<option selected>" . $var["Name"] . "</option>";
-				} else{
-					$tmpHTML3 .= "<option>" . $var["Name"] . "</option>";
-				}
+					$tmpHTML3 = "";
+					foreach ($result_C as $var) {
+						if($var["Name"] === $result[0]["Category"]){
+							$tmpHTML3 .= "<option selected>" . $var["Name"] . "</option>";
+						} else{
+							$tmpHTML3 .= "<option>" . $var["Name"] . "</option>";
+						}
 
-			}
-			echo $tmpHTML3;
-			?>
-		</select>
-	</div>
+					}
+					echo $tmpHTML3;
+					?>
+				</select>
+			</div>
 
-	<div class="form-group">
-		<label for="event-description"><b>Description</b></label>
-		<textarea class="form-control" id="event-description" name="event-description" rows="5" placeholder="Type the description of the event"><?php print trim($result[0]["Description"]); ?></textarea>
-	</div>
-	<button id="event-modify" type="button" class="btn btn-primary" onclick="checkEvent()">Modify</button>
-	<button id="event-modify" type="button" class="btn btn-primary" onclick="deleteEvent()">Delete</button>
-</form>
+			<div class="form-group">
+				<label for="event-description"><b>Description</b></label>
+				<textarea class="form-control" id="event-description" name="event-description" rows="5" placeholder="Type the description of the event"><?php print trim($result[0]["Description"]); ?></textarea>
+			</div>
+			<button id="event-modify" type="button" class="btn btn-primary" onclick="checkEvent()">Modify</button>
+			<button id="event-modify" type="button" class="btn btn-primary" onclick="deleteEvent()">Delete</button>
+		</div>
+		
+	</form>
+</div>
+
 
 <script type="text/javascript">
 	$("#form-modifyevent").submit(function(e){
@@ -347,7 +352,7 @@ if(isset($_GET["event_id"])){
 				});
 			} else {
 				Swal.fire({
-					title: "Cancelled",
+					title: "Operation canceled!",
 					text: "Event not deleted!"
 				});
 			}
@@ -356,9 +361,6 @@ if(isset($_GET["event_id"])){
 	}
 
 	$(document).ready(() => {
-		$(".inputImage").css("width", "30%");
-		$("#form-modifyevent").css("width", "70%");
-
 		document.getElementById("selectImage").addEventListener('change', updateImageDisplay);
 	});
 </script>
