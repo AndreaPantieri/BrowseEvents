@@ -11,7 +11,7 @@
                     } ?>!</h2>
     </div>
 
-    <div id="myaccountform" class="transparent-layout-white rounded border pl-3 pr-3 pt-3 pb-3">
+    <div id="myaccountform" class="transparent-layout-white rounded border pl-3 pr-3 pt-3 pb-2">
         <!-- Admin approval organizer requests -->
         <div id="approveorganizerlabel"></div>
         <div id="adminorganizerform" class="form-inline mb-2 ">

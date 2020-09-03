@@ -9,7 +9,7 @@
             <div id="cart-elements"></div> <!-- this is where the events are being inserted -->
         </div>
         <!-- This is the column for price details -->
-        <div id="price_details" class="col-md-4 offset-md-1 border rounded mt-5 bg-white">
+        <div id="price_details" class="col-md-4 offset-md-1 border rounded mt-5 transparent-layout-white">
             <div class="pt-4">
                 <h6>PRICE DETAILS</h6>
                 <hr>

@@ -49,7 +49,7 @@ if (isset($_SESSION["userid"])) {
                                     <button type="button" class="btn bg-light border rounded-circle" onClick="increaseQuantity(this)" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '"><i class="fas fa-plus"></i></button>
                                     <div class="py-2">
                                         <div class="px-4">
-                                            <button type="submit" class="btn btn-danger mx-2" name="remove" onClick="removeProduct(this)" data-idCart="' . $row["idCart"] . '" data-idProduct="' . $row["idEvent"] . '">Remove</button>
+                                            <button type="button" class="btn btn-danger mx-2" name="remove" onClick="removeProduct(this)" data-idCart="' . $row["idCart"] . '" data-idProduct="' . $row["idEvent"] . '">Remove</button>
                                         </div>
                                     </div>
                                 </div>

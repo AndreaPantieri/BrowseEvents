@@ -216,6 +216,11 @@ body {
     color: #FFC312;
 }
 
+/* myaccount page */ 
+#myaccount {
+    margin-bottom: 5%;
+}
+
 /* Miscellaneous */
 
 .hr-w {
