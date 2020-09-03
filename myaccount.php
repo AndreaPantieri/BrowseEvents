@@ -3,7 +3,7 @@
         <h1>My Account</h1>
     </div>
     <hr class="mb-5">
-    <div class="mb-5" id="name" data-name="<?php if (isset($_SESSION["username"])) {
+    <div class="mb-3" id="name" data-name="<?php if (isset($_SESSION["username"])) {
                                                 echo $_SESSION["username"];
                                             } ?>">
         <h2>Hello <?php if (isset($_SESSION["username"])) {
@@ -43,8 +43,8 @@
         <input type="password" class="form-control mb-1" id="oldPwd" placeholder="Insert your old password" required />
         <input type="password" class="form-control mb-2" id="newPwd" placeholder="Insert your new password" required />
         <button type="button" class="btn btn-primary" onclick="changePassword()">Save changes</button>
-        <div id="passwordWarning" class="text-danger"></div>
-        <div id="passwordWarning2" class="text-danger"></div>
+        <div id="passwordWarning" class="text-danger mt-2"></div>
+        <div id="passwordWarning2" class="text-danger mt-2"></div>
     </div>
 </div>
 
@@ -111,20 +111,28 @@
         var username = $("#name").attr('data-name');
         var newEmail = $("#email").val();
 
-        $.ajax({
-            type: "POST",
-            url: "php/checkEmailAddress.php",
-            data: {
-                newEmail: newEmail
-            }
-        }).then(function(data) {
-            if (data) {
-                $("#emailWarning").html("This email address already exists!");
-            } else {
-                $("#emailWarning").html("");
-                checkVerificationCode(username);
-            }
-        })
+        if ($("#email").val() != "") {
+            $.ajax({
+                type: "POST",
+                url: "php/checkEmailAddress.php",
+                data: {
+                    newEmail: newEmail
+                }
+            }).then(function(data) {
+                if (data) {
+                    $("#emailWarning").html("This email address already exists!");
+                } else {
+                    $("#emailWarning").html("");
+                    checkVerificationCode(username);
+                }
+            })
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'This field can\'t be empty!',
+            })
+        }
+
     }
 
     function changePassword() {
