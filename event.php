@@ -77,7 +77,7 @@
 				}
 
 				?>
-				<div id="showevent-info" class="rounded border mt-5 mb-5 px-5 py-5">
+				<div id="showevent-info" class="transparent-layout-white rounded border mt-5 mb-5 px-5 py-5">
 					<div>
 						<div class="col-form-label"><b>Event name</b></div>
 						<div id="showevent-name" class="col-form-label">
@@ -201,7 +201,7 @@
 						title: "You can't buy more than the available quantity!",
 						icon: "error"
 					});
-				}
+					showevent-info}
 			}
 		})
 	}

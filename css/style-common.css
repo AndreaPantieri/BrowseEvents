@@ -1,9 +1,9 @@
+/* main content */
 html {
     margin: 0px;
 }
 
-html,
-body {
+html, body {
     background-image: url('../res/img/loginwallpaper.png');
     background-color: #4da0e9;
     background-size: cover;
@@ -18,14 +18,15 @@ body {
     background-color: whitesmoke;
 }
 
-.clickable {
-    cursor: pointer;
+#maincontent {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
 }
 
-.clickableSizes {
-    width: max-content;
-    height: max-content;
-}
+/* menus */
 
 #topbar {
     width: 100%;
@@ -33,13 +34,33 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    background-color: rgba(34,27,27,0.99);
+    background-color: rgba(34, 27, 27, 0.99);
     color: white;
     position: fixed;
     z-index: 2;
 }
 
-#searchbar {
+#slidemenu {
+    height: 100%;
+    background-color: rgba(34, 27, 27, 0.6);
+    color: white;
+    position: fixed;
+    z-index: 2;
+}
+
+#subslidemenu {
+    padding-top: 2em;
+}
+
+#slidemenu ol, #subslidemenu ol {
+    list-style-type: none;
+    width: inherit;
+    height: inherit;
+    background-color: inherit;
+    padding-right: 1.5em;
+}
+
+.flexColumnCenter {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -52,63 +73,14 @@ body {
     min-width: 20%;
 }
 
-#maincontent {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-}
+/* footbar */
 
 #footbar {
     height: 20%;
     width: 100%;
 }
 
-#slidemenu {
-    height: 100%;
-    background-color: rgba(34, 27, 27, 0.6);
-    color: white;
-    position: fixed;
-    z-index: 2;
-}
-
-#subslidemenu{
-    padding-top: 2em;
-}
-
-#slidemenu ol,
-#subslidemenu ol {
-    list-style-type: none;
-    width: inherit;
-    height: inherit;
-    background-color: inherit;
-    padding-right: 1.5em;
-}
-
-
-.flexColumnCenter {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-#form-newevent {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: auto;
-}
-
-#title-newevent {
-    text-align: center;
-}
-
-.inputImage {
-    width: 100%;
-    height: 100%;
-    margin: auto;
-}
+/* events */
 
 #events-container {
     display: flex;
@@ -137,11 +109,23 @@ body {
     float: right;
 }
 
-.nonVisible {
-    display: none !important;
+#form-newevent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
 }
 
+#title-newevent {
+    text-align: center;
+}
+
+/* searchbar */
+
 #searchbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 16rem;
 }
 
@@ -189,8 +173,58 @@ body {
     text-decoration: none;
 }
 
-#showevent-info{
-    background-color: rgba(255,255,255,0.5);
+/* layouts */
+
+.transparent-layout {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    color: white;
+}
+
+.transparent-layout-white {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* buttons */
+
+.back-yc {
+    background-color: #FFC312;
+    color: black;
+}
+
+.back-wc:hover {
+    color: black;
+    background-color: white;
+}
+
+/* carousel */
+
+.carousel-inner {
+    height: 50vh;
+}
+
+.carousel-item {
+    height: 100%;
+}
+
+/* colors */
+
+.bc {
+    color: #4da0e9;
+}
+
+.yc {
+    color: #FFC312;
+}
+
+/* Miscellaneous */
+
+.hr-w {
+    border-top-color: white;
+}
+
+.w-mc {
+    width: min-content;
 }
 
 .flex-col-c {
@@ -199,42 +233,21 @@ body {
     justify-content: center;
 }
 
-.transparent-layout {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
-    color: white;
+.nonVisible {
+    display: none !important;
 }
 
-.back-yc{
-    background-color: #FFC312;
-    color: black;
-}
-
-.back-wc:hover{
-    color: black;
-    background-color: white;
-}
-
-.hr-w{
-    border-top-color: white;
-}
-
-.w-mc{
-    width: min-content;
-}
-
-.carousel-inner{
-    height: 50vh;
-}
-
-.carousel-item{
+.inputImage {
+    width: 100%;
     height: 100%;
+    margin: auto;
 }
 
-.bc{
-    color: #4da0e9;
+.clickable {
+    cursor: pointer;
 }
 
-.yc{
-    color: #FFC312;
+.clickableSizes {
+    width: max-content;
+    height: max-content;
 }
