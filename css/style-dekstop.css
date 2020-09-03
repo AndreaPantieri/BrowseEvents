@@ -27,7 +27,6 @@
 }
 
 /* Login Page */
-
 #loginlogo {
     max-width: 50%;
     height: auto;
@@ -64,13 +63,6 @@
     margin-bottom: auto;
 }
 
-.input-group-prepend span {
-    width: 50px;
-    background-color: #FFC312;
-    color: black;
-    border: 0 !important;
-}
-
 #logincard h1 {
     color: white;
     font-size: 32px;
@@ -91,4 +83,20 @@
 
 #registrationcard button {
     width: 100px;
+}
+
+/* my account page */
+#myaccount {
+}
+
+#myaccountform {
+    
+}
+
+/* miscellaneuos */
+.input-group-prepend span {
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border: 0 !important;
 }

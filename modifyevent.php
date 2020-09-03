@@ -21,7 +21,7 @@
 			$numImages = count($images);
 			?>
 			<form id="form-modifyevent" class="w-75" action="php/updateEvent.php" method="POST" enctype="multipart/form-data">
-				<h1 id="title-modifyevent">Modify Event</h1>
+				<h1 id="title-modifyevent" class="mt-4 mb-2">Modify Event</h1>
 				<svg id="emptyEventImage" viewBox="0 0 16 16" <?php if($numImages > 0){
 					echo 'class="bi bi-card-image inputImage d-block nonVisible"';
 				} else{
@@ -160,8 +160,8 @@
 				<label for="event-description"><b>Description</b></label>
 				<textarea class="form-control" id="event-description" name="event-description" rows="5" placeholder="Type the description of the event"><?php print trim($result[0]["Description"]); ?></textarea>
 			</div>
-			<button id="event-modify" type="button" class="btn btn-primary" onclick="checkEvent()">Modify</button>
-			<button id="event-modify" type="button" class="btn btn-primary" onclick="deleteEvent()">Delete</button>
+			<button id="event-modify" type="button" class="btn btn-primary" onclick="checkEvent()">Save changes</button>
+			<button id="event-delete" type="button" class="btn btn-danger" onclick="deleteEvent()">Delete</button>
 		</div>
 		
 	</form>
@@ -352,7 +352,7 @@
 				});
 			} else {
 				Swal.fire({
-					title: "Operation canceled!",
+					title: "Operation cancelled!",
 					text: "Event not deleted!"
 				});
 			}
