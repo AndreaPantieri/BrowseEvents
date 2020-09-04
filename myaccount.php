@@ -3,11 +3,11 @@
         <h1>My Account</h1>
     </div>
     <hr class="mb-5">
-    <div class="mb-3" id="name" data-name="<?php if (isset($_SESSION["username"])) {
-                                                echo $_SESSION["username"];
+    <div class="mb-3" id="name" data-name="<?php if (isset($_SESSION['username'])) {
+                                                echo $_SESSION['username'];
                                             } ?>">
-        <h2>Hello <?php if (isset($_SESSION["username"])) {
-                        echo $_SESSION["username"];
+        <h2>Hello <?php if (isset($_SESSION['username'])) {
+                        echo $_SESSION['username'];
                     } ?>!</h2>
     </div>
 
@@ -15,13 +15,13 @@
         <!-- Admin approval organizer requests -->
         <div id="approveorganizerlabel"></div>
         <div id="adminorganizerform" class="form-inline mb-2 ">
-            <div id="adminrequests" data-usertype="<?php echo $_SESSION["idUserType"]; ?>"></div>
+            <div id="adminrequests" data-usertype="<?php echo $_SESSION['idUserType']; ?>"></div>
             <div id="acceptrequestbutton"></div>
         </div>
         <!-- user form for becoming an organizer -->
         <div class="form-inline mb-2 ">
             <div id="becomeorganizerlabel"></div>
-            <div id="becomeorganizerbutton" data-usertype="<?php echo $_SESSION["idUserType"]; ?>"></div>
+            <div id="becomeorganizerbutton" data-usertype="<?php echo $_SESSION['idUserType']; ?>"></div>
         </div>
         <!-- change username -->
         <label><b>Change Username:</b></label>
@@ -39,7 +39,7 @@
         </div>
         <div id="emailWarning" class="text-danger"></div>
         <!-- change password -->
-        <label for="password"><b>Change Password:</b></label>
+        <label><b>Change Password:</b></label>
         <input type="password" class="form-control mb-1" id="oldPwd" placeholder="Insert your old password" required />
         <input type="password" class="form-control mb-2" id="newPwd" placeholder="Insert your new password" required />
         <button type="button" class="btn btn-primary" onclick="changePassword()">Save changes</button>

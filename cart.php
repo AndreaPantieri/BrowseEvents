@@ -14,7 +14,7 @@
                 <h6>PRICE DETAILS</h6>
                 <hr>
                 <div class="row">
-                    <div class="col-md-6" id="itemNumber"></div>
+                    <div class="col-md-6 mb-1" id="itemNumber"></div>
                 </div>
                 <div id="total"></div>
                 <div>
@@ -27,16 +27,18 @@
 
 <script>
     $(document).ready(getCartElements);
+    var fadeTime = 300;
 
     function getCartElements() {
+        //$("#total").fadeOut(fadeTime);
         $.ajax({
             type: "GET",
             url: "php/getCartElements.php"
         }).then(function(data) {
-            console.log(data);
             var tmp = JSON.parse(data);
             document.getElementById("cart-elements").innerHTML = tmp["HTML"];
             document.getElementById("total").innerHTML = "Total: " + tmp["total"] + "€";
+            //$("#total").fadeIn(fadeTime);
             if (tmp["count"] == 1) {
                 document.getElementById("itemNumber").innerHTML = "Price (" + tmp["count"] + " item)";
             } else {
@@ -136,14 +138,17 @@
         var cart_id = jQuery(elem).attr('data-idCart');
         var product_id = jQuery(elem).attr('data-idProduct');
 
-        $.ajax({
-            type: "POST",
-            url: "php/removeProductFromCart.php",
-            data: {
-                cart_id: cart_id,
-                product_id: product_id
-            }
-        }).then(getCartElements);
+        $('#' + cart_id).slideUp(fadeTime, function() {
+            $.ajax({
+                type: "POST",
+                url: "php/removeProductFromCart.php",
+                data: {
+                    cart_id: cart_id,
+                    product_id: product_id
+                }
+            }).then(getCartElements);
+        });
+
     }
 
     function completeTransaction() {

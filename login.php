@@ -1,4 +1,4 @@
-<img id="loginlogo" src="res\img\logo nightmode.png" alt="BrowseEvents logo">
+<img id="loginlogo" src="res/img/logo_nightmode.png" alt="BrowseEvents logo">
 <h2 id="browseeventstext">Browse all the events nearby you</h2>
 <!-- login -->
 <div>
@@ -104,7 +104,7 @@
 </div>
 
 <!-- login/registration scripts -->
-<script type="application/javascript">
+<script>
     const USERMINLENGTH = 5;
     const PASSMINLENGTH = 8;
 

@@ -29,9 +29,9 @@ if (isset($_SESSION["userid"])) {
             foreach ($result as $row) {
                 $getCartElementsResponse->total += $row["Price"] * $row["TicketQuantity"];
                 $getCartElementsResponse->HTML .= '
-                <div class="border rounded">
+                <div id="' . $row["idCart"] . '" class="product border rounded">
                     <div class="bg-white">
-                        <div class="product row px-3">
+                        <div class="row px-3">
                             <div class="col-md-2 py-3">
                                 <img src="' . $row["Image"] . '" alt="' . $row["Description"] . '" class="img-fluid">
                             </div>

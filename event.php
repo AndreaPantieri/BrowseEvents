@@ -201,7 +201,7 @@
 						title: "You can't buy more than the available quantity!",
 						icon: "error"
 					});
-					showevent-info}
+				}
 			}
 		})
 	}
