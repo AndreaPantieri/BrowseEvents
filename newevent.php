@@ -28,37 +28,37 @@
 		</div>
 		<div id="newevent-info" class="transparent-layout-white rounded border mt-5 mb-5 px-5 py-5">
 			<div class="form-group">
-				<label for="name-event" class="col-form-label">Event name</label>
+				<label for="name-event" class="col-form-label"><b>Event name</b></label>
 				<div class="col-form-label">
 					<input id="name-event" class="form-control" type="text" name="event-name" placeholder="Type event name">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="event-date" class=" col-form-label">Date/Hour</label>
+				<label for="event-date" class=" col-form-label"><b>Date</b></label>
 				<div class="col-form-label">
 					<input id="event-date" class="form-control" type="date" name="event-date">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="event-place" class="col-form-label">Place</label>
+				<label for="event-place" class="col-form-label"><b>Place</b></label>
 				<div class="col-form-label">
 					<input id="event-place" class="form-control" type="text" name="event-place" placeholder="Type the place">
 				</div>
 			</div>
 			<div class="form-group ">
-				<label for="event-price" class="col-form-label">Price per ticket</label>
+				<label for="event-price" class="col-form-label"><b>Price per ticket</b></label>
 				<div class="col-form-label">
 					<input id="event-price" class="form-control" type="number" name="event-price" placeholder="Type the price per ticket">
 				</div>
 			</div>
 			<div class="form-group">	
-				<label for="event-maxtickets" class="col-form-label">Max num. tickets</label>
+				<label for="event-maxtickets" class="col-form-label"><b>Max num. tickets</b></label>
 				<div class="col-form-label">
 					<input id="event-maxtickets" class="form-control" type="number" name="event-maxtickets" placeholder="Type the max number of tickets to sell">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="event-category" class="col-form-label">Category</label>
+				<label for="event-category" class="col-form-label"><b>Category</b></label>
 				<select class="form-control col-form-label" id="event-category" name="event-category" >
 					<?php
 					require 'php/getCategories.php';
@@ -66,7 +66,7 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="event-description" class="col-form-label">Description</label>
+				<label for="event-description" class="col-form-label"><b>Description</b></label>
 				<textarea class="form-control col-form-label" id="event-description" name="event-description" rows="5" placeholder="Type the description of the event"></textarea>
 			</div>
 			<div class="w-mc">
