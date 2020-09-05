@@ -1,5 +1,5 @@
 <div class="w-75">
-	<div class="col-md-7">
+	<div>
 		<div class="mt-3">
 			<h6>Notifications</h6>
 		</div>
@@ -27,7 +27,7 @@
 					$isRead = $var["isRead"];
 					?>
 					<div class="border rounded mt-5 mb-5 <?php echo $isRead == 0 ? 'clickable' : ''; ?>" data-id='<?php echo $idNotification; ?>' data-isRead='<?php echo $isRead; ?>' onclick="readNotification(this)">
-						<div class="bg-white">
+						<div class="transparent-layout-white">
 							<div class="row px-3" style="position: relative;">
 								<div class="col-md-7 py-3">
 									<h4 class="pt-2"><b><?php echo $title; ?></b></h4>
