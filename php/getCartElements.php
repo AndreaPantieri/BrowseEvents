@@ -32,25 +32,25 @@ if (isset($_SESSION["userid"])) {
                 <div id="' . $row["idCart"] . '" class="product border rounded">
                     <div class="bg-white">
                         <div class="row px-3">
-                            <div class="col-md-2 py-3">
+                            <div id="product-image" class="col-md-2 py-3">
                                 <img src="' . $row["Image"] . '" alt="' . $row["Description"] . '" class="img-fluid">
                             </div>
                             <div class="col-md-7 py-3">
-                                <h5 class="pt-2">' . $row["Name"] . '</h5>
+                                <h1 class="pt-2">' . $row["Name"] . '</h1>
                                 <small class="text-secondary">Organizer: ' . $row["Username"] . '</small>
-                                <h6 class="pt-4"><b>Available Quantity: </b>' . $row["TicketNumber"] . '</h6>
-                                <h6 class=""><b>Price: </b>' . $row["Price"] . '€</h6>
+                                <h2 class="pt-3"><b>Available Quantity: </b>' . $row["TicketNumber"] . '</h2>
+                                <h2 class=""><b>Price: </b>' . $row["Price"] . '€</h2>
                             </div>
-                            <div class="col-md-3 py-4">
-                                <h5>Partial Price: ' . $row["Price"] * $row["TicketQuantity"] . '€</h5>
-                                <div class="px-3">
-                                    <button type="button" class="btn bg-light border rounded-circle" onClick="decreaseQuantity(this)" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '"><i class="fas fa-minus"></i></button>
-                                    <input type="text" class="form-control w-25 d-inline" value="' . $row["TicketQuantity"] . '" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '" onChange="updateQuantity(this)">
-                                    <button type="button" class="btn bg-light border rounded-circle" onClick="increaseQuantity(this)" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '"><i class="fas fa-plus"></i></button>
-                                    <div class="py-2">
-                                        <div class="px-4">
-                                            <button type="button" class="btn btn-danger mx-2" name="remove" onClick="removeProduct(this)" data-idCart="' . $row["idCart"] . '" data-idProduct="' . $row["idEvent"] . '">Remove</button>
-                                        </div>
+                            <div class="col-md-3 mt-3">
+                                <h2 class="mt-1">Partial Price: ' . $row["Price"] * $row["TicketQuantity"] . '€</h2>
+                                <div class="mt-3">
+                                    <button type="button" style="float: left;" class="btn bg-light border rounded-circle" onClick="decreaseQuantity(this)" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '"><i class="fas fa-minus"></i></button>
+                                    <input type="text" style="min-width: 58%;" class="form-control w-25 d-inline ml-1" value="' . $row["TicketQuantity"] . '" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '" onChange="updateQuantity(this)">
+                                    <button type="button" style="float: right;" class="btn bg-light border rounded-circle" onClick="increaseQuantity(this)" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '"><i class="fas fa-plus"></i></button>
+                                </div>  
+                                <div id="removebutton" class="mt-4 pb-3">
+                                    <div class="ml-4">
+                                        <button type="button" class="btn btn-danger" name="remove" onClick="removeProduct(this)" data-idCart="' . $row["idCart"] . '" data-idProduct="' . $row["idEvent"] . '">Remove</button>
                                     </div>
                                 </div>
                             </div>

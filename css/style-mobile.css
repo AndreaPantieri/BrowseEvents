@@ -1,19 +1,15 @@
-#icon_myaccount,
-#icon_newevent,
-#icon_manageevents,
-#icon_notifications,
-#secondtitle,
-#filters {
+#icon_myaccount, #icon_newevent, #icon_manageevents, #icon_notifications, #secondtitle, #filters {
     display: none !important;
 }
 
-#container-fluid{
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
+#container-fluid {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 /* Login Page */
+
 #loginlogo {
     max-width: 90%;
     height: auto;
@@ -36,8 +32,8 @@
     padding-bottom: 5%;
 }
 
-#logincard{
-    padding-bottom: 4%;    
+#logincard {
+    padding-bottom: 4%;
 }
 
 .input-group-prepend span {
@@ -67,13 +63,38 @@
 }
 
 /* Event */
-#div-event,
-#form-modifyevent,
-#form-newevent{
-	width: 100% !important;
+
+#div-event, #form-modifyevent, #form-newevent {
+    width: 100% !important;
 }
 
 #carousel {
     width: 100%;
     padding: 0 !important;
+}
+
+/* cart */
+
+#removebutton {
+    float: right;
+}
+
+/*.product > * {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+}*/
+
+.product h1 {
+    font-size: 25px;
+}
+
+.product h2 {
+    font-size: 18px;
+}
+
+#price_details {
+    margin-bottom: 4%;
+}
+
+#price_details button {
+    float: right;
 }
