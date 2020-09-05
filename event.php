@@ -21,7 +21,7 @@
 			$numImages = count($images);
 			?>
 			<div id="div-event" class="w-75">
-				<h1 id="title-showevent">Event</h1>
+				<h1 id="title-showevent"><b><?php echo $result[0]["Name"]; ?></b></h1>
 
 				<?php
 				if ($numImages > 0) {
@@ -78,14 +78,6 @@
 
 				?>
 				<div id="showevent-info" class="transparent-layout-white rounded border mt-5 mb-5 px-5 py-5">
-					<div>
-						<div class="col-form-label"><b>Event name</b></div>
-						<div id="showevent-name" class="col-form-label">
-							<?php
-							echo $result[0]["Name"];
-							?>
-						</div>
-					</div>
 					<div>
 						<div class="col-form-label"><b>Date</b></div>
 						<div id="showevent-date" class="col-form-label">

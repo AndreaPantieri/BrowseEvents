@@ -18,6 +18,10 @@ body {
     background-color: whitesmoke;
 }
 
+h1{
+    font-weight: bold;
+}
+
 #maincontent {
     display: flex;
     flex-direction: row;
@@ -116,9 +120,6 @@ body {
     margin: auto;
 }
 
-#title-newevent {
-    text-align: center;
-}
 
 /* searchbar */
 
