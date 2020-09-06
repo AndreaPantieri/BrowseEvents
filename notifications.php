@@ -1,7 +1,7 @@
 <div class="w-75">
 	<div>
 		<div class="mt-3">
-			<h6>Notifications</h6>
+			<h2>Notifications</h2>
 		</div>
 		<hr>
 		<div>

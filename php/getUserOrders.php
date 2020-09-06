@@ -16,7 +16,8 @@ if (isset($_SESSION["userid"])) {
     INNER JOIN event ON cart.Event_idEvent = event.idEvent 
     INNER JOIN user ON cart.User_idUsers = user.idUsers 
     INNER JOIN image ON image.Image = event.Image 
-    WHERE cart.User_idUsers = '$userid' AND isAcquired = 1";
+    WHERE cart.User_idUsers = '$userid' AND isAcquired = 1
+    ORDER BY cart.Date DESC";
     $result = $DBHandler->select($sql);
 
     if ($result) {
@@ -43,7 +44,7 @@ if (isset($_SESSION["userid"])) {
                                 
                             </div>
                             <div class="col-md-3 py-4">
-                                <h5 class="py-5">Total Price: ' . $row["Price"] * $row["TicketQuantity"] . '€</h5>
+                                <h5 id="ordertotalprice">Total Price: ' . $row["Price"] * $row["TicketQuantity"] . '€</h5>
                             </div>
                         </div>
                     </div>

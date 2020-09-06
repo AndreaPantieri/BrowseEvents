@@ -1,5 +1,6 @@
-<div style="width: 70%;">
-	<h1 class="mt-4">My Events</h1>
+<div class="w-75">
+	<h1 class="mt-3">My Events</h1>
+	<hr>
 	<?php
 	require_once 'php/DBHandler.php';
 	$DBHandler = new DBHandler();
@@ -23,7 +24,7 @@
 				$file = $files[0];
 			}
 			?>
-			<div class="border rounded mt-5 mb-5 clickable" data-id='<?php echo $idEvent; ?>' onclick="manageEvent(this)">
+			<div class="border rounded mt-4 mb-4 clickable" data-id='<?php echo $idEvent; ?>' onclick="manageEvent(this)">
 				<div class="transparent-layout-white">
 				    <div class="row px-3" style="position: relative;">
 				        <div class="col-md-4 py-3">

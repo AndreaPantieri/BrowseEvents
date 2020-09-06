@@ -74,9 +74,8 @@
 }
 
 /* cart */
-
-#removebutton {
-    float: right;
+#mycart h2 {
+    font-size: 16px;
 }
 
 /*.product > * {
@@ -91,10 +90,36 @@
     font-size: 18px;
 }
 
+#removebutton {
+    float: right;
+}
+
 #price_details {
     margin-bottom: 4%;
 }
 
+#price_details h2 {
+    font-size: 16px;
+}
+
+
 #price_details button {
     float: right;
+}
+
+#ordertotalprice {
+    float: right;
+    margin-bottom: 0px;
+    padding-right: 5px;
+}
+
+/* myaccount */
+#myaccount {
+    width: 90%;
+    height: 90%;
+    float: center;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 3%;
+    padding-bottom: 3%;
 }

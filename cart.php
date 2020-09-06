@@ -1,9 +1,9 @@
 <div class="container-fluid">
     <!-- This is the row for all the events in cart loaded dinamically -->
     <div class="row px-5">
-        <div class="col-md-7">
-            <div class="mycart mt-3">
-                <h6>My Cart</h6>
+        <div id="mycart" class="col-md-7">
+            <div class="mt-3">
+                <h2>My Cart</h2>
             </div>
             <hr>
             <div id="cart-elements"></div> <!-- this is where the events are being inserted -->
@@ -11,7 +11,7 @@
         <!-- This is the column for price details -->
         <div id="price_details" class="col-md-4 offset-md-1 border rounded mt-5 transparent-layout-white">
             <div class="pt-4">
-                <h6>PRICE DETAILS</h6>
+                <h2>PRICE DETAILS</h2>
                 <hr>
                 <div class="row">
                     <div class="col-md-6 mb-1" id="itemNumber"></div>

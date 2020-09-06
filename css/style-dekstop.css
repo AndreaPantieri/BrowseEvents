@@ -27,6 +27,7 @@
 }
 
 /* Login Page */
+
 #loginlogo {
     max-width: 50%;
     height: auto;
@@ -86,6 +87,7 @@
 }
 
 /* miscellaneuos */
+
 .input-group-prepend span {
     width: 50px;
     background-color: #FFC312;
@@ -94,11 +96,13 @@
 }
 
 /* Empyt Image for new and modify event */
+
 #emptyEventImage {
     width: 50% !important;
 }
 
 /* cart */
+
 #removebutton {
     float: right !important;
 }
@@ -114,4 +118,21 @@
 #product-image {
     margin-top: 2%;
     margin-bottom: 2%;
+}
+
+#mycart h2 {
+    font-size: 16px;
+}
+
+#price_details h2 {
+    font-size: 16px;
+}
+
+/* myorders */
+
+#ordertotalprice {
+    float: right;
+    margin-right: 15%;
+    margin-bottom: 20%;
+    margin-top: 20%;
 }

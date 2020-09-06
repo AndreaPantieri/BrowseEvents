@@ -1,9 +1,9 @@
 <div class="container-fluid w-75">
     <!-- This is the row for all the acquired events loaded dinamically -->
     <div class="row">
-        <div class="col-md-11">
-            <div class="myorders mt-3">
-                <h6>My Orders</h6>
+        <div class="col-md-9">
+            <div class="mt-3">
+                <h2>My Orders</h2>
             </div>
             <hr>
             <div id="order-elements"></div> <!-- this is where user orders are being inserted -->
