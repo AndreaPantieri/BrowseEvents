@@ -33,8 +33,8 @@ require_once './php/DBHandler.php';
 
     <div id="rightIconMenu">
         <!-- My account-->
-        <div id="icon_myaccount" class='flexColumnCenter' onmouseover="highlightButton(this)" onmouseout="dehighlightButton(this)" onclick="changeButtonColor(this)">
-            <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-person-circle clickable" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="clickMyAccount()">
+        <div id="icon_myaccount" class='flexColumnCenter' onmouseover="highlightButton(this)" onmouseout="dehighlightButton(this)">
+            <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-person-circle clickable" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="clickMyAccount(this)">
                 <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
                 <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                 <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
@@ -44,15 +44,15 @@ require_once './php/DBHandler.php';
         <?php
         if ($type_account == 1 || $type_account == 2) {
             echo '<!-- Create new event-->
-            <div id="icon_newevent" class=\'flexColumnCenter\' onmouseover="highlightButton(this)" onmouseout="dehighlightButton(this)" onclick="changeButtonColor(this)">
-            <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill clickable" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="clickNewEvent()">
+            <div id="icon_newevent" class=\'flexColumnCenter\' onmouseover="highlightButton(this)" onmouseout="dehighlightButton(this)">
+            <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill clickable" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="clickNewEvent(this)">
             <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"/>
             </svg>
             </div>
 
             <!-- Manage events-->
-            <div id="icon_manageevents" class=\'flexColumnCenter\' onmouseover="highlightButton(this)" onmouseout="dehighlightButton(this)" onclick="changeButtonColor(this)">
-            <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-pencil-square clickable" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="clickManageEvents()">
+            <div id="icon_manageevents" class=\'flexColumnCenter\' onmouseover="highlightButton(this)" onmouseout="dehighlightButton(this)">
+            <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-pencil-square clickable" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="clickManageEvents(this)">
             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
             </svg>
@@ -82,8 +82,8 @@ require_once './php/DBHandler.php';
 
 
         <!-- Cart -->
-        <div id="icon_cart" class="flexColumnCenter" onmouseover="highlightButton(this)" onmouseout="dehighlightButton(this)" onclick="changeButtonColor(this)">
-            <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-cart4 clickable" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="clickCart()">
+        <div id="icon_cart" class="flexColumnCenter" onmouseover="highlightButton(this)" onmouseout="dehighlightButton(this)">
+            <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-cart4 clickable" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="clickCart(this)">
                 <path fill-rule="evenodd" d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
             </svg>
         </div>
@@ -111,7 +111,7 @@ require_once './php/DBHandler.php';
             </ol>
         </li>
         <hr class="hr-w">
-        <li id="my_account" class="clickable clickableSizes" onclick="clickMyAccount()">My account</li>
+        <li id="my_account" class="clickable clickableSizes" onclick="clickMyAccount($('#icon_myaccount svg'))">My account</li>
         <?php
         if ($type_account == 1 || $type_account == 2) {
             echo '<li id="new_event" class="clickable clickableSizes" onclick="clickNewEvent()">Create new event</li>
@@ -139,7 +139,7 @@ require_once './php/DBHandler.php';
         xhttp.send();
     }
 
-    function includeMainContent(filePHP) {
+    function includeMainContent(filePHP, data) {
         includeContent(filePHP, (h) => {
             document.getElementById("maincontent").innerHTML = h;
             var s = document.getElementById("maincontent").getElementsByTagName('script');
@@ -153,36 +153,38 @@ require_once './php/DBHandler.php';
                 parent.insertBefore(d, node);
                 parent.removeChild(node);
             }
-
+            $("#rightIconMenu div").removeClass("yc");
+            changeButtonColor($(data).parent());
         });
     }
 
-    function clickMyAccount() {
-        includeMainContent("myaccount.php");
+    function clickMyAccount(data) {
+        includeMainContent("myaccount.php", data);
+        
     }
 
     <?php
     if ($type_account == 1 || $type_account == 2) {
         echo 'function clickNewEvent(){
-            includeMainContent("newevent.php");
+            includeMainContent("newevent.php", $("#icon_newevent svg"));
         }
 
         function clickManageEvents(){
-            includeMainContent("myevents.php");
+            includeMainContent("myevents.php", $("#icon_manageevents svg"));
         }';
     }
     ?>
 
-    function clickMyOrders() {
-        includeMainContent("myorders.php");
+    function clickMyOrders(data) {
+        includeMainContent("myorders.php", data);
     }
 
     function clickNotifications() {
         includeMainContent("notifications.php");
     }
 
-    function clickCart() {
-        includeMainContent("cart.php");
+    function clickCart(data) {
+        includeMainContent("cart.php", data);
     }
 
     function openSlideMenu() {
@@ -272,20 +274,6 @@ require_once './php/DBHandler.php';
     }
 
     function changeButtonColor(data) {
-        id = $(data).attr('id');
-
-        if (<?php echo "{$_SESSION['idUserType']}"?> == 1 || <?php echo "{$_SESSION['idUserType']}"?> == 2) {
-            document.getElementById("icon_myaccount").classList.remove('yc');
-            document.getElementById("icon_newevent").classList.remove('yc');
-            document.getElementById("icon_manageevents").classList.remove('yc');
-            document.getElementById("icon_cart").classList.remove('yc');
-
-            document.getElementById(id).classList.add('yc');
-        } else if (<?php echo "{$_SESSION['idUserType']}"?> == 3) {
-            document.getElementById("icon_myaccount").classList.remove('yc');
-            document.getElementById("icon_cart").classList.remove('yc');
-
-            document.getElementById(id).classList.add('yc');
-        }
+        $(data).addClass("yc");
     }
 </script>
