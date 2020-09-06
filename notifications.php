@@ -26,10 +26,10 @@
 					$description = $var["Description"];
 					$isRead = $var["isRead"];
 					?>
-					<div class="border rounded mt-5 mb-5 <?php echo $isRead == 0 ? 'clickable' : ''; ?>" data-id='<?php echo $idNotification; ?>' data-isRead='<?php echo $isRead; ?>' onclick="readNotification(this)">
+					<div class="border rounded mt-3 mb-3 <?php echo $isRead == 0 ? 'clickable' : ''; ?>" data-id='<?php echo $idNotification; ?>' data-isRead='<?php echo $isRead; ?>' onclick="readNotification(this)">
 						<div class="transparent-layout-white">
 							<div class="row px-3" style="position: relative;">
-								<div class="col-md-7 py-3">
+								<div class="col-md-9 py-3">
 									<h4 class="pt-2"><b><?php echo $title; ?></b></h4>
 									<small class="pt-2"><b>Date: </b><?php echo $date; ?></small>
 									<h6 class="pt-2"><b>Description: </b><?php echo $description; ?></h6>

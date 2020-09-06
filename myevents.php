@@ -1,5 +1,5 @@
 <div style="width: 70%;">
-	<h1>My Events</h1>
+	<h1 class="mt-4">My Events</h1>
 	<?php
 	require_once 'php/DBHandler.php';
 	$DBHandler = new DBHandler();

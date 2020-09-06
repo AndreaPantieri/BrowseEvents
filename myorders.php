@@ -1,7 +1,7 @@
-<div class="container-fluid">
+<div class="container-fluid w-75">
     <!-- This is the row for all the acquired events loaded dinamically -->
-    <div class="row px-5">
-        <div class="col-md-7">
+    <div class="row">
+        <div class="col-md-11">
             <div class="myorders mt-3">
                 <h6>My Orders</h6>
             </div>

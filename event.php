@@ -21,7 +21,7 @@
 			$numImages = count($images);
 			?>
 			<div id="div-event" class="w-75">
-				<h1 id="title-showevent"><b><?php echo $result[0]["Name"]; ?></b></h1>
+				<h1 id="title-showevent" class="mt-4 mb-4"><b><?php echo $result[0]["Name"]; ?></b></h1>
 
 				<?php
 				if ($numImages > 0) {
