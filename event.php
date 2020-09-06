@@ -124,10 +124,27 @@
 					</div>
 					<div>
 						<div class="col-form-label"><b>Buy tickets</b></div>
-						<input id="event-tickets" class="form-control mr-3 mb-3" type="number" name="event-tickets" placeholder="Type the number of tickets to add to cart" value="1" min="1" oninput="checkQuantity(this)" data-maxquantity="<?php echo $result[0]['TicketNumber']; ?>" max="99">
+						<?php
+						if($result[0]["TicketNumber"] != 0){
+							?>
+
+							<input id="event-tickets" class="form-control mr-3 mb-3" type="number" name="event-tickets" placeholder="Type the number of tickets to add to cart" value="1" min="1" oninput="checkQuantity(this)" data-maxquantity="<?php echo $result[0]['TicketNumber']; ?>" max="99">
+							<?php
+						} else {
+							?>
+							<div class="col-form-label">Sold out!</div>
+							<?php
+						}
+						?>
 					</div>
 					<div class="w-mc">
-						<button id="btn-addcart" class="btn btn-primary" onclick="addToCart(this)" data-eventid="<?php echo $result[0]['idEvent']; ?>" data-userid="<?php if (isset($_SESSION["userid"])) { echo $_SESSION["userid"];} ?>" data-maxquantity="<?php echo $result[0]['TicketNumber']; ?>">Add to cart</button>
+						<?php
+						if($result[0]["TicketNumber"] != 0){
+							?>
+							<button id="btn-addcart" class="btn btn-primary" onclick="addToCart(this)" data-eventid="<?php echo $result[0]['idEvent']; ?>" data-userid="<?php if (isset($_SESSION["userid"])) { echo $_SESSION["userid"];} ?>" data-maxquantity="<?php echo $result[0]['TicketNumber']; ?>">Add to cart</button>
+							<?php
+						}
+						?>
 						<?php
 						if ($result[0]["User_idUsers"] == $_SESSION["userid"]) {
 							?>
