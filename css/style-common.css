@@ -120,6 +120,18 @@ h1{
     margin: auto;
 }
 
+#events-more {
+    min-width: min-content;
+}
+
+#title-showevent {
+    text-align: center;
+}
+
+#title-modifyevent {
+    text-align: center;
+}
+
 /* searchbar */
 
 #searchbar {
@@ -184,6 +196,11 @@ h1{
     background-color: rgba(255, 255, 255, 0.5);
 }
 
+.transparent-layout-red {
+    background-color: #f8d7da;
+    border-radius: 5px;
+}
+
 /* buttons */
 
 .back-yc {
@@ -219,6 +236,13 @@ h1{
 /* myaccount page */ 
 #myaccount {
     margin-bottom: 5%;
+}
+
+/* cart */ 
+#cartbuttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 /* Miscellaneous */

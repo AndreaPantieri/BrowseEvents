@@ -43,9 +43,9 @@ if (isset($_SESSION["userid"])) {
                             </div>
                             <div class="col-md-3 mt-3">
                                 <h2 class="mt-1">Partial Price: ' . $row["Price"] * $row["TicketQuantity"] . '€</h2>
-                                <div class="mt-3">
+                                <div id="cartbuttons" class="mt-3">
                                     <button type="button" style="float: left;" class="btn bg-light border rounded-circle" onClick="decreaseQuantity(this)" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '"><i class="fas fa-minus"></i></button>
-                                    <input type="text" style="min-width: 58%;" class="form-control w-25 d-inline ml-1" value="' . $row["TicketQuantity"] . '" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '" onChange="updateQuantity(this)">
+                                    <input type="text" style="min-width: 58%;" class="form-control w-25 d-inline ml-1 mr-1" value="' . $row["TicketQuantity"] . '" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '" onChange="updateQuantity(this)">
                                     <button type="button" style="float: right;" class="btn bg-light border rounded-circle" onClick="increaseQuantity(this)" data-idCart="' . $row["idCart"] . '" data-maxQuantity="' . $row["TicketNumber"] . '"><i class="fas fa-plus"></i></button>
                                 </div>  
                                 <div id="removebutton" class="mt-4 pb-3">

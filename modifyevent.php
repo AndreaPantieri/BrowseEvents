@@ -21,7 +21,7 @@
 			$numImages = count($images);
 			?>
 			<form id="form-modifyevent" class="w-75" action="php/updateEvent.php" method="POST" enctype="multipart/form-data">
-				<h1 id="title-modifyevent" class="mt-4 mb-4"><b>Modify Event</b></h1>
+				<h2 id="title-modifyevent" class="mt-4 mb-4">Modify Event</h2>
 				<svg id="emptyEventImage" viewBox="0 0 16 16" <?php if($numImages > 0){
 					echo 'class="bi bi-card-image inputImage d-block px-5 nonVisible"';
 				} else{

@@ -30,7 +30,11 @@ if(isset($_GET["c"]) && $_GET["c"] != "All"){
 if(isset($_GET["o"])){
 	$o = $_GET["o"];
 
-	$sql_e .= "ORDER BY " . $o . " DESC";
+	$sql_e .= "ORDER BY " . $o;
+
+	if ($o == 'Datetime') {
+		$sql_e .= " DESC";
+	}
 }
 
 $sql_e .= " LIMIT $numb_events, 5";

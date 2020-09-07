@@ -15,13 +15,14 @@
 		$result = $DBHandler->select($sql);
 
 		if ($result) {
+			$_SESSION["event_id"] = $result[0]["idEvent"];
 			$path = "./res/img/events/" . $result[0]["idEvent"] . "/";
 			$images = glob($path . "*.{jpg,png,jpeg}", GLOB_BRACE);
 			sort($images);
 			$numImages = count($images);
 			?>
 			<div id="div-event" class="w-75">
-				<h1 id="title-showevent" class="mt-4 mb-4"><b><?php echo $result[0]["Name"]; ?></b></h1>
+				<h1 id="title-showevent" class="mt-4 mb-4"><?php echo $result[0]["Name"]; ?></h1>
 
 				<?php
 				if ($numImages > 0) {
@@ -151,6 +152,11 @@
 							<button id="btn-modify" class="btn btn-warning mt-1" onclick="includeMainContent(<?php echo "'modifyEvent.php?event_id=" . $result[0]['idEvent'] . "'"; ?>)">Modify</button>
 							<?php
 						}
+						if ($_SESSION["idUserType"] == 1 || $result[0]["User_idUsers"] == $_SESSION["userid"]) {
+							?>
+							<button id="event-delete" type="button" class="btn btn-danger mt-1" onclick="deleteEvent()">Delete</button>
+							<?php
+						}
 						?>
 					</div>
 				</div>
@@ -231,5 +237,38 @@
 				icon: "error"
 			});
 		}
+	}
+
+	function deleteEvent(){
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You will not be able to recover this event!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "Yes, archive it!",
+			cancelButtonText: "No, cancel please!",
+		}).then(function(res) {
+			if (res.isConfirmed) {
+				$.ajax({
+					type: "POST",
+					url: "php/deleteEvent.php",
+					success:function(data){
+						if(JSON.parse(data)["result"]){
+							Swal.fire({
+								title: "Event deleted successfully!",
+								icon: "success"
+							}).then(() => location.reload());
+						}
+					}
+				});
+			} else {
+				Swal.fire({
+					title: "Operation cancelled!",
+					text: "Event not deleted!"
+				});
+			}
+		});
+		
 	}
 </script>
