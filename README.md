@@ -1,7 +1,7 @@
 # BrowseEvents
 
 ATTENZIONE: PHP 7.4 richiesto per visualizzare correttamente il sito Web
-inoltre, per il corretto invio delle mail di posta elettronica bisogna richiedere le credenziali di accesso all'account gmail: infobrowseevents@gmail.com
+, inoltre, per il corretto invio delle mail di posta elettronica bisogna richiedere le credenziali di accesso all'account gmail: infobrowseevents@gmail.com
 e configurare i file php.ini e sendmail.ini presenti in Xampp in maniera appropriata. (numero porta 465 e utilizzo di SSL) (contattare i creatori in caso di problemi di configurazione di tali file)
 
 ISTRUZIONI: 
